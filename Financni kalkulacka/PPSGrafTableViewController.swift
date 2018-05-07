@@ -12,9 +12,11 @@ import MessageUI
 
 class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSource, JBLineChartViewDelegate, MFMailComposeViewControllerDelegate {
     
+    
+    
     let gradientLayer = CAGradientLayer()
-    let jistinaColor = UIColor.greenColor()
-    let urokColor = UIColor.blueColor()
+    let jistinaColor = UIColor.green
+    let urokColor = UIColor.blue
     
     var mesicSplaceni = Int()
     var poleSporeni:[Int] = []
@@ -35,24 +37,23 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         
         self.title = "Graf PPS"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "sendEmail")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: "sendEmail")
         
         vypocet()
                
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        
-        var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("showChart"), userInfo: nil, repeats: false)
+        var timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: Selector("showChart"), userInfo: nil, repeats: false)
     }
     
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(true)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
         let graphView: JBLineChartView = self.tableView.viewWithTag(20) as! JBLineChartView
-        graphView.setState(.Collapsed, animated: true)
+        graphView.setState(.collapsed, animated: true)
         
     }
     
@@ -60,16 +61,14 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         
         let graphView: JBLineChartView = self.tableView.viewWithTag(20) as! JBLineChartView
         graphView.reloadData()
-        graphView.setState(.Expanded, animated: true)
+        graphView.setState(.expanded, animated: true)
         
     }
     
     //MARK: - JBLineChartView data source
     
-    func numberOfLinesInLineChartView(lineChartView: JBLineChartView!) -> UInt {
-        
+    func numberOfLines(in lineChartView: JBLineChartView!) -> UInt {
         return 2
-        
     }
     
     func lineChartView(_ lineChartView: JBLineChartView!, numberOfVerticalValuesAtLineIndex lineIndex: UInt) -> UInt {
@@ -78,7 +77,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, verticalValueForHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, verticalValueForHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
         
         if lineIndex == 0 {
             
@@ -97,25 +96,25 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, verticalSelectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, verticalSelectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
         
-        return UIColor.whiteColor()
-        
-    }
-    
-    func lineChartView(lineChartView: JBLineChartView!, selectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
-        
-        return UIColor.whiteColor()
+        return UIColor.white
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, dotRadiusForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, selectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+        
+        return UIColor.white
+        
+    }
+    
+    func lineChartView(_ lineChartView: JBLineChartView!, dotRadiusForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
         
         return 4
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, colorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, colorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
         
         if lineIndex == 0 {
             
@@ -127,19 +126,19 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         }
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, selectionColorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, selectionColorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
         
-        return UIColor.whiteColor()
+        return UIColor.white
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, widthForLineAtLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, widthForLineAtLineIndex lineIndex: UInt) -> CGFloat {
         
         return 2
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, colorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, colorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
         
         if lineIndex == 0 {
             
@@ -152,35 +151,35 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         }
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, dimmedSelectionOpacityAtLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, dimmedSelectionOpacityAtLineIndex lineIndex: UInt) -> CGFloat {
         
         return 0.15
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, showsDotsForLineAtLineIndex lineIndex: UInt) -> Bool {
+    func lineChartView(_ lineChartView: JBLineChartView!, showsDotsForLineAtLineIndex lineIndex: UInt) -> Bool {
         
         return true
     }
     
     
-    func lineChartView(lineChartView: JBLineChartView!, didSelectLineAtIndex lineIndex: UInt, horizontalIndex: UInt, touchPoint: CGPoint) {
+    func lineChartView(_ lineChartView: JBLineChartView!, didSelectLineAt lineIndex: UInt, horizontalIndex: UInt, touch touchPoint: CGPoint) {
         
         let infoLabel = self.tableView.viewWithTag(10) as! UILabel
         
         if lineIndex == 0 {
             
             let data = castky[Int(horizontalIndex)]
-            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: zbývá \(numberFormattingInt(data)) Kč z jistiny"
+            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: zbývá \(numberFormattingInt(number: data)) Kč z jistiny"
             
         } else {
             
             let data = sporeni[Int(horizontalIndex)]
-            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: uspořeno \(numberFormattingInt(data)) Kč"
+            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: uspořeno \(numberFormattingInt(number: data)) Kč"
             
         }
         
-        tableView.scrollEnabled = false
+        tableView.isScrollEnabled = false
         
         
     }
@@ -190,7 +189,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         let infoLabel = self.tableView.viewWithTag(10) as! UILabel
         infoLabel.text = hlaskaSplaceni
         
-        tableView.scrollEnabled = true
+        tableView.isScrollEnabled = true
         
     }
     
@@ -222,7 +221,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         let num4 = maxCastka/4
         
         //formatting do stringu
-        castkyLabels = [numberFormatting(num1), numberFormatting(num2), numberFormatting(num3), numberFormatting(num4)]
+        castkyLabels = [numberFormatting(castka: num1), numberFormatting(castka: num2), numberFormatting(castka: num3), numberFormatting(castka: num4)]
     }
     
     func numberFormatting(castka: Int) -> String {
@@ -248,12 +247,12 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if section == 0 {
@@ -266,7 +265,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 1 {
             
@@ -279,7 +278,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
     }
     
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
             
@@ -299,16 +298,16 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("graf") as! PPSCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "graf") as! PPSCell
             
             //setting gradient background
             gradientBackground()
             gradientLayer.frame = cell.contentView.bounds
-            cell.contentView.layer.insertSublayer(gradientLayer, atIndex: 0)
+            cell.contentView.layer.insertSublayer(gradientLayer, at: 0)
             
             //graph setup
             cell.graphView.delegate = self
@@ -322,16 +321,16 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
             
             //vysvetlivky
             cell.jistinaKolecko.layer.cornerRadius = 4
-            cell.jistinaKolecko.layer.backgroundColor = jistinaColor.CGColor
+            cell.jistinaKolecko.layer.backgroundColor = jistinaColor.cgColor
             
             cell.urokKolecko.layer.cornerRadius = 4
-            cell.urokKolecko.layer.backgroundColor = urokColor.CGColor
+            cell.urokKolecko.layer.backgroundColor = urokColor.cgColor
             
             //popisky grafu: roky
             if rokyLabels.count == 2 {
                 
-                cell.roky1.hidden = true
-                cell.roky3.hidden = true
+                cell.roky1.isHidden = true
+                cell.roky3.isHidden = true
                 
                 cell.roky2.text = rokyLabels[0]
                 cell.roky4.text = rokyLabels[1]
@@ -359,23 +358,23 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("headerCell")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell")
                 
                 return cell!
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("tabulka") as! PPSTabulkaCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "tabulka") as! PPSTabulkaCell
                 
                 let index = indexPath.row - 1
                 
                 cell.rokyLabel.text = "\(roky[index])"
-                cell.jistinaLabel.text = "\(numberFormattingInt(castky[index])) Kč"
-                cell.urokyLabel.text = "\(numberFormattingInt(sporeni[index])) Kč"
+                cell.jistinaLabel.text = "\(numberFormattingInt(number: castky[index])) Kč"
+                cell.urokyLabel.text = "\(numberFormattingInt(number: sporeni[index])) Kč"
                 
                 if indexPath.row % 2 == 0 {
                     
-                    cell.backgroundColor = UIColor.whiteColor()
+                    cell.backgroundColor = UIColor.white
                     
                 } else {
                     
@@ -394,8 +393,8 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
     
     func gradientBackground() {
         
-        let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).CGColor
-        let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).CGColor
+        let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).cgColor
+        let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).cgColor
         gradientLayer.colors = [color1, color2]
         gradientLayer.locations = [0.0, 1]
     }
@@ -415,8 +414,8 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
             
         }
         
-        vypocetCastkyLabels(poleJistin[0])
-        vypocetRokyLabels(roky.count)
+        vypocetCastkyLabels(maxCastka: poleJistin[0])
+        vypocetRokyLabels(pocetRoku: roky.count)
         
         print(castky.count, castky)
         print(sporeni.count, sporeni)
@@ -428,11 +427,10 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
     
     func numberFormattingInt(number: Int) -> String {
         
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
         
         return formatter.stringFromNumber(number)!.stringByReplacingOccurrencesOfString(",", withString: " ")
-        
     }
     
     //MARK: - share graph via email
@@ -441,7 +439,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
             self.showSendMailErrorAlert()
         }
@@ -469,8 +467,8 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
 }
