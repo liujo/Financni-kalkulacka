@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0930"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "26A2E5351B23116D00CE3A81"
+               BuildableName = "Financni kalkulacka.app"
+               BlueprintName = "Financni kalkulacka"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "26A2E54A1B23116D00CE3A81"
+               BuildableName = "Financni kalkulackaTests.xctest"
+               BlueprintName = "Financni kalkulackaTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2622A4101B43289300A673CC"
+               BuildableName = "Financni kalkulacka grafTests.xctest"
+               BlueprintName = "Financni kalkulacka grafTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2622A4421B432B3600A673CC"
+               BuildableName = "GrafTests.xctest"
+               BlueprintName = "GrafTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "26ABB3901B5D385F00664972"
+               BuildableName = "Screenshot frameworkTests.xctest"
+               BlueprintName = "Screenshot frameworkTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "26ABB3C71B5D3C0500664972"
+               BuildableName = "ScreenshotTests.xctest"
+               BlueprintName = "ScreenshotTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "26A2E54A1B23116D00CE3A81"
+               BuildableName = "Financni kalkulackaTests.xctest"
+               BlueprintName = "Financni kalkulackaTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2622A4101B43289300A673CC"
+               BuildableName = "Financni kalkulacka grafTests.xctest"
+               BlueprintName = "Financni kalkulacka grafTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2622A4421B432B3600A673CC"
+               BuildableName = "GrafTests.xctest"
+               BlueprintName = "GrafTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "26ABB3901B5D385F00664972"
+               BuildableName = "Screenshot frameworkTests.xctest"
+               BlueprintName = "Screenshot frameworkTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "26ABB3C71B5D3C0500664972"
+               BuildableName = "ScreenshotTests.xctest"
+               BlueprintName = "ScreenshotTests"
+               ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "26A2E5351B23116D00CE3A81"
+            BuildableName = "Financni kalkulacka.app"
+            BlueprintName = "Financni kalkulacka"
+            ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "26A2E5351B23116D00CE3A81"
+            BuildableName = "Financni kalkulacka.app"
+            BlueprintName = "Financni kalkulacka"
+            ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "26A2E5351B23116D00CE3A81"
+            BuildableName = "Financni kalkulacka.app"
+            BlueprintName = "Financni kalkulacka"
+            ReferencedContainer = "container:Financni kalkulacka.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

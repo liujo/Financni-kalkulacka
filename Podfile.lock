@@ -1,0 +1,13 @@
+PODS:
+  - DHSmartScreenshot (1.3.1)
+  - JBChartView (2.8.19)
+
+DEPENDENCIES:
+  - DHSmartScreenshot
+  - JBChartView
+
+SPEC CHECKSUMS:
+  DHSmartScreenshot: ee749048bd7126c4826748f98df3a4adc6ad6c78
+  JBChartView: 196146fea321396bafc4b2116fd03acd7d725a64
+
+COCOAPODS: 0.39.0

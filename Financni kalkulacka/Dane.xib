@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="13r-lZ-Pdh">
+            <rect key="frame" x="0.0" y="0.0" width="800" height="102"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Řešit daně?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frt-ee-q2F">
+                    <rect key="frame" x="10" y="41" width="71" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kja-h8-LGF">
+                    <rect key="frame" x="10" y="39" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poznámky:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRa-U3-rd7">
+                    <rect key="frame" x="155" y="13" width="71.5" height="16"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ano" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="if5-7Z-MZQ">
+                    <rect key="frame" x="89" y="41" width="24.5" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="HKS-qC-0ji"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="HKS-qC-0ji"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daně" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZY-6K-gE4">
+                    <rect key="frame" x="10" y="10" width="45" height="22"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poznamky" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D14-N2-OSq">
+                    <rect key="frame" x="155" y="37" width="637" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="95" id="CcJ-Db-9DD"/>
+                        <constraint firstAttribute="width" constant="637" id="N2G-Pc-qG5"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="CcJ-Db-9DD"/>
+                        </mask>
+                    </variation>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fRa-U3-rd7" firstAttribute="leading" secondItem="gZY-6K-gE4" secondAttribute="trailing" constant="199.5" id="5zi-Fc-oCb"/>
+                <constraint firstItem="frt-ee-q2F" firstAttribute="leading" secondItem="Kja-h8-LGF" secondAttribute="leading" id="6DG-O4-cUi"/>
+                <constraint firstItem="D14-N2-OSq" firstAttribute="leading" secondItem="fRa-U3-rd7" secondAttribute="leading" id="6Wn-tj-cku"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="D14-N2-OSq" secondAttribute="bottom" constant="14" id="9JN-7i-8kq"/>
+                <constraint firstItem="fRa-U3-rd7" firstAttribute="centerY" secondItem="gZY-6K-gE4" secondAttribute="centerY" id="9de-Fn-SX6"/>
+                <constraint firstItem="D14-N2-OSq" firstAttribute="top" secondItem="fRa-U3-rd7" secondAttribute="bottom" constant="8" id="9fk-oF-5ja"/>
+                <constraint firstItem="if5-7Z-MZQ" firstAttribute="leading" secondItem="13r-lZ-Pdh" secondAttribute="leading" constant="8" id="Atd-Gv-rUP"/>
+                <constraint firstItem="gZY-6K-gE4" firstAttribute="top" secondItem="13r-lZ-Pdh" secondAttribute="top" constant="10" id="IEi-91-2fk"/>
+                <constraint firstItem="gZY-6K-gE4" firstAttribute="leading" secondItem="13r-lZ-Pdh" secondAttribute="leading" constant="10" id="KXp-mB-3Hy"/>
+                <constraint firstItem="frt-ee-q2F" firstAttribute="top" secondItem="Kja-h8-LGF" secondAttribute="bottom" constant="1" id="LcL-IZ-AHT"/>
+                <constraint firstItem="if5-7Z-MZQ" firstAttribute="centerY" secondItem="frt-ee-q2F" secondAttribute="centerY" id="Lwd-4O-4IV"/>
+                <constraint firstItem="if5-7Z-MZQ" firstAttribute="leading" secondItem="frt-ee-q2F" secondAttribute="trailing" constant="8" id="OGr-aR-Dsl"/>
+                <constraint firstItem="fRa-U3-rd7" firstAttribute="leading" secondItem="gZY-6K-gE4" secondAttribute="trailing" constant="200" id="PhB-Sx-ROt"/>
+                <constraint firstItem="Kja-h8-LGF" firstAttribute="top" secondItem="gZY-6K-gE4" secondAttribute="bottom" constant="8" id="Q7X-Kj-qko"/>
+                <constraint firstItem="if5-7Z-MZQ" firstAttribute="centerY" secondItem="frt-ee-q2F" secondAttribute="centerY" id="Xv4-h7-99k"/>
+                <constraint firstItem="frt-ee-q2F" firstAttribute="top" secondItem="Kja-h8-LGF" secondAttribute="bottom" constant="1" id="YyN-tb-Bhb"/>
+                <constraint firstItem="if5-7Z-MZQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="D14-N2-OSq" secondAttribute="bottom" constant="14" id="fSg-ij-JFg"/>
+                <constraint firstItem="Kja-h8-LGF" firstAttribute="leading" secondItem="gZY-6K-gE4" secondAttribute="leading" id="l2p-7g-2fG"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="D14-N2-OSq" secondAttribute="bottom" constant="14" id="ndB-Tc-8L8"/>
+                <constraint firstItem="fRa-U3-rd7" firstAttribute="leading" secondItem="gZY-6K-gE4" secondAttribute="trailing" constant="100" id="zf3-pq-oMd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="YyN-tb-Bhb"/>
+                    <exclude reference="Atd-Gv-rUP"/>
+                    <exclude reference="Lwd-4O-4IV"/>
+                    <exclude reference="fSg-ij-JFg"/>
+                    <exclude reference="5zi-Fc-oCb"/>
+                    <exclude reference="PhB-Sx-ROt"/>
+                    <exclude reference="ndB-Tc-8L8"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="568" y="296"/>
+        </view>
+    </objects>
+</document>

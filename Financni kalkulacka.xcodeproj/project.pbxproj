@@ -1,0 +1,1077 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2605DDF91C232C390032E4AA /* NovyKlientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605DDF81C232C390032E4AA /* NovyKlientTableViewController.swift */; };
+		2605DDFE1C232C860032E4AA /* NovyKlientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605DDFD1C232C860032E4AA /* NovyKlientCell.swift */; };
+		26107EB81C0B3A33006470B8 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26107EB71C0B3A33006470B8 /* BaseTableViewController.swift */; };
+		26107EBA1C0B4097006470B8 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26107EB91C0B4097006470B8 /* BaseCell.swift */; };
+		26107EC11C0C62AF006470B8 /* HypotekaGrafTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26107EC01C0C62AF006470B8 /* HypotekaGrafTableViewController.swift */; };
+		26107EC31C0C6327006470B8 /* HypotekaGrafCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26107EC21C0C6327006470B8 /* HypotekaGrafCell.swift */; };
+		2611F90A1BE223DB00377B26 /* PracovniPomerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2611F9091BE223DB00377B26 /* PracovniPomerTableViewController.swift */; };
+		26166AA11C130DA0006CB664 /* KartaKlientaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26166AA01C130DA0006CB664 /* KartaKlientaCell.swift */; };
+		262592C91BDF7B5700096AB2 /* Cell classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262592C81BDF7B5700096AB2 /* Cell classes.swift */; };
+		262592CD1BDF9DA200096AB2 /* ZdravotniStavTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262592CC1BDF9DA200096AB2 /* ZdravotniStavTableViewController.swift */; };
+		262592CF1BDFA9C800096AB2 /* Zakladni udaje global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262592CE1BDFA9C800096AB2 /* Zakladni udaje global.swift */; };
+		262592DC1BE2105400096AB2 /* ZabezpeceniPrijmuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262592DB1BE2105400096AB2 /* ZabezpeceniPrijmuTableViewController.swift */; };
+		2628C4381C0E423D00886E9F /* SavingsGrafTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628C4371C0E423D00886E9F /* SavingsGrafTableViewController.swift */; };
+		2628C43A1C0E425B00886E9F /* SavingsGrafCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628C4391C0E425B00886E9F /* SavingsGrafCell.swift */; };
+		2628C43C1C10791F00886E9F /* PPSGrafTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628C43B1C10791F00886E9F /* PPSGrafTableViewController.swift */; };
+		2628C43E1C10937500886E9F /* PPSCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628C43D1C10937500886E9F /* PPSCell.swift */; };
+		2628C47A1C1264B300886E9F /* KartaKlientaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628C4791C1264B300886E9F /* KartaKlientaTableViewController.swift */; };
+		26475E661BEF53C4008BCCD2 /* DuchodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E651BEF53C4008BCCD2 /* DuchodTableViewController.swift */; };
+		26475E691BEF7064008BCCD2 /* PripravaNaDuchodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E681BEF7064008BCCD2 /* PripravaNaDuchodTableViewController.swift */; };
+		26475E6C1BEF99A1008BCCD2 /* DaneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E6B1BEF99A1008BCCD2 /* DaneTableViewController.swift */; };
+		26475E721BEF9E21008BCCD2 /* OstatniPozadavkyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E711BEF9E21008BCCD2 /* OstatniPozadavkyTableViewController.swift */; };
+		26475E751BEFA6B8008BCCD2 /* PriorityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E741BEFA6B8008BCCD2 /* PriorityTableViewController.swift */; };
+		26475E781BEFD2DE008BCCD2 /* ShrnutiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E771BEFD2DE008BCCD2 /* ShrnutiTableViewController.swift */; };
+		26475E7C1BF0C1C8008BCCD2 /* ZajisteniPrijmuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E7B1BF0C1C8008BCCD2 /* ZajisteniPrijmuTableViewController.swift */; };
+		26475E7E1BF0C46E008BCCD2 /* Zajisteni prijmu cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E7D1BF0C46E008BCCD2 /* Zajisteni prijmu cells.swift */; };
+		26475E801BF0C6D4008BCCD2 /* ZajisteniPrijmuPracovniPomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E7F1BF0C6D4008BCCD2 /* ZajisteniPrijmuPracovniPomer.swift */; };
+		26475E841BF0CCA6008BCCD2 /* ZajisteniPrijmuPracovniPomerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E831BF0CCA6008BCCD2 /* ZajisteniPrijmuPracovniPomerTableViewController.swift */; };
+		26534E0C1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26534E0B1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift */; };
+		268C5C2C1BE7C046002DE24D /* BytCiDumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C5C2B1BE7C046002DE24D /* BytCiDumTableViewController.swift */; };
+		268C5C301BE7C0A3002DE24D /* VlastniCiNajemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C5C2F1BE7C0A3002DE24D /* VlastniCiNajemTableViewController.swift */; };
+		268C5C321BE7C130002DE24D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 268C5C311BE7C130002DE24D /* Main.storyboard */; };
+		268C5C361BE81F45002DE24D /* SpokojenostBydleniTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C5C351BE81F45002DE24D /* SpokojenostBydleniTableViewController.swift */; };
+		268C5C3A1BE8BD86002DE24D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C5C391BE8BD86002DE24D /* Extensions.swift */; };
+		268C5C3D1BEB5E93002DE24D /* DetiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C5C3C1BEB5E93002DE24D /* DetiTableViewController.swift */; };
+		268C5C401BED55E5002DE24D /* PlanujeteDetiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C5C3F1BED55E5002DE24D /* PlanujeteDetiTableViewController.swift */; };
+		268DA6571BE7753E00F79BC6 /* BydleniTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268DA6561BE7753E00F79BC6 /* BydleniTableViewController.swift */; };
+		268DF89A1C173FEB006AFDDE /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268DF8991C173FEB006AFDDE /* PDFViewController.swift */; };
+		26A2E53C1B23116D00CE3A81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A2E53B1B23116D00CE3A81 /* AppDelegate.swift */; };
+		26A2E5521B23116D00CE3A81 /* Financni_kalkulackaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A2E5511B23116D00CE3A81 /* Financni_kalkulackaTests.swift */; };
+		26A55B881C8B406600866F89 /* PDFRendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A55B871C8B406600866F89 /* PDFRendering.swift */; };
+		26A55B8A1C8B408F00866F89 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A55B891C8B408F00866F89 /* CoreText.framework */; };
+		26ABB34F1B59524300664972 /* CustomHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ABB34E1B59524300664972 /* CustomHeaderCell.swift */; };
+		26ABB3511B5BF02E00664972 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ABB3501B5BF02E00664972 /* CustomCell.swift */; };
+		26B9D6731C1A243D00D0779B /* shrnuti.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 26B9D6721C1A243D00D0779B /* shrnuti.pdf */; };
+		26BA1D7E1BE25A190065A878 /* UverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA1D7D1BE25A190065A878 /* UverTableViewController.swift */; };
+		26BC97091CCA274D00C957AA /* RodinnyStavTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC97081CCA274D00C957AA /* RodinnyStavTableViewController.swift */; };
+		26C153F21CEEEDC00058C13C /* GraphHeaderTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C153F11CEEEDC00058C13C /* GraphHeaderTableCell.xib */; };
+		26C153F41CEF03710058C13C /* GraphTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C153F31CEF03710058C13C /* GraphTableCell.xib */; };
+		26C153F71CEF051F0058C13C /* GraphCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C153F61CEF051F0058C13C /* GraphCells.swift */; };
+		26D72E6B1B47F1C7006DAC48 /* share_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D72E6A1B47F1C7006DAC48 /* share_button.png */; };
+		26D91E491CE5F81400734BDD /* HypotekaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D91E481CE5F81400734BDD /* HypotekaTableViewController.swift */; };
+		26D91E4B1CE60D7700734BDD /* SavingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D91E4A1CE60D7700734BDD /* SavingsTableViewController.swift */; };
+		26D91E4D1CE62D5D00734BDD /* PPSTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D91E4C1CE62D5D00734BDD /* PPSTableViewController.swift */; };
+		26D91E4F1CE63E6E00734BDD /* NavratnostInvesticeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D91E4E1CE63E6E00734BDD /* NavratnostInvesticeTableViewController.swift */; };
+		26D91E511CE6409100734BDD /* NavratnostInvesticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D91E501CE6409100734BDD /* NavratnostInvesticeCell.swift */; };
+		26D91E551CE76E7600734BDD /* GraphBackground.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26D91E541CE76E7600734BDD /* GraphBackground.xib */; };
+		26DD24321CDB62980079B66A /* DiteSporeniTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DD24311CDB62980079B66A /* DiteSporeniTableViewController.swift */; };
+		26E9B7251CE220C6003344BE /* pdf.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B7241CE220C6003344BE /* pdf.xib */; };
+		26E9B7291CE261D7003344BE /* Bydleni.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B7281CE261D7003344BE /* Bydleni.xib */; };
+		26E9B72B1CE26DA3003344BE /* ZajisteniPrijmu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B72A1CE26DA3003344BE /* ZajisteniPrijmu.xib */; };
+		26E9B72D1CE26FD1003344BE /* Duchod.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B72C1CE26FD1003344BE /* Duchod.xib */; };
+		26E9B72F1CE27818003344BE /* Deti.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B72E1CE27818003344BE /* Deti.xib */; };
+		26E9B7311CE284BD003344BE /* Dane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B7301CE284BD003344BE /* Dane.xib */; };
+		26E9B7331CE2859A003344BE /* OstatniPozadavky.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B7321CE2859A003344BE /* OstatniPozadavky.xib */; };
+		26E9B7351CE2860C003344BE /* KlientNechceResit.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B7341CE2860C003344BE /* KlientNechceResit.xib */; };
+		26E9B7371CE28887003344BE /* Shrnuti.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B7361CE28887003344BE /* Shrnuti.xib */; };
+		26E9B73B1CE45964003344BE /* ZakladniUdaje.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B73A1CE45964003344BE /* ZakladniUdaje.xib */; };
+		26E9B73D1CE459B7003344BE /* Priority.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E9B73C1CE459B7003344BE /* Priority.xib */; };
+		26ED8AA61B3CA142008CC312 /* zajisteni prijmu.png in Resources */ = {isa = PBXBuildFile; fileRef = 26ED8AA51B3CA142008CC312 /* zajisteni prijmu.png */; };
+		26EF6C701B29D1FA00B2D4D3 /* SalaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF6C6F1B29D1FA00B2D4D3 /* SalaryViewController.swift */; };
+		26EF6C7A1B2A531800B2D4D3 /* Mince.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EF6C761B2A531800B2D4D3 /* Mince.png */; };
+		26EF6C7B1B2A531800B2D4D3 /* Penize.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EF6C771B2A531800B2D4D3 /* Penize.png */; };
+		26EF6C7C1B2A531800B2D4D3 /* Prase.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EF6C781B2A531800B2D4D3 /* Prase.png */; };
+		26EF6C7D1B2A531800B2D4D3 /* Teplomer.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EF6C791B2A531800B2D4D3 /* Teplomer.png */; };
+		26EF6C811B2A53F500B2D4D3 /* Dum.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EF6C801B2A53F500B2D4D3 /* Dum.png */; };
+		26F0C2EE1CA2A947004F1BE6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F0C2ED1CA2A947004F1BE6 /* Images.xcassets */; };
+		26F105BF1B2871F100B1C861 /* Otaznik ikona.png in Resources */ = {isa = PBXBuildFile; fileRef = 26F105BD1B2871F100B1C861 /* Otaznik ikona.png */; };
+		26F16B8C1BDF701500F9CB9A /* ZakladniUdajeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F16B8B1BDF701500F9CB9A /* ZakladniUdajeTableViewController.swift */; };
+		87BA3A0E4406C10099E29799 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35D0F11E0487C7011FF06C4F /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		26A2E54C1B23116D00CE3A81 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2E52E1B23116D00CE3A81 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 26A2E5351B23116D00CE3A81;
+			remoteInfo = "Financni kalkulacka";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2622A4251B43289300A673CC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2605DDF81C232C390032E4AA /* NovyKlientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NovyKlientTableViewController.swift; sourceTree = "<group>"; };
+		2605DDFD1C232C860032E4AA /* NovyKlientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NovyKlientCell.swift; sourceTree = "<group>"; };
+		26107EB71C0B3A33006470B8 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		26107EB91C0B4097006470B8 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		26107EC01C0C62AF006470B8 /* HypotekaGrafTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HypotekaGrafTableViewController.swift; sourceTree = "<group>"; };
+		26107EC21C0C6327006470B8 /* HypotekaGrafCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HypotekaGrafCell.swift; sourceTree = "<group>"; };
+		2611F9091BE223DB00377B26 /* PracovniPomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracovniPomerTableViewController.swift; sourceTree = "<group>"; };
+		26166AA01C130DA0006CB664 /* KartaKlientaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KartaKlientaCell.swift; sourceTree = "<group>"; };
+		262592C81BDF7B5700096AB2 /* Cell classes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell classes.swift"; sourceTree = "<group>"; };
+		262592CC1BDF9DA200096AB2 /* ZdravotniStavTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZdravotniStavTableViewController.swift; sourceTree = "<group>"; };
+		262592CE1BDFA9C800096AB2 /* Zakladni udaje global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Zakladni udaje global.swift"; sourceTree = "<group>"; };
+		262592DB1BE2105400096AB2 /* ZabezpeceniPrijmuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZabezpeceniPrijmuTableViewController.swift; sourceTree = "<group>"; };
+		2628C4371C0E423D00886E9F /* SavingsGrafTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavingsGrafTableViewController.swift; sourceTree = "<group>"; };
+		2628C4391C0E425B00886E9F /* SavingsGrafCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavingsGrafCell.swift; sourceTree = "<group>"; };
+		2628C43B1C10791F00886E9F /* PPSGrafTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPSGrafTableViewController.swift; sourceTree = "<group>"; };
+		2628C43D1C10937500886E9F /* PPSCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPSCell.swift; sourceTree = "<group>"; };
+		2628C4791C1264B300886E9F /* KartaKlientaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KartaKlientaTableViewController.swift; sourceTree = "<group>"; };
+		2642A8A31B62965B001174E1 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		26475E651BEF53C4008BCCD2 /* DuchodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuchodTableViewController.swift; sourceTree = "<group>"; };
+		26475E681BEF7064008BCCD2 /* PripravaNaDuchodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PripravaNaDuchodTableViewController.swift; sourceTree = "<group>"; };
+		26475E6B1BEF99A1008BCCD2 /* DaneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaneTableViewController.swift; sourceTree = "<group>"; };
+		26475E711BEF9E21008BCCD2 /* OstatniPozadavkyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OstatniPozadavkyTableViewController.swift; sourceTree = "<group>"; };
+		26475E741BEFA6B8008BCCD2 /* PriorityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriorityTableViewController.swift; sourceTree = "<group>"; };
+		26475E771BEFD2DE008BCCD2 /* ShrnutiTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShrnutiTableViewController.swift; sourceTree = "<group>"; };
+		26475E7B1BF0C1C8008BCCD2 /* ZajisteniPrijmuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZajisteniPrijmuTableViewController.swift; sourceTree = "<group>"; };
+		26475E7D1BF0C46E008BCCD2 /* Zajisteni prijmu cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Zajisteni prijmu cells.swift"; sourceTree = "<group>"; };
+		26475E7F1BF0C6D4008BCCD2 /* ZajisteniPrijmuPracovniPomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZajisteniPrijmuPracovniPomer.swift; sourceTree = "<group>"; };
+		26475E831BF0CCA6008BCCD2 /* ZajisteniPrijmuPracovniPomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZajisteniPrijmuPracovniPomerTableViewController.swift; sourceTree = "<group>"; };
+		26534E0B1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavratnostInvesticeViewController.swift; sourceTree = "<group>"; };
+		268C5C2B1BE7C046002DE24D /* BytCiDumTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytCiDumTableViewController.swift; sourceTree = "<group>"; };
+		268C5C2F1BE7C0A3002DE24D /* VlastniCiNajemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VlastniCiNajemTableViewController.swift; sourceTree = "<group>"; };
+		268C5C311BE7C130002DE24D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		268C5C351BE81F45002DE24D /* SpokojenostBydleniTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpokojenostBydleniTableViewController.swift; sourceTree = "<group>"; };
+		268C5C391BE8BD86002DE24D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		268C5C3C1BEB5E93002DE24D /* DetiTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetiTableViewController.swift; sourceTree = "<group>"; };
+		268C5C3F1BED55E5002DE24D /* PlanujeteDetiTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanujeteDetiTableViewController.swift; sourceTree = "<group>"; };
+		268DA6561BE7753E00F79BC6 /* BydleniTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BydleniTableViewController.swift; sourceTree = "<group>"; };
+		268DF8991C173FEB006AFDDE /* PDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		26A2E5361B23116D00CE3A81 /* Financni kalkulacka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Financni kalkulacka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		26A2E53A1B23116D00CE3A81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26A2E53B1B23116D00CE3A81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		26A2E54B1B23116D00CE3A81 /* Financni kalkulackaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Financni kalkulackaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		26A2E5501B23116D00CE3A81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26A2E5511B23116D00CE3A81 /* Financni_kalkulackaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Financni_kalkulackaTests.swift; sourceTree = "<group>"; };
+		26A55B871C8B406600866F89 /* PDFRendering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFRendering.swift; sourceTree = "<group>"; };
+		26A55B891C8B408F00866F89 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		26ABB34E1B59524300664972 /* CustomHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHeaderCell.swift; sourceTree = "<group>"; };
+		26ABB3501B5BF02E00664972 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		26B9D6721C1A243D00D0779B /* shrnuti.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = shrnuti.pdf; sourceTree = "<group>"; };
+		26BA1D7D1BE25A190065A878 /* UverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UverTableViewController.swift; sourceTree = "<group>"; };
+		26BC97081CCA274D00C957AA /* RodinnyStavTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RodinnyStavTableViewController.swift; sourceTree = "<group>"; };
+		26C153F11CEEEDC00058C13C /* GraphHeaderTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphHeaderTableCell.xib; sourceTree = "<group>"; };
+		26C153F31CEF03710058C13C /* GraphTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphTableCell.xib; sourceTree = "<group>"; };
+		26C153F61CEF051F0058C13C /* GraphCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCells.swift; sourceTree = "<group>"; };
+		26D72E621B45EC8F006DAC48 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		26D72E6A1B47F1C7006DAC48 /* share_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_button.png; sourceTree = "<group>"; };
+		26D91E481CE5F81400734BDD /* HypotekaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HypotekaTableViewController.swift; sourceTree = "<group>"; };
+		26D91E4A1CE60D7700734BDD /* SavingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavingsTableViewController.swift; sourceTree = "<group>"; };
+		26D91E4C1CE62D5D00734BDD /* PPSTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPSTableViewController.swift; sourceTree = "<group>"; };
+		26D91E4E1CE63E6E00734BDD /* NavratnostInvesticeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavratnostInvesticeTableViewController.swift; sourceTree = "<group>"; };
+		26D91E501CE6409100734BDD /* NavratnostInvesticeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavratnostInvesticeCell.swift; sourceTree = "<group>"; };
+		26D91E541CE76E7600734BDD /* GraphBackground.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphBackground.xib; sourceTree = "<group>"; };
+		26DD24311CDB62980079B66A /* DiteSporeniTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiteSporeniTableViewController.swift; sourceTree = "<group>"; };
+		26E9B7241CE220C6003344BE /* pdf.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = pdf.xib; sourceTree = "<group>"; };
+		26E9B7281CE261D7003344BE /* Bydleni.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Bydleni.xib; sourceTree = "<group>"; };
+		26E9B72A1CE26DA3003344BE /* ZajisteniPrijmu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZajisteniPrijmu.xib; sourceTree = "<group>"; };
+		26E9B72C1CE26FD1003344BE /* Duchod.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Duchod.xib; sourceTree = "<group>"; };
+		26E9B72E1CE27818003344BE /* Deti.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Deti.xib; sourceTree = "<group>"; };
+		26E9B7301CE284BD003344BE /* Dane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Dane.xib; sourceTree = "<group>"; };
+		26E9B7321CE2859A003344BE /* OstatniPozadavky.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OstatniPozadavky.xib; sourceTree = "<group>"; };
+		26E9B7341CE2860C003344BE /* KlientNechceResit.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KlientNechceResit.xib; sourceTree = "<group>"; };
+		26E9B7361CE28887003344BE /* Shrnuti.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Shrnuti.xib; sourceTree = "<group>"; };
+		26E9B73A1CE45964003344BE /* ZakladniUdaje.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZakladniUdaje.xib; sourceTree = "<group>"; };
+		26E9B73C1CE459B7003344BE /* Priority.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Priority.xib; sourceTree = "<group>"; };
+		26ED8AA51B3CA142008CC312 /* zajisteni prijmu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zajisteni prijmu.png"; sourceTree = "<group>"; };
+		26EF6C6F1B29D1FA00B2D4D3 /* SalaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalaryViewController.swift; sourceTree = "<group>"; };
+		26EF6C761B2A531800B2D4D3 /* Mince.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mince.png; sourceTree = "<group>"; };
+		26EF6C771B2A531800B2D4D3 /* Penize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Penize.png; sourceTree = "<group>"; };
+		26EF6C781B2A531800B2D4D3 /* Prase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prase.png; sourceTree = "<group>"; };
+		26EF6C791B2A531800B2D4D3 /* Teplomer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Teplomer.png; sourceTree = "<group>"; };
+		26EF6C801B2A53F500B2D4D3 /* Dum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dum.png; sourceTree = "<group>"; };
+		26F0C2ED1CA2A947004F1BE6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Financni kalkulacka/Images.xcassets"; sourceTree = "<group>"; };
+		26F105BD1B2871F100B1C861 /* Otaznik ikona.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Otaznik ikona.png"; sourceTree = "<group>"; };
+		26F16B8B1BDF701500F9CB9A /* ZakladniUdajeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZakladniUdajeTableViewController.swift; sourceTree = "<group>"; };
+		2B602345F7C9659B680866CF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		35D0F11E0487C7011FF06C4F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AAACFD35AA38FA01DE4AED0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		26A2E5331B23116D00CE3A81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26A55B8A1C8B408F00866F89 /* CoreText.framework in Frameworks */,
+				87BA3A0E4406C10099E29799 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26A2E5481B23116D00CE3A81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2605DDFA1C232C4C0032E4AA /* Novy klient */ = {
+			isa = PBXGroup;
+			children = (
+				2605DDF81C232C390032E4AA /* NovyKlientTableViewController.swift */,
+				2605DDFD1C232C860032E4AA /* NovyKlientCell.swift */,
+				2605DDFC1C232C690032E4AA /* Udaje */,
+			);
+			name = "Novy klient";
+			sourceTree = "<group>";
+		};
+		2605DDFC1C232C690032E4AA /* Udaje */ = {
+			isa = PBXGroup;
+			children = (
+				26F16B8F1BDF702A00F9CB9A /* Zakladni udaje */,
+				262592DD1BE2143600096AB2 /* Zabezpeceni prijmu */,
+				268DA6551BE7752800F79BC6 /* Bydleni */,
+				268C5C3B1BEB5E6C002DE24D /* Deti */,
+				26475E641BEF5385008BCCD2 /* Duchod */,
+				26475E6A1BEF998C008BCCD2 /* Dane a dotace */,
+				26475E701BEF9E06008BCCD2 /* Ostatni pozadavky */,
+				26475E731BEFA6A6008BCCD2 /* Priority */,
+				26475E761BEFD2CE008BCCD2 /* Shrnuti */,
+			);
+			name = Udaje;
+			sourceTree = "<group>";
+		};
+		262592DD1BE2143600096AB2 /* Zabezpeceni prijmu */ = {
+			isa = PBXGroup;
+			children = (
+				262592DB1BE2105400096AB2 /* ZabezpeceniPrijmuTableViewController.swift */,
+				268C5C2D1BE7C04D002DE24D /* Options VCs */,
+			);
+			name = "Zabezpeceni prijmu";
+			sourceTree = "<group>";
+		};
+		26475E641BEF5385008BCCD2 /* Duchod */ = {
+			isa = PBXGroup;
+			children = (
+				26475E651BEF53C4008BCCD2 /* DuchodTableViewController.swift */,
+				26475E671BEF7041008BCCD2 /* Options VCs */,
+			);
+			name = Duchod;
+			sourceTree = "<group>";
+		};
+		26475E671BEF7041008BCCD2 /* Options VCs */ = {
+			isa = PBXGroup;
+			children = (
+				26475E681BEF7064008BCCD2 /* PripravaNaDuchodTableViewController.swift */,
+			);
+			name = "Options VCs";
+			sourceTree = "<group>";
+		};
+		26475E6A1BEF998C008BCCD2 /* Dane a dotace */ = {
+			isa = PBXGroup;
+			children = (
+				26475E6B1BEF99A1008BCCD2 /* DaneTableViewController.swift */,
+			);
+			name = "Dane a dotace";
+			sourceTree = "<group>";
+		};
+		26475E701BEF9E06008BCCD2 /* Ostatni pozadavky */ = {
+			isa = PBXGroup;
+			children = (
+				26475E711BEF9E21008BCCD2 /* OstatniPozadavkyTableViewController.swift */,
+			);
+			name = "Ostatni pozadavky";
+			sourceTree = "<group>";
+		};
+		26475E731BEFA6A6008BCCD2 /* Priority */ = {
+			isa = PBXGroup;
+			children = (
+				26475E741BEFA6B8008BCCD2 /* PriorityTableViewController.swift */,
+			);
+			name = Priority;
+			sourceTree = "<group>";
+		};
+		26475E761BEFD2CE008BCCD2 /* Shrnuti */ = {
+			isa = PBXGroup;
+			children = (
+				26475E771BEFD2DE008BCCD2 /* ShrnutiTableViewController.swift */,
+				268DF8991C173FEB006AFDDE /* PDFViewController.swift */,
+				26A55B871C8B406600866F89 /* PDFRendering.swift */,
+				26E9B7271CE261B6003344BE /* XIB files */,
+			);
+			name = Shrnuti;
+			sourceTree = "<group>";
+		};
+		26475E811BF0C73D008BCCD2 /* Zajisteni prijmu cell & struct */ = {
+			isa = PBXGroup;
+			children = (
+				26475E7D1BF0C46E008BCCD2 /* Zajisteni prijmu cells.swift */,
+				26475E7F1BF0C6D4008BCCD2 /* ZajisteniPrijmuPracovniPomer.swift */,
+			);
+			name = "Zajisteni prijmu cell & struct";
+			sourceTree = "<group>";
+		};
+		26475E821BF0CC7D008BCCD2 /* Options VC */ = {
+			isa = PBXGroup;
+			children = (
+				26475E831BF0CCA6008BCCD2 /* ZajisteniPrijmuPracovniPomerTableViewController.swift */,
+			);
+			name = "Options VC";
+			sourceTree = "<group>";
+		};
+		268C5C2D1BE7C04D002DE24D /* Options VCs */ = {
+			isa = PBXGroup;
+			children = (
+				2611F9091BE223DB00377B26 /* PracovniPomerTableViewController.swift */,
+				26BA1D7D1BE25A190065A878 /* UverTableViewController.swift */,
+			);
+			name = "Options VCs";
+			sourceTree = "<group>";
+		};
+		268C5C2E1BE7C091002DE24D /* Options VCs */ = {
+			isa = PBXGroup;
+			children = (
+				268C5C2B1BE7C046002DE24D /* BytCiDumTableViewController.swift */,
+				268C5C2F1BE7C0A3002DE24D /* VlastniCiNajemTableViewController.swift */,
+				268C5C351BE81F45002DE24D /* SpokojenostBydleniTableViewController.swift */,
+			);
+			name = "Options VCs";
+			sourceTree = "<group>";
+		};
+		268C5C3B1BEB5E6C002DE24D /* Deti */ = {
+			isa = PBXGroup;
+			children = (
+				268C5C3C1BEB5E93002DE24D /* DetiTableViewController.swift */,
+				268C5C3E1BED55CB002DE24D /* Options VCs */,
+			);
+			name = Deti;
+			sourceTree = "<group>";
+		};
+		268C5C3E1BED55CB002DE24D /* Options VCs */ = {
+			isa = PBXGroup;
+			children = (
+				268C5C3F1BED55E5002DE24D /* PlanujeteDetiTableViewController.swift */,
+				26DD24311CDB62980079B66A /* DiteSporeniTableViewController.swift */,
+			);
+			name = "Options VCs";
+			sourceTree = "<group>";
+		};
+		268DA6551BE7752800F79BC6 /* Bydleni */ = {
+			isa = PBXGroup;
+			children = (
+				268DA6561BE7753E00F79BC6 /* BydleniTableViewController.swift */,
+				268C5C2E1BE7C091002DE24D /* Options VCs */,
+			);
+			name = Bydleni;
+			sourceTree = "<group>";
+		};
+		26A2E52D1B23116D00CE3A81 = {
+			isa = PBXGroup;
+			children = (
+				2642A8A31B62965B001174E1 /* BridgingHeader.h */,
+				26D72E621B45EC8F006DAC48 /* MyPlayground.playground */,
+				268C5C311BE7C130002DE24D /* Main.storyboard */,
+				26F0C2ED1CA2A947004F1BE6 /* Images.xcassets */,
+				26A2E5381B23116D00CE3A81 /* Financni kalkulacka */,
+				26A2E54E1B23116D00CE3A81 /* Financni kalkulackaTests */,
+				26A2E5371B23116D00CE3A81 /* Products */,
+				BB8B5B32FE6A7868FAEDF676 /* Pods */,
+				B89BA6F9B1AAEF55CD581AB3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		26A2E5371B23116D00CE3A81 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				26A2E5361B23116D00CE3A81 /* Financni kalkulacka.app */,
+				26A2E54B1B23116D00CE3A81 /* Financni kalkulackaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		26A2E5381B23116D00CE3A81 /* Financni kalkulacka */ = {
+			isa = PBXGroup;
+			children = (
+				26A2E53B1B23116D00CE3A81 /* AppDelegate.swift */,
+				2628C4791C1264B300886E9F /* KartaKlientaTableViewController.swift */,
+				26166AA01C130DA0006CB664 /* KartaKlientaCell.swift */,
+				26F16B881BDE89C400F9CB9A /* Karta klienta */,
+				26F16B811BDE892F00F9CB9A /* Podpora */,
+				26F16B8A1BDE8A0000F9CB9A /* Extensions */,
+				26A2E5391B23116D00CE3A81 /* Supporting Files */,
+			);
+			path = "Financni kalkulacka";
+			sourceTree = "<group>";
+		};
+		26A2E5391B23116D00CE3A81 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				26B9D6721C1A243D00D0779B /* shrnuti.pdf */,
+				26D72E6A1B47F1C7006DAC48 /* share_button.png */,
+				26ED8AA51B3CA142008CC312 /* zajisteni prijmu.png */,
+				26EF6C761B2A531800B2D4D3 /* Mince.png */,
+				26EF6C771B2A531800B2D4D3 /* Penize.png */,
+				26EF6C781B2A531800B2D4D3 /* Prase.png */,
+				26EF6C801B2A53F500B2D4D3 /* Dum.png */,
+				26EF6C791B2A531800B2D4D3 /* Teplomer.png */,
+				26F105BD1B2871F100B1C861 /* Otaznik ikona.png */,
+				26A2E53A1B23116D00CE3A81 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		26A2E54E1B23116D00CE3A81 /* Financni kalkulackaTests */ = {
+			isa = PBXGroup;
+			children = (
+				26A2E5511B23116D00CE3A81 /* Financni_kalkulackaTests.swift */,
+				26A2E54F1B23116D00CE3A81 /* Supporting Files */,
+			);
+			path = "Financni kalkulackaTests";
+			sourceTree = "<group>";
+		};
+		26A2E54F1B23116D00CE3A81 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				26A2E5501B23116D00CE3A81 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		26BC970A1CCA275400C957AA /* Options VCs */ = {
+			isa = PBXGroup;
+			children = (
+				262592CC1BDF9DA200096AB2 /* ZdravotniStavTableViewController.swift */,
+				26BC97081CCA274D00C957AA /* RodinnyStavTableViewController.swift */,
+			);
+			name = "Options VCs";
+			sourceTree = "<group>";
+		};
+		26C153F51CEF050C0058C13C /* TableViewFiles */ = {
+			isa = PBXGroup;
+			children = (
+				26C153F11CEEEDC00058C13C /* GraphHeaderTableCell.xib */,
+				26C153F31CEF03710058C13C /* GraphTableCell.xib */,
+				26C153F61CEF051F0058C13C /* GraphCells.swift */,
+			);
+			name = TableViewFiles;
+			sourceTree = "<group>";
+		};
+		26E9B7271CE261B6003344BE /* XIB files */ = {
+			isa = PBXGroup;
+			children = (
+				26E9B7241CE220C6003344BE /* pdf.xib */,
+				26E9B73A1CE45964003344BE /* ZakladniUdaje.xib */,
+				26E9B73C1CE459B7003344BE /* Priority.xib */,
+				26E9B72A1CE26DA3003344BE /* ZajisteniPrijmu.xib */,
+				26E9B7281CE261D7003344BE /* Bydleni.xib */,
+				26E9B72E1CE27818003344BE /* Deti.xib */,
+				26E9B72C1CE26FD1003344BE /* Duchod.xib */,
+				26E9B7301CE284BD003344BE /* Dane.xib */,
+				26E9B7321CE2859A003344BE /* OstatniPozadavky.xib */,
+				26E9B7341CE2860C003344BE /* KlientNechceResit.xib */,
+				26E9B7361CE28887003344BE /* Shrnuti.xib */,
+				26D91E541CE76E7600734BDD /* GraphBackground.xib */,
+				26C153F51CEF050C0058C13C /* TableViewFiles */,
+			);
+			name = "XIB files";
+			sourceTree = "<group>";
+		};
+		26F16B811BDE892F00F9CB9A /* Podpora */ = {
+			isa = PBXGroup;
+			children = (
+				26107EB91C0B4097006470B8 /* BaseCell.swift */,
+				26107EB71C0B3A33006470B8 /* BaseTableViewController.swift */,
+				26F16B821BDE895000F9CB9A /* Hypoteka kalkulacka */,
+				26F16B831BDE895A00F9CB9A /* Sporeni kalkulacka */,
+				26F16B841BDE896200F9CB9A /* Cista mzda */,
+				26F16B851BDE896700F9CB9A /* Zajisteni prijmu */,
+				26F16B861BDE896F00F9CB9A /* Program predcasneho splaceni */,
+				26F16B871BDE898400F9CB9A /* Navratnost investice */,
+				26F16B891BDE89E000F9CB9A /* Graph cells */,
+			);
+			name = Podpora;
+			sourceTree = "<group>";
+		};
+		26F16B821BDE895000F9CB9A /* Hypoteka kalkulacka */ = {
+			isa = PBXGroup;
+			children = (
+				26D91E481CE5F81400734BDD /* HypotekaTableViewController.swift */,
+				26107EC01C0C62AF006470B8 /* HypotekaGrafTableViewController.swift */,
+				26107EC21C0C6327006470B8 /* HypotekaGrafCell.swift */,
+			);
+			name = "Hypoteka kalkulacka";
+			sourceTree = "<group>";
+		};
+		26F16B831BDE895A00F9CB9A /* Sporeni kalkulacka */ = {
+			isa = PBXGroup;
+			children = (
+				26D91E4A1CE60D7700734BDD /* SavingsTableViewController.swift */,
+				2628C4371C0E423D00886E9F /* SavingsGrafTableViewController.swift */,
+				2628C4391C0E425B00886E9F /* SavingsGrafCell.swift */,
+			);
+			name = "Sporeni kalkulacka";
+			sourceTree = "<group>";
+		};
+		26F16B841BDE896200F9CB9A /* Cista mzda */ = {
+			isa = PBXGroup;
+			children = (
+				26EF6C6F1B29D1FA00B2D4D3 /* SalaryViewController.swift */,
+			);
+			name = "Cista mzda";
+			sourceTree = "<group>";
+		};
+		26F16B851BDE896700F9CB9A /* Zajisteni prijmu */ = {
+			isa = PBXGroup;
+			children = (
+				26475E7B1BF0C1C8008BCCD2 /* ZajisteniPrijmuTableViewController.swift */,
+				26475E821BF0CC7D008BCCD2 /* Options VC */,
+				26475E811BF0C73D008BCCD2 /* Zajisteni prijmu cell & struct */,
+			);
+			name = "Zajisteni prijmu";
+			sourceTree = "<group>";
+		};
+		26F16B861BDE896F00F9CB9A /* Program predcasneho splaceni */ = {
+			isa = PBXGroup;
+			children = (
+				26D91E4C1CE62D5D00734BDD /* PPSTableViewController.swift */,
+				2628C43B1C10791F00886E9F /* PPSGrafTableViewController.swift */,
+				2628C43D1C10937500886E9F /* PPSCell.swift */,
+			);
+			name = "Program predcasneho splaceni";
+			sourceTree = "<group>";
+		};
+		26F16B871BDE898400F9CB9A /* Navratnost investice */ = {
+			isa = PBXGroup;
+			children = (
+				26D91E4E1CE63E6E00734BDD /* NavratnostInvesticeTableViewController.swift */,
+				26534E0B1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift */,
+				26D91E501CE6409100734BDD /* NavratnostInvesticeCell.swift */,
+			);
+			name = "Navratnost investice";
+			sourceTree = "<group>";
+		};
+		26F16B881BDE89C400F9CB9A /* Karta klienta */ = {
+			isa = PBXGroup;
+			children = (
+				262592CE1BDFA9C800096AB2 /* Zakladni udaje global.swift */,
+				262592C81BDF7B5700096AB2 /* Cell classes.swift */,
+				2605DDFA1C232C4C0032E4AA /* Novy klient */,
+			);
+			name = "Karta klienta";
+			sourceTree = "<group>";
+		};
+		26F16B891BDE89E000F9CB9A /* Graph cells */ = {
+			isa = PBXGroup;
+			children = (
+				26ABB3501B5BF02E00664972 /* CustomCell.swift */,
+				26ABB34E1B59524300664972 /* CustomHeaderCell.swift */,
+			);
+			name = "Graph cells";
+			sourceTree = "<group>";
+		};
+		26F16B8A1BDE8A0000F9CB9A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				268C5C391BE8BD86002DE24D /* Extensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		26F16B8F1BDF702A00F9CB9A /* Zakladni udaje */ = {
+			isa = PBXGroup;
+			children = (
+				26F16B8B1BDF701500F9CB9A /* ZakladniUdajeTableViewController.swift */,
+				26BC970A1CCA275400C957AA /* Options VCs */,
+			);
+			name = "Zakladni udaje";
+			sourceTree = "<group>";
+		};
+		B89BA6F9B1AAEF55CD581AB3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				26A55B891C8B408F00866F89 /* CoreText.framework */,
+				35D0F11E0487C7011FF06C4F /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB8B5B32FE6A7868FAEDF676 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2B602345F7C9659B680866CF /* Pods.debug.xcconfig */,
+				7AAACFD35AA38FA01DE4AED0 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		26A2E5351B23116D00CE3A81 /* Financni kalkulacka */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26A2E5551B23116D00CE3A81 /* Build configuration list for PBXNativeTarget "Financni kalkulacka" */;
+			buildPhases = (
+				8F7CB9CE8132A512D61BC046 /* Check Pods Manifest.lock */,
+				26A2E5321B23116D00CE3A81 /* Sources */,
+				26A2E5331B23116D00CE3A81 /* Frameworks */,
+				26A2E5341B23116D00CE3A81 /* Resources */,
+				2622A4251B43289300A673CC /* Embed Frameworks */,
+				57F200ADACA256689334A87F /* Copy Pods Resources */,
+				6E04EFD23CAF9DC76CB36F80 /* Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Financni kalkulacka";
+			productName = "Financni kalkulacka";
+			productReference = 26A2E5361B23116D00CE3A81 /* Financni kalkulacka.app */;
+			productType = "com.apple.product-type.application";
+		};
+		26A2E54A1B23116D00CE3A81 /* Financni kalkulackaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26A2E5581B23116D00CE3A81 /* Build configuration list for PBXNativeTarget "Financni kalkulackaTests" */;
+			buildPhases = (
+				26A2E5471B23116D00CE3A81 /* Sources */,
+				26A2E5481B23116D00CE3A81 /* Frameworks */,
+				26A2E5491B23116D00CE3A81 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				26A2E54D1B23116D00CE3A81 /* PBXTargetDependency */,
+			);
+			name = "Financni kalkulackaTests";
+			productName = "Financni kalkulackaTests";
+			productReference = 26A2E54B1B23116D00CE3A81 /* Financni kalkulackaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		26A2E52E1B23116D00CE3A81 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = "Joseph Liu";
+				TargetAttributes = {
+					26A2E5351B23116D00CE3A81 = {
+						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = L7H3CHXZTL;
+					};
+					26A2E54A1B23116D00CE3A81 = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 26A2E5351B23116D00CE3A81;
+					};
+				};
+			};
+			buildConfigurationList = 26A2E5311B23116D00CE3A81 /* Build configuration list for PBXProject "Financni kalkulacka" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 26A2E52D1B23116D00CE3A81;
+			productRefGroup = 26A2E5371B23116D00CE3A81 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				26A2E5351B23116D00CE3A81 /* Financni kalkulacka */,
+				26A2E54A1B23116D00CE3A81 /* Financni kalkulackaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		26A2E5341B23116D00CE3A81 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26E9B7251CE220C6003344BE /* pdf.xib in Resources */,
+				26EF6C7B1B2A531800B2D4D3 /* Penize.png in Resources */,
+				26E9B7311CE284BD003344BE /* Dane.xib in Resources */,
+				26EF6C7A1B2A531800B2D4D3 /* Mince.png in Resources */,
+				26ED8AA61B3CA142008CC312 /* zajisteni prijmu.png in Resources */,
+				26C153F21CEEEDC00058C13C /* GraphHeaderTableCell.xib in Resources */,
+				26E9B7351CE2860C003344BE /* KlientNechceResit.xib in Resources */,
+				26F105BF1B2871F100B1C861 /* Otaznik ikona.png in Resources */,
+				26E9B7371CE28887003344BE /* Shrnuti.xib in Resources */,
+				26C153F41CEF03710058C13C /* GraphTableCell.xib in Resources */,
+				26E9B72D1CE26FD1003344BE /* Duchod.xib in Resources */,
+				26E9B7331CE2859A003344BE /* OstatniPozadavky.xib in Resources */,
+				26EF6C811B2A53F500B2D4D3 /* Dum.png in Resources */,
+				26EF6C7D1B2A531800B2D4D3 /* Teplomer.png in Resources */,
+				26F0C2EE1CA2A947004F1BE6 /* Images.xcassets in Resources */,
+				26E9B73B1CE45964003344BE /* ZakladniUdaje.xib in Resources */,
+				268C5C321BE7C130002DE24D /* Main.storyboard in Resources */,
+				26E9B73D1CE459B7003344BE /* Priority.xib in Resources */,
+				26D72E6B1B47F1C7006DAC48 /* share_button.png in Resources */,
+				26D91E551CE76E7600734BDD /* GraphBackground.xib in Resources */,
+				26E9B72F1CE27818003344BE /* Deti.xib in Resources */,
+				26E9B72B1CE26DA3003344BE /* ZajisteniPrijmu.xib in Resources */,
+				26B9D6731C1A243D00D0779B /* shrnuti.pdf in Resources */,
+				26E9B7291CE261D7003344BE /* Bydleni.xib in Resources */,
+				26EF6C7C1B2A531800B2D4D3 /* Prase.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26A2E5491B23116D00CE3A81 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		57F200ADACA256689334A87F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E04EFD23CAF9DC76CB36F80 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F7CB9CE8132A512D61BC046 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		26A2E5321B23116D00CE3A81 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2628C43C1C10791F00886E9F /* PPSGrafTableViewController.swift in Sources */,
+				26D91E4D1CE62D5D00734BDD /* PPSTableViewController.swift in Sources */,
+				2628C43E1C10937500886E9F /* PPSCell.swift in Sources */,
+				268C5C2C1BE7C046002DE24D /* BytCiDumTableViewController.swift in Sources */,
+				26EF6C701B29D1FA00B2D4D3 /* SalaryViewController.swift in Sources */,
+				26C153F71CEF051F0058C13C /* GraphCells.swift in Sources */,
+				26107EBA1C0B4097006470B8 /* BaseCell.swift in Sources */,
+				26D91E511CE6409100734BDD /* NavratnostInvesticeCell.swift in Sources */,
+				26BC97091CCA274D00C957AA /* RodinnyStavTableViewController.swift in Sources */,
+				26ABB3511B5BF02E00664972 /* CustomCell.swift in Sources */,
+				262592CF1BDFA9C800096AB2 /* Zakladni udaje global.swift in Sources */,
+				262592DC1BE2105400096AB2 /* ZabezpeceniPrijmuTableViewController.swift in Sources */,
+				26107EC11C0C62AF006470B8 /* HypotekaGrafTableViewController.swift in Sources */,
+				268DF89A1C173FEB006AFDDE /* PDFViewController.swift in Sources */,
+				26D91E4F1CE63E6E00734BDD /* NavratnostInvesticeTableViewController.swift in Sources */,
+				26475E7C1BF0C1C8008BCCD2 /* ZajisteniPrijmuTableViewController.swift in Sources */,
+				26A55B881C8B406600866F89 /* PDFRendering.swift in Sources */,
+				268C5C361BE81F45002DE24D /* SpokojenostBydleniTableViewController.swift in Sources */,
+				26475E801BF0C6D4008BCCD2 /* ZajisteniPrijmuPracovniPomer.swift in Sources */,
+				26534E0C1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift in Sources */,
+				26107EB81C0B3A33006470B8 /* BaseTableViewController.swift in Sources */,
+				26ABB34F1B59524300664972 /* CustomHeaderCell.swift in Sources */,
+				2611F90A1BE223DB00377B26 /* PracovniPomerTableViewController.swift in Sources */,
+				26166AA11C130DA0006CB664 /* KartaKlientaCell.swift in Sources */,
+				26475E691BEF7064008BCCD2 /* PripravaNaDuchodTableViewController.swift in Sources */,
+				26D91E491CE5F81400734BDD /* HypotekaTableViewController.swift in Sources */,
+				26475E781BEFD2DE008BCCD2 /* ShrnutiTableViewController.swift in Sources */,
+				26475E7E1BF0C46E008BCCD2 /* Zajisteni prijmu cells.swift in Sources */,
+				26DD24321CDB62980079B66A /* DiteSporeniTableViewController.swift in Sources */,
+				2628C4381C0E423D00886E9F /* SavingsGrafTableViewController.swift in Sources */,
+				26107EC31C0C6327006470B8 /* HypotekaGrafCell.swift in Sources */,
+				26475E721BEF9E21008BCCD2 /* OstatniPozadavkyTableViewController.swift in Sources */,
+				262592C91BDF7B5700096AB2 /* Cell classes.swift in Sources */,
+				26475E841BF0CCA6008BCCD2 /* ZajisteniPrijmuPracovniPomerTableViewController.swift in Sources */,
+				26475E661BEF53C4008BCCD2 /* DuchodTableViewController.swift in Sources */,
+				268C5C401BED55E5002DE24D /* PlanujeteDetiTableViewController.swift in Sources */,
+				268C5C3D1BEB5E93002DE24D /* DetiTableViewController.swift in Sources */,
+				268C5C301BE7C0A3002DE24D /* VlastniCiNajemTableViewController.swift in Sources */,
+				26D91E4B1CE60D7700734BDD /* SavingsTableViewController.swift in Sources */,
+				262592CD1BDF9DA200096AB2 /* ZdravotniStavTableViewController.swift in Sources */,
+				2605DDFE1C232C860032E4AA /* NovyKlientCell.swift in Sources */,
+				26475E751BEFA6B8008BCCD2 /* PriorityTableViewController.swift in Sources */,
+				26BA1D7E1BE25A190065A878 /* UverTableViewController.swift in Sources */,
+				26A2E53C1B23116D00CE3A81 /* AppDelegate.swift in Sources */,
+				268DA6571BE7753E00F79BC6 /* BydleniTableViewController.swift in Sources */,
+				2605DDF91C232C390032E4AA /* NovyKlientTableViewController.swift in Sources */,
+				2628C43A1C0E425B00886E9F /* SavingsGrafCell.swift in Sources */,
+				2628C47A1C1264B300886E9F /* KartaKlientaTableViewController.swift in Sources */,
+				26F16B8C1BDF701500F9CB9A /* ZakladniUdajeTableViewController.swift in Sources */,
+				268C5C3A1BE8BD86002DE24D /* Extensions.swift in Sources */,
+				26475E6C1BEF99A1008BCCD2 /* DaneTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26A2E5471B23116D00CE3A81 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26A2E5521B23116D00CE3A81 /* Financni_kalkulackaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		26A2E54D1B23116D00CE3A81 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 26A2E5351B23116D00CE3A81 /* Financni kalkulacka */;
+			targetProxy = 26A2E54C1B23116D00CE3A81 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		26A2E5531B23116D00CE3A81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		26A2E5541B23116D00CE3A81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		26A2E5561B23116D00CE3A81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B602345F7C9659B680866CF /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "Financni kalkulacka/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.josephliu.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "Financni kalkulacka";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
+				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
+			};
+			name = Debug;
+		};
+		26A2E5571B23116D00CE3A81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AAACFD35AA38FA01DE4AED0 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "Financni kalkulacka/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.josephliu.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "Financni kalkulacka";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
+				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
+			};
+			name = Release;
+		};
+		26A2E5591B23116D00CE3A81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Financni kalkulackaTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.josephliu.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Financni kalkulacka.app/Financni kalkulacka";
+			};
+			name = Debug;
+		};
+		26A2E55A1B23116D00CE3A81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Financni kalkulackaTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.josephliu.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Financni kalkulacka.app/Financni kalkulacka";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		26A2E5311B23116D00CE3A81 /* Build configuration list for PBXProject "Financni kalkulacka" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26A2E5531B23116D00CE3A81 /* Debug */,
+				26A2E5541B23116D00CE3A81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26A2E5551B23116D00CE3A81 /* Build configuration list for PBXNativeTarget "Financni kalkulacka" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26A2E5561B23116D00CE3A81 /* Debug */,
+				26A2E5571B23116D00CE3A81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26A2E5581B23116D00CE3A81 /* Build configuration list for PBXNativeTarget "Financni kalkulackaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26A2E5591B23116D00CE3A81 /* Debug */,
+				26A2E55A1B23116D00CE3A81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 26A2E52E1B23116D00CE3A81 /* Project object */;
+}

@@ -1,0 +1,640 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0769A81CECD904D759621701858754FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		1D468ECE4E7537CE0F4D60835DC72949 /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DC781FFFD8D4D499D0013212A32B56 /* JBLineChartView.m */; };
+		417FDCBD36D70E035C7D2B1E43388B30 /* UIScrollView+DHSmartScreenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F05032A42EA090E628EFD0D677D412D /* UIScrollView+DHSmartScreenshot.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		5C3FE1793B1DA29CA3363D1CC92C9096 /* UIScrollView+DHSmartScreenshot.h in Headers */ = {isa = PBXBuildFile; fileRef = D87CA02FF9725DB2BDC34BABBDA7DA84 /* UIScrollView+DHSmartScreenshot.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6985A25C3B1F2752A91BD37990BB1BDB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		6A0EE6073D7324F8B93078130C56B6D4 /* DHSmartScreenshot-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2D5518F64A1DA15131FA111EAE3422 /* DHSmartScreenshot-dummy.m */; };
+		6ACD7FB06C649FE9E5F1746017D56D11 /* UIImage+DHImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF19317663EA794BD6AC81344B1B49F /* UIImage+DHImageAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		7D613687C7420B5E8574CB9BA4B49566 /* UIView+DHSmartScreenshot.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB4D61352522C1FE9780F343EECDC5A /* UIView+DHSmartScreenshot.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E329EF860FE515B20295618CC98305D /* JBLineChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 472B047FDE52A560454F8CCE95E5F317 /* JBLineChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E55F721EB306948709748DCE76290E /* JBBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4215D3FBFCD474342B8D2AE5924110 /* JBBarChartView.m */; };
+		859D9EAFAFE10C06DAC48E20F6A365AC /* JBBarChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = EB71A1678739DE8592D0E331353B0238 /* JBBarChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B5670621C34A08449CF1E5F4B73FE01 /* UIImage+DHImageAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 99CEF9B8EECCC5601C1FF2394C65B265 /* UIImage+DHImageAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C0ADE077C806EE52D6402DCDEC164DF /* JBChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 54221BF1AE7A314E7B40C9C78A37FBA5 /* JBChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B20C81F2E1915E5835B370F7B8EAA393 /* UITableView+DHSmartScreenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0520ED95226E73406D75B60DA9345 /* UITableView+DHSmartScreenshot.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B4162CE6143D61442C822A89B521EAB4 /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EC8CCB5906BE45F9D5E20A1957ED6 /* JBChartView.m */; };
+		D189848204B72BF5EF61F72A0E9BFB83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		DA4C709F17AD527C0C385E367A6EBD90 /* UITableView+DHSmartScreenshot.h in Headers */ = {isa = PBXBuildFile; fileRef = 431401EC6FA42BE302B9983C02B53D92 /* UITableView+DHSmartScreenshot.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DDEBF0ACACDDA7AFF54FE912A7E8F7AB /* JBChartView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C692B377C7FA06018A1AA41D0C0FC68 /* JBChartView-dummy.m */; };
+		E50E2ECA58DABBB92356B5192BD93C43 /* UIView+DHSmartScreenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFE2AFCA04EDE534C666F53FEC6627 /* UIView+DHSmartScreenshot.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		E8EA6DEE12B339499A320A2CE4287B09 /* DHSmartScreenshot.h in Headers */ = {isa = PBXBuildFile; fileRef = 849778F25D82F3BCD89E9261BBD6016A /* DHSmartScreenshot.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F52ED9FF8589E873814BE1A6CD41366D /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9F6D6B729573638E4122ADF0CA589BBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2061574269A97A86123A077A63906664;
+			remoteInfo = DHSmartScreenshot;
+		};
+		D34419AC244A3D6B7F8166EA168B9542 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 383DF1D0756F323FC2957E68F6997C6D;
+			remoteInfo = JBChartView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0EC0520ED95226E73406D75B60DA9345 /* UITableView+DHSmartScreenshot.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableView+DHSmartScreenshot.m"; path = "Classes/UITableView+DHSmartScreenshot.m"; sourceTree = "<group>"; };
+		10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		2A6EC8CCB5906BE45F9D5E20A1957ED6 /* JBChartView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JBChartView.m; path = Classes/JBChartView.m; sourceTree = "<group>"; };
+		2C2D5518F64A1DA15131FA111EAE3422 /* DHSmartScreenshot-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DHSmartScreenshot-dummy.m"; sourceTree = "<group>"; };
+		2F05032A42EA090E628EFD0D677D412D /* UIScrollView+DHSmartScreenshot.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+DHSmartScreenshot.m"; path = "Classes/UIScrollView+DHSmartScreenshot.m"; sourceTree = "<group>"; };
+		37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		3EF19317663EA794BD6AC81344B1B49F /* UIImage+DHImageAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+DHImageAdditions.m"; path = "Classes/UIImage+DHImageAdditions.m"; sourceTree = "<group>"; };
+		3FBFE2AFCA04EDE534C666F53FEC6627 /* UIView+DHSmartScreenshot.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+DHSmartScreenshot.m"; path = "Classes/UIView+DHSmartScreenshot.m"; sourceTree = "<group>"; };
+		431401EC6FA42BE302B9983C02B53D92 /* UITableView+DHSmartScreenshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableView+DHSmartScreenshot.h"; path = "Classes/UITableView+DHSmartScreenshot.h"; sourceTree = "<group>"; };
+		472B047FDE52A560454F8CCE95E5F317 /* JBLineChartView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JBLineChartView.h; path = Classes/JBLineChartView.h; sourceTree = "<group>"; };
+		4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		54221BF1AE7A314E7B40C9C78A37FBA5 /* JBChartView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JBChartView.h; path = Classes/JBChartView.h; sourceTree = "<group>"; };
+		64BFE127063A5DAEEF7259D9125F6214 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6911BECA35E7518D864239B7E898EEF3 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
+		743408031EF5DE1A974DF902249204DD /* libJBChartView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJBChartView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C692B377C7FA06018A1AA41D0C0FC68 /* JBChartView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JBChartView-dummy.m"; sourceTree = "<group>"; };
+		7D4215D3FBFCD474342B8D2AE5924110 /* JBBarChartView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JBBarChartView.m; path = Classes/JBBarChartView.m; sourceTree = "<group>"; };
+		849778F25D82F3BCD89E9261BBD6016A /* DHSmartScreenshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHSmartScreenshot.h; path = Classes/DHSmartScreenshot.h; sourceTree = "<group>"; };
+		88DC781FFFD8D4D499D0013212A32B56 /* JBLineChartView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JBLineChartView.m; path = Classes/JBLineChartView.m; sourceTree = "<group>"; };
+		8A97A39CCACBB419D3F3EEBAF6FDBCD6 /* JBChartView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JBChartView.xcconfig; sourceTree = "<group>"; };
+		8BF0CCDE3EFBC87F43F43CF771206EE4 /* DHSmartScreenshot-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DHSmartScreenshot-prefix.pch"; sourceTree = "<group>"; };
+		8E429407D2DF2D56C05FE9250209588F /* DHSmartScreenshot.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DHSmartScreenshot.xcconfig; sourceTree = "<group>"; };
+		98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		99CEF9B8EECCC5601C1FF2394C65B265 /* UIImage+DHImageAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+DHImageAdditions.h"; path = "Classes/UIImage+DHImageAdditions.h"; sourceTree = "<group>"; };
+		9CB4D61352522C1FE9780F343EECDC5A /* UIView+DHSmartScreenshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+DHSmartScreenshot.h"; path = "Classes/UIView+DHSmartScreenshot.h"; sourceTree = "<group>"; };
+		A1A36D34413696BE466E2CA0AFF194DA /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BAE4E42D495F93D0B0DB1B5FA4F4E5C8 /* JBChartView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JBChartView-prefix.pch"; sourceTree = "<group>"; };
+		D6B0821C1A8166A3F7557C0853A5E67F /* libDHSmartScreenshot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDHSmartScreenshot.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D87CA02FF9725DB2BDC34BABBDA7DA84 /* UIScrollView+DHSmartScreenshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+DHSmartScreenshot.h"; path = "Classes/UIScrollView+DHSmartScreenshot.h"; sourceTree = "<group>"; };
+		EB71A1678739DE8592D0E331353B0238 /* JBBarChartView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JBBarChartView.h; path = Classes/JBBarChartView.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		31FA921E433AC65BE26604274166EC32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6985A25C3B1F2752A91BD37990BB1BDB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B678D3EEED5CA7545D869C1E772F241 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D189848204B72BF5EF61F72A0E9BFB83 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA2AFCB80B060FA51BC544F81A04E803 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0769A81CECD904D759621701858754FC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		037C0CA694176A3C0915F62C9D20B3E6 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B3D1D13E0C6553800746CB8FD61CF946 /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		381AE7A58506AA7AEA143DD223259523 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8A97A39CCACBB419D3F3EEBAF6FDBCD6 /* JBChartView.xcconfig */,
+				7C692B377C7FA06018A1AA41D0C0FC68 /* JBChartView-dummy.m */,
+				BAE4E42D495F93D0B0DB1B5FA4F4E5C8 /* JBChartView-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/JBChartView";
+			sourceTree = "<group>";
+		};
+		39AAEF39F399CB264C8B972980172F44 /* DHSmartScreenshot */ = {
+			isa = PBXGroup;
+			children = (
+				849778F25D82F3BCD89E9261BBD6016A /* DHSmartScreenshot.h */,
+				99CEF9B8EECCC5601C1FF2394C65B265 /* UIImage+DHImageAdditions.h */,
+				3EF19317663EA794BD6AC81344B1B49F /* UIImage+DHImageAdditions.m */,
+				D87CA02FF9725DB2BDC34BABBDA7DA84 /* UIScrollView+DHSmartScreenshot.h */,
+				2F05032A42EA090E628EFD0D677D412D /* UIScrollView+DHSmartScreenshot.m */,
+				431401EC6FA42BE302B9983C02B53D92 /* UITableView+DHSmartScreenshot.h */,
+				0EC0520ED95226E73406D75B60DA9345 /* UITableView+DHSmartScreenshot.m */,
+				9CB4D61352522C1FE9780F343EECDC5A /* UIView+DHSmartScreenshot.h */,
+				3FBFE2AFCA04EDE534C666F53FEC6627 /* UIView+DHSmartScreenshot.m */,
+				821EFFF07400D73C28352320C2EC845E /* Support Files */,
+			);
+			path = DHSmartScreenshot;
+			sourceTree = "<group>";
+		};
+		40415BE98542BF8E49D4A7A54515F0EE /* JBChartView */ = {
+			isa = PBXGroup;
+			children = (
+				EB71A1678739DE8592D0E331353B0238 /* JBBarChartView.h */,
+				7D4215D3FBFCD474342B8D2AE5924110 /* JBBarChartView.m */,
+				54221BF1AE7A314E7B40C9C78A37FBA5 /* JBChartView.h */,
+				2A6EC8CCB5906BE45F9D5E20A1957ED6 /* JBChartView.m */,
+				472B047FDE52A560454F8CCE95E5F317 /* JBLineChartView.h */,
+				88DC781FFFD8D4D499D0013212A32B56 /* JBLineChartView.m */,
+				381AE7A58506AA7AEA143DD223259523 /* Support Files */,
+			);
+			path = JBChartView;
+			sourceTree = "<group>";
+		};
+		4E5EA682221D7DAA8F7118D4110F8837 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				39AAEF39F399CB264C8B972980172F44 /* DHSmartScreenshot */,
+				40415BE98542BF8E49D4A7A54515F0EE /* JBChartView */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				4E5EA682221D7DAA8F7118D4110F8837 /* Pods */,
+				D77140521BA2478D3CC99862E5959880 /* Products */,
+				037C0CA694176A3C0915F62C9D20B3E6 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		821EFFF07400D73C28352320C2EC845E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E429407D2DF2D56C05FE9250209588F /* DHSmartScreenshot.xcconfig */,
+				2C2D5518F64A1DA15131FA111EAE3422 /* DHSmartScreenshot-dummy.m */,
+				8BF0CCDE3EFBC87F43F43CF771206EE4 /* DHSmartScreenshot-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/DHSmartScreenshot";
+			sourceTree = "<group>";
+		};
+		B3D1D13E0C6553800746CB8FD61CF946 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */,
+				10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */,
+				272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */,
+				6911BECA35E7518D864239B7E898EEF3 /* Pods-frameworks.sh */,
+				A1A36D34413696BE466E2CA0AFF194DA /* Pods-resources.sh */,
+				4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */,
+				98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D77140521BA2478D3CC99862E5959880 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D6B0821C1A8166A3F7557C0853A5E67F /* libDHSmartScreenshot.a */,
+				743408031EF5DE1A974DF902249204DD /* libJBChartView.a */,
+				64BFE127063A5DAEEF7259D9125F6214 /* libPods.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C1C1AF48D8823C9740F8DAD20F11E3A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				859D9EAFAFE10C06DAC48E20F6A365AC /* JBBarChartView.h in Headers */,
+				9C0ADE077C806EE52D6402DCDEC164DF /* JBChartView.h in Headers */,
+				7E329EF860FE515B20295618CC98305D /* JBLineChartView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D794218C9A032111C960A27303F08B5E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8EA6DEE12B339499A320A2CE4287B09 /* DHSmartScreenshot.h in Headers */,
+				9B5670621C34A08449CF1E5F4B73FE01 /* UIImage+DHImageAdditions.h in Headers */,
+				5C3FE1793B1DA29CA3363D1CC92C9096 /* UIScrollView+DHSmartScreenshot.h in Headers */,
+				DA4C709F17AD527C0C385E367A6EBD90 /* UITableView+DHSmartScreenshot.h in Headers */,
+				7D613687C7420B5E8574CB9BA4B49566 /* UIView+DHSmartScreenshot.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2061574269A97A86123A077A63906664 /* DHSmartScreenshot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEC4ECB726A63A039CB64ED06BA966FF /* Build configuration list for PBXNativeTarget "DHSmartScreenshot" */;
+			buildPhases = (
+				782DBCC1C93AF7A705F25D8AB1986A68 /* Sources */,
+				4B678D3EEED5CA7545D869C1E772F241 /* Frameworks */,
+				D794218C9A032111C960A27303F08B5E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DHSmartScreenshot;
+			productName = DHSmartScreenshot;
+			productReference = D6B0821C1A8166A3F7557C0853A5E67F /* libDHSmartScreenshot.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		26DDE4EDDC02EF57F535027FB10E1D2C /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0CD75B725245BE44ABF08E6A7349E7F6 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				0F32E9942D59D29AAD6B1146CF8C755C /* Sources */,
+				31FA921E433AC65BE26604274166EC32 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89D74F39DF8AF9CE0F407D4BF3561FA9 /* PBXTargetDependency */,
+				6C6EB49A615268FD2919851C64B6C2BD /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = 64BFE127063A5DAEEF7259D9125F6214 /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		383DF1D0756F323FC2957E68F6997C6D /* JBChartView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F24AAEA5084266242D0D63FD3230262 /* Build configuration list for PBXNativeTarget "JBChartView" */;
+			buildPhases = (
+				B50E9C934F43312D4E4D14734FC93979 /* Sources */,
+				BA2AFCB80B060FA51BC544F81A04E803 /* Frameworks */,
+				C1C1AF48D8823C9740F8DAD20F11E3A1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JBChartView;
+			productName = JBChartView;
+			productReference = 743408031EF5DE1A974DF902249204DD /* libJBChartView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0930;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = D77140521BA2478D3CC99862E5959880 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2061574269A97A86123A077A63906664 /* DHSmartScreenshot */,
+				383DF1D0756F323FC2957E68F6997C6D /* JBChartView */,
+				26DDE4EDDC02EF57F535027FB10E1D2C /* Pods */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0F32E9942D59D29AAD6B1146CF8C755C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F52ED9FF8589E873814BE1A6CD41366D /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		782DBCC1C93AF7A705F25D8AB1986A68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A0EE6073D7324F8B93078130C56B6D4 /* DHSmartScreenshot-dummy.m in Sources */,
+				6ACD7FB06C649FE9E5F1746017D56D11 /* UIImage+DHImageAdditions.m in Sources */,
+				417FDCBD36D70E035C7D2B1E43388B30 /* UIScrollView+DHSmartScreenshot.m in Sources */,
+				B20C81F2E1915E5835B370F7B8EAA393 /* UITableView+DHSmartScreenshot.m in Sources */,
+				E50E2ECA58DABBB92356B5192BD93C43 /* UIView+DHSmartScreenshot.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B50E9C934F43312D4E4D14734FC93979 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81E55F721EB306948709748DCE76290E /* JBBarChartView.m in Sources */,
+				DDEBF0ACACDDA7AFF54FE912A7E8F7AB /* JBChartView-dummy.m in Sources */,
+				B4162CE6143D61442C822A89B521EAB4 /* JBChartView.m in Sources */,
+				1D468ECE4E7537CE0F4D60835DC72949 /* JBLineChartView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6C6EB49A615268FD2919851C64B6C2BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JBChartView;
+			target = 383DF1D0756F323FC2957E68F6997C6D /* JBChartView */;
+			targetProxy = D34419AC244A3D6B7F8166EA168B9542 /* PBXContainerItemProxy */;
+		};
+		89D74F39DF8AF9CE0F407D4BF3561FA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DHSmartScreenshot;
+			target = 2061574269A97A86123A077A63906664 /* DHSmartScreenshot */;
+			targetProxy = 9F6D6B729573638E4122ADF0CA589BBB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0304737DCB9CBB5A6841E000FFA7339F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E429407D2DF2D56C05FE9250209588F /* DHSmartScreenshot.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DHSmartScreenshot/DHSmartScreenshot-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		3BD01D198A67E1875A10FCA346B4AD97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		8878E49A286CA220784CF7CA204C8A63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E429407D2DF2D56C05FE9250209588F /* DHSmartScreenshot.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DHSmartScreenshot/DHSmartScreenshot-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9EE0E8BD5213D39408240409E5EBA5D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A97A39CCACBB419D3F3EEBAF6FDBCD6 /* JBChartView.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JBChartView/JBChartView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		C010CAFBB016C10B7F8C6A3D37265EF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A97A39CCACBB419D3F3EEBAF6FDBCD6 /* JBChartView.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JBChartView/JBChartView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C44D17E0CA3F4433FF8D4E023305C57F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0CD75B725245BE44ABF08E6A7349E7F6 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C44D17E0CA3F4433FF8D4E023305C57F /* Debug */,
+				3BD01D198A67E1875A10FCA346B4AD97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */,
+				FB45FFD90572718D82AB9092B750F0CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F24AAEA5084266242D0D63FD3230262 /* Build configuration list for PBXNativeTarget "JBChartView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C010CAFBB016C10B7F8C6A3D37265EF2 /* Debug */,
+				9EE0E8BD5213D39408240409E5EBA5D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEC4ECB726A63A039CB64ED06BA966FF /* Build configuration list for PBXNativeTarget "DHSmartScreenshot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8878E49A286CA220784CF7CA204C8A63 /* Debug */,
+				0304737DCB9CBB5A6841E000FFA7339F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

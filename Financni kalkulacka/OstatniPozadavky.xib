@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="5Hn-Il-WKH">
+            <rect key="frame" x="0.0" y="0.0" width="800" height="102"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wnt-3E-BWE">
+                    <rect key="frame" x="10" y="39" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poznamky" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4w-oU-XJG">
+                    <rect key="frame" x="8" y="35" width="784" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="95" id="7mY-k2-0JD"/>
+                        <constraint firstAttribute="width" constant="784" id="SMR-KR-WOi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="7mY-k2-0JD"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ostatní požadavky" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rax-Ry-VcW">
+                    <rect key="frame" x="8" y="8" width="162" height="22"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="s4w-oU-XJG" firstAttribute="top" secondItem="Rax-Ry-VcW" secondAttribute="bottom" constant="5" id="LI5-QX-Sxj"/>
+                <constraint firstItem="Rax-Ry-VcW" firstAttribute="top" secondItem="5Hn-Il-WKH" secondAttribute="top" constant="8" id="R74-3v-Ab2"/>
+                <constraint firstItem="Rax-Ry-VcW" firstAttribute="leading" secondItem="5Hn-Il-WKH" secondAttribute="leading" constant="8" id="U0q-VJ-aBh"/>
+                <constraint firstItem="s4w-oU-XJG" firstAttribute="leading" secondItem="Rax-Ry-VcW" secondAttribute="leading" id="U10-Wx-PcG"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="s4w-oU-XJG" secondAttribute="bottom" constant="14" id="fw0-lk-Ssl"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="s4w-oU-XJG" secondAttribute="bottom" constant="14" id="lhl-hG-Reg"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="lhl-hG-Reg"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="634" y="297"/>
+        </view>
+    </objects>
+</document>

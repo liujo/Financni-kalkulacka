@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="bfW-7q-jTu">
+            <rect key="frame" x="0.0" y="0.0" width="800" height="192"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Shrnutí" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZo-qT-RnV">
+                    <rect key="frame" x="10" y="10" width="68" height="22"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Částka na bydlení:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSg-1k-F2H">
+                    <rect key="frame" x="10" y="57" width="111" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 Kč" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rio-Ho-LkY">
+                    <rect key="frame" x="208" y="40" width="115" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="162.5" id="HWe-8W-gdP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="HWe-8W-gdP"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Částka na důchod:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0T-7w-MNn">
+                    <rect key="frame" x="10" y="91" width="113" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Částka na zajištění příjmů:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3j-MV-FA0">
+                    <rect key="frame" x="10" y="40" width="158" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Částka na děti:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5Z-io-Esc">
+                    <rect key="frame" x="10" y="74" width="91" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQw-o7-etf" userLabel="Vynalozena castka view">
+                    <rect key="frame" x="10" y="158" width="299" height="26"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Vynaložená částka na projekt:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1J-q3-Sgl">
+                            <rect key="frame" x="10" y="5" width="194" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="4RH-66-fsI"/>
+                                <constraint firstAttribute="width" constant="197" id="s4B-lX-NiR"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="4RH-66-fsI"/>
+                                    <exclude reference="s4B-lX-NiR"/>
+                                </mask>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.050980392159999999" green="0.50588235290000005" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="a1J-q3-Sgl" firstAttribute="centerY" secondItem="pQw-o7-etf" secondAttribute="centerY" id="4Zs-Qg-gFo"/>
+                        <constraint firstAttribute="height" constant="26" id="Gi9-24-FF9"/>
+                        <constraint firstItem="a1J-q3-Sgl" firstAttribute="leading" secondItem="pQw-o7-etf" secondAttribute="leading" constant="8" id="cc4-Ae-YlC"/>
+                        <constraint firstItem="a1J-q3-Sgl" firstAttribute="leading" secondItem="pQw-o7-etf" secondAttribute="leading" constant="8" id="k1g-Gn-Oik"/>
+                        <constraint firstAttribute="width" constant="298.5" id="ruc-GP-ooL"/>
+                        <constraint firstItem="a1J-q3-Sgl" firstAttribute="leading" secondItem="pQw-o7-etf" secondAttribute="leading" constant="8" id="yr0-yb-ucN"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="cc4-Ae-YlC"/>
+                            <exclude reference="k1g-Gn-Oik"/>
+                        </mask>
+                    </variation>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Celková částka na projekt:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBP-KK-S4l">
+                    <rect key="frame" x="10" y="117" width="159" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Kč" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-bY-hXc">
+                    <rect key="frame" x="208" y="91" width="115" height="16"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 000 Kč" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkR-P4-s4R">
+                    <rect key="frame" x="208" y="57" width="115" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="ake-T1-a99"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ake-T1-a99"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 Kč" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dq-23-FVy">
+                    <rect key="frame" x="208" y="74" width="115" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="IEA-3s-xum"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="IEA-3s-xum"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 000 Kč" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxh-Uc-nhu">
+                    <rect key="frame" x="208" y="117" width="115" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="114.5" id="1KN-I4-VaB"/>
+                        <constraint firstAttribute="width" constant="180" id="gZ0-78-JPZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="gZ0-78-JPZ"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50% z rozdílu: příjmy - výdaje" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYg-Dc-eVy">
+                    <rect key="frame" x="10" y="134" width="178" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="6" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 000 Kč" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijm-gu-ne0">
+                    <rect key="frame" x="208" y="134" width="115" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="114.5" id="2qw-JE-RB0"/>
+                        <constraint firstAttribute="width" constant="180" id="4QP-Lc-BTo"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="4QP-Lc-BTo"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Celkové výdaje:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Fw-6s-adq">
+                    <rect key="frame" x="362" y="57" width="95" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="8" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35 000 Kč" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K52-Re-UTE">
+                    <rect key="frame" x="475" y="40" width="65" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="162.5" id="ogr-CG-kBE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ogr-CG-kBE"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Celkové příjmy:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JkH-Cc-KFZ">
+                    <rect key="frame" x="362" y="40" width="93" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="9" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 000 Kč" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGZ-ax-QjI">
+                    <rect key="frame" x="475" y="57" width="65" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="VXK-UD-JJ5"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="VXK-UD-JJ5"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="7" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 000 Kč" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBM-Tc-jQC">
+                    <rect key="frame" x="221" y="163" width="90" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="CUp-Mb-a5d"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pQw-o7-etf" firstAttribute="leading" secondItem="BZo-qT-RnV" secondAttribute="leading" id="3mZ-Tn-gHO"/>
+                <constraint firstItem="JkH-Cc-KFZ" firstAttribute="centerY" secondItem="Rio-Ho-LkY" secondAttribute="centerY" id="4cp-Dw-osl"/>
+                <constraint firstItem="4Fw-6s-adq" firstAttribute="leading" secondItem="JkH-Cc-KFZ" secondAttribute="leading" id="4uL-ar-zGR"/>
+                <constraint firstItem="ZkR-P4-s4R" firstAttribute="width" secondItem="Rio-Ho-LkY" secondAttribute="width" id="5pm-OI-YSK"/>
+                <constraint firstItem="DSg-1k-F2H" firstAttribute="top" secondItem="i3j-MV-FA0" secondAttribute="bottom" constant="1" id="62v-cw-6jA"/>
+                <constraint firstItem="CGZ-ax-QjI" firstAttribute="centerY" secondItem="4Fw-6s-adq" secondAttribute="centerY" id="6kT-86-SEu"/>
+                <constraint firstItem="Rio-Ho-LkY" firstAttribute="width" secondItem="ZkR-P4-s4R" secondAttribute="width" id="7xM-Vr-MR8"/>
+                <constraint firstItem="JkH-Cc-KFZ" firstAttribute="leading" secondItem="Rio-Ho-LkY" secondAttribute="trailing" constant="39.5" id="8kd-fd-czr"/>
+                <constraint firstItem="DSg-1k-F2H" firstAttribute="top" secondItem="i3j-MV-FA0" secondAttribute="bottom" constant="1" id="APn-Op-DCH"/>
+                <constraint firstItem="Rio-Ho-LkY" firstAttribute="centerY" secondItem="i3j-MV-FA0" secondAttribute="centerY" id="B2o-ic-Ngv"/>
+                <constraint firstItem="ZkR-P4-s4R" firstAttribute="centerY" secondItem="DSg-1k-F2H" secondAttribute="centerY" id="DfA-6D-ZBk"/>
+                <constraint firstItem="pQw-o7-etf" firstAttribute="leading" secondItem="l0T-7w-MNn" secondAttribute="leading" id="Dm7-7k-yuS"/>
+                <constraint firstItem="i3j-MV-FA0" firstAttribute="top" secondItem="BZo-qT-RnV" secondAttribute="bottom" constant="8" id="Dyu-JP-278"/>
+                <constraint firstItem="DBM-Tc-jQC" firstAttribute="centerX" secondItem="ijm-gu-ne0" secondAttribute="centerX" id="EY7-T6-hX6"/>
+                <constraint firstItem="BZo-qT-RnV" firstAttribute="leading" secondItem="bfW-7q-jTu" secondAttribute="leading" constant="10" id="Env-QG-mSE"/>
+                <constraint firstItem="i3j-MV-FA0" firstAttribute="leading" secondItem="BZo-qT-RnV" secondAttribute="leading" id="FyC-IS-8Dg"/>
+                <constraint firstAttribute="bottom" secondItem="pQw-o7-etf" secondAttribute="bottom" constant="14" id="Hhp-tD-zif"/>
+                <constraint firstItem="l0T-7w-MNn" firstAttribute="top" secondItem="J5Z-io-Esc" secondAttribute="bottom" constant="1" id="I73-1f-xQu"/>
+                <constraint firstItem="3dq-23-FVy" firstAttribute="centerY" secondItem="J5Z-io-Esc" secondAttribute="centerY" id="IV0-XF-0g9"/>
+                <constraint firstItem="Uxh-Uc-nhu" firstAttribute="centerY" secondItem="iBP-KK-S4l" secondAttribute="centerY" id="LYl-5f-uUI"/>
+                <constraint firstItem="J5Z-io-Esc" firstAttribute="top" secondItem="DSg-1k-F2H" secondAttribute="bottom" constant="1" id="MMi-Wp-HLw"/>
+                <constraint firstItem="K52-Re-UTE" firstAttribute="leading" secondItem="JkH-Cc-KFZ" secondAttribute="trailing" constant="20" id="N63-y7-jMw"/>
+                <constraint firstItem="bNT-bY-hXc" firstAttribute="width" secondItem="3dq-23-FVy" secondAttribute="width" id="P2F-aW-MD1"/>
+                <constraint firstItem="ijm-gu-ne0" firstAttribute="leading" secondItem="jYg-Dc-eVy" secondAttribute="trailing" constant="20" id="PN2-RA-Nce"/>
+                <constraint firstItem="3dq-23-FVy" firstAttribute="width" secondItem="bNT-bY-hXc" secondAttribute="width" id="PaQ-dA-sYL"/>
+                <constraint firstItem="Rio-Ho-LkY" firstAttribute="leading" secondItem="i3j-MV-FA0" secondAttribute="trailing" constant="40" id="Q2T-wM-5fy"/>
+                <constraint firstItem="DSg-1k-F2H" firstAttribute="leading" secondItem="i3j-MV-FA0" secondAttribute="leading" id="Qez-mK-CeO"/>
+                <constraint firstItem="ZkR-P4-s4R" firstAttribute="centerY" secondItem="DSg-1k-F2H" secondAttribute="centerY" id="ROp-eA-xuW"/>
+                <constraint firstItem="ijm-gu-ne0" firstAttribute="centerY" secondItem="jYg-Dc-eVy" secondAttribute="centerY" id="RSS-nY-fms"/>
+                <constraint firstItem="iBP-KK-S4l" firstAttribute="leading" secondItem="l0T-7w-MNn" secondAttribute="leading" id="SS1-FO-s3Z"/>
+                <constraint firstItem="bNT-bY-hXc" firstAttribute="centerY" secondItem="l0T-7w-MNn" secondAttribute="centerY" id="TYf-fc-563"/>
+                <constraint firstItem="bNT-bY-hXc" firstAttribute="width" secondItem="Rio-Ho-LkY" secondAttribute="width" constant="17.5" id="TaA-aA-GhB"/>
+                <constraint firstItem="ijm-gu-ne0" firstAttribute="centerY" secondItem="jYg-Dc-eVy" secondAttribute="centerY" id="WXy-Pk-0B7"/>
+                <constraint firstItem="3dq-23-FVy" firstAttribute="leading" secondItem="bNT-bY-hXc" secondAttribute="leading" id="Zb4-wc-jS4"/>
+                <constraint firstItem="ZkR-P4-s4R" firstAttribute="width" secondItem="3dq-23-FVy" secondAttribute="width" id="aZw-da-7cE"/>
+                <constraint firstItem="3dq-23-FVy" firstAttribute="leading" secondItem="bNT-bY-hXc" secondAttribute="leading" id="bxk-UV-RXT"/>
+                <constraint firstItem="l0T-7w-MNn" firstAttribute="leading" secondItem="J5Z-io-Esc" secondAttribute="leading" id="cT0-rD-huT"/>
+                <constraint firstItem="ijm-gu-ne0" firstAttribute="leading" secondItem="jYg-Dc-eVy" secondAttribute="trailing" constant="14" id="cXj-pr-L4X"/>
+                <constraint firstItem="bNT-bY-hXc" firstAttribute="leading" secondItem="Uxh-Uc-nhu" secondAttribute="leading" id="cbU-jX-Oab"/>
+                <constraint firstItem="Uxh-Uc-nhu" firstAttribute="leading" secondItem="bNT-bY-hXc" secondAttribute="leading" id="dps-BA-SaW"/>
+                <constraint firstItem="jYg-Dc-eVy" firstAttribute="leading" secondItem="iBP-KK-S4l" secondAttribute="leading" id="eL0-9r-SES"/>
+                <constraint firstItem="DBM-Tc-jQC" firstAttribute="centerY" secondItem="pQw-o7-etf" secondAttribute="centerY" id="fk6-4d-zVF"/>
+                <constraint firstItem="ijm-gu-ne0" firstAttribute="leading" secondItem="jYg-Dc-eVy" secondAttribute="trailing" constant="20" id="frv-j1-qiu"/>
+                <constraint firstItem="3dq-23-FVy" firstAttribute="leading" secondItem="ZkR-P4-s4R" secondAttribute="leading" id="hj0-hu-0bD"/>
+                <constraint firstItem="J5Z-io-Esc" firstAttribute="leading" secondItem="DSg-1k-F2H" secondAttribute="leading" id="igV-w5-WeY"/>
+                <constraint firstItem="3dq-23-FVy" firstAttribute="width" secondItem="ZkR-P4-s4R" secondAttribute="width" id="jRl-au-gSW"/>
+                <constraint firstItem="Uxh-Uc-nhu" firstAttribute="leading" secondItem="iBP-KK-S4l" secondAttribute="trailing" constant="8" id="jiy-gr-Qcj"/>
+                <constraint firstItem="pQw-o7-etf" firstAttribute="top" secondItem="Uxh-Uc-nhu" secondAttribute="bottom" constant="8" id="k0s-4X-CdJ"/>
+                <constraint firstItem="jYg-Dc-eVy" firstAttribute="top" secondItem="iBP-KK-S4l" secondAttribute="bottom" constant="1" id="l2U-Gb-Ipm"/>
+                <constraint firstItem="pQw-o7-etf" firstAttribute="top" secondItem="bNT-bY-hXc" secondAttribute="bottom" constant="8" id="mY0-2c-Evf"/>
+                <constraint firstItem="ZkR-P4-s4R" firstAttribute="leading" secondItem="3dq-23-FVy" secondAttribute="leading" id="nTV-1M-wmT"/>
+                <constraint firstItem="ijm-gu-ne0" firstAttribute="leading" secondItem="Uxh-Uc-nhu" secondAttribute="leading" id="omL-ha-Iaa"/>
+                <constraint firstItem="4Fw-6s-adq" firstAttribute="top" secondItem="JkH-Cc-KFZ" secondAttribute="bottom" constant="1" id="owm-4r-WG0"/>
+                <constraint firstItem="Uxh-Uc-nhu" firstAttribute="width" secondItem="bNT-bY-hXc" secondAttribute="width" id="qfq-fh-zxN"/>
+                <constraint firstItem="bNT-bY-hXc" firstAttribute="width" secondItem="Uxh-Uc-nhu" secondAttribute="width" id="qiD-qf-MCR"/>
+                <constraint firstItem="K52-Re-UTE" firstAttribute="centerY" secondItem="JkH-Cc-KFZ" secondAttribute="centerY" id="rPL-BT-DVM"/>
+                <constraint firstItem="BZo-qT-RnV" firstAttribute="top" secondItem="bfW-7q-jTu" secondAttribute="top" constant="10" id="sFe-yJ-eSm"/>
+                <constraint firstItem="pQw-o7-etf" firstAttribute="top" secondItem="ijm-gu-ne0" secondAttribute="bottom" constant="8" id="siq-6P-dz8"/>
+                <constraint firstItem="iBP-KK-S4l" firstAttribute="top" secondItem="l0T-7w-MNn" secondAttribute="bottom" constant="10" id="uMs-uF-ika"/>
+                <constraint firstItem="CGZ-ax-QjI" firstAttribute="leading" secondItem="K52-Re-UTE" secondAttribute="leading" id="wp0-E1-zXQ"/>
+                <constraint firstItem="Uxh-Uc-nhu" firstAttribute="leading" secondItem="iBP-KK-S4l" secondAttribute="trailing" constant="14" id="wsO-oK-PS1"/>
+                <constraint firstItem="K52-Re-UTE" firstAttribute="width" secondItem="CGZ-ax-QjI" secondAttribute="width" id="x72-6X-wgZ"/>
+                <constraint firstItem="ZkR-P4-s4R" firstAttribute="centerY" secondItem="J5Z-io-Esc" secondAttribute="centerY" id="xLe-fB-bvO"/>
+                <constraint firstItem="pQw-o7-etf" firstAttribute="top" secondItem="Uxh-Uc-nhu" secondAttribute="bottom" constant="8" id="yk1-Bv-30h"/>
+                <constraint firstItem="ZkR-P4-s4R" firstAttribute="leading" secondItem="Rio-Ho-LkY" secondAttribute="leading" id="zid-Pw-U9g"/>
+                <constraint firstItem="Rio-Ho-LkY" firstAttribute="centerY" secondItem="i3j-MV-FA0" secondAttribute="centerY" id="zu8-xT-tuo"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="APn-Op-DCH"/>
+                    <exclude reference="Dm7-7k-yuS"/>
+                    <exclude reference="Hhp-tD-zif"/>
+                    <exclude reference="k0s-4X-CdJ"/>
+                    <exclude reference="mY0-2c-Evf"/>
+                    <exclude reference="yk1-Bv-30h"/>
+                    <exclude reference="B2o-ic-Ngv"/>
+                    <exclude reference="Q2T-wM-5fy"/>
+                    <exclude reference="5pm-OI-YSK"/>
+                    <exclude reference="ROp-eA-xuW"/>
+                    <exclude reference="xLe-fB-bvO"/>
+                    <exclude reference="bxk-UV-RXT"/>
+                    <exclude reference="hj0-hu-0bD"/>
+                    <exclude reference="jRl-au-gSW"/>
+                    <exclude reference="P2F-aW-MD1"/>
+                    <exclude reference="TaA-aA-GhB"/>
+                    <exclude reference="dps-BA-SaW"/>
+                    <exclude reference="jiy-gr-Qcj"/>
+                    <exclude reference="qfq-fh-zxN"/>
+                    <exclude reference="wsO-oK-PS1"/>
+                    <exclude reference="PN2-RA-Nce"/>
+                    <exclude reference="RSS-nY-fms"/>
+                    <exclude reference="cXj-pr-L4X"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="568" y="341.5"/>
+        </view>
+    </objects>
+</document>
