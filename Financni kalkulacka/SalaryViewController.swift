@@ -61,7 +61,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
         scrollView.alwaysBounceVertical = true
         
         
-        let b = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "sendEmail")
+        let b = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: "sendEmail")
         self.navigationItem.rightBarButtonItem = b
     }
     
@@ -69,7 +69,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     
     func spocitat() {
         
-        let hrubaMzdaBezMezer = condenseWhitespace(hrubaMzdaTextField.text!)
+        let hrubaMzdaBezMezer = condenseWhitespace(string: hrubaMzdaTextField.text!)
         
         //hruba mzda
         let hrubaMzda:Float = Float((hrubaMzdaBezMezer as NSString).floatValue) //penize, ktere zamestnanec dostane od zamestnavatele
@@ -105,7 +105,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
         
         //Danove slevy
         //deti
-        let pocetDeti = Int((pocetDetiLabel.text)!)
+        let pocetDeti = Int((pocetDetiLabel.text)!)!
         var slevaDite = Int()//rocne max 60 300
         
         if pocetDeti == 1 {
@@ -118,7 +118,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
             
         } else if pocetDeti > 2 {
             
-            let pocetDetiMinusDva = pocetDeti! - 2
+            let pocetDetiMinusDva = pocetDeti - 2
             slevaDite = 1117 + 1317 + 1417 * pocetDetiMinusDva
             
         } else {
@@ -140,12 +140,12 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
         
         let mzdaInt:Int = Int(mzda)
         
-        cistaMzdaLabel.text = mzdaInt.currencyFormattingWithSymbol("Kč")
-        superHrubaMzdaLabel.text = Int(superHrubaMzda).currencyFormattingWithSymbol("Kč")
-        socialniPojisteniZamestnanecLabel.text = Int(socialniPojisteni).currencyFormattingWithSymbol("Kč")
-        zdravotniPojisteniZamestnanecLabel.text = Int(zdravotniPojisteni).currencyFormattingWithSymbol("Kč")
-        socialniPojisteniZamestnavatelLAbel.text = Int(socialniPojisteniSef).currencyFormattingWithSymbol("Kč")
-        zdravotniPojisteniZamestnavatelLabel.text = Int(zdravotniPojisteniSef).currencyFormattingWithSymbol("Kč")
+        cistaMzdaLabel.text = mzdaInt.currencyFormattingWithSymbol(currencySymbol: "Kč")
+        superHrubaMzdaLabel.text = Int(superHrubaMzda).currencyFormattingWithSymbol(currencySymbol: "Kč")
+        socialniPojisteniZamestnanecLabel.text = Int(socialniPojisteni).currencyFormattingWithSymbol(currencySymbol: "Kč")
+        zdravotniPojisteniZamestnanecLabel.text = Int(zdravotniPojisteni).currencyFormattingWithSymbol(currencySymbol: "Kč")
+        socialniPojisteniZamestnavatelLAbel.text = Int(socialniPojisteniSef).currencyFormattingWithSymbol(currencySymbol: "Kč")
+        zdravotniPojisteniZamestnavatelLabel.text = Int(zdravotniPojisteniSef).currencyFormattingWithSymbol(currencySymbol: "Kč")
     }
     
         //MARK: - stepper and switches shanenigans
@@ -159,7 +159,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     
     @IBAction func isLehceInvalidni(sender: AnyObject) {
         
-        if castecnaInvalidita.on {
+        if castecnaInvalidita.isOn {
             
             invaliditaLehci = 210.0
         
@@ -174,7 +174,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     
     @IBAction func isPlneInvalidni(sender: AnyObject) {
         
-        if plnaInvalidita.on {
+        if plnaInvalidita.isOn {
             
             invaliditaTezka = 420.0
         
@@ -187,7 +187,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     
     @IBAction func isDrzitelZTP(sender: AnyObject) {
         
-        if drzitelZTP.on {
+        if drzitelZTP.isOn {
             
             drzitelPrukazuZTP = 1345.0
         
@@ -200,7 +200,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     
     @IBAction func isStudent(sender: AnyObject) {
         
-        if student.on {
+        if student.isOn {
             
             slevaStudenta = 335.0
         
@@ -213,7 +213,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     
     @IBAction func hasLowIncomePartner(sender: AnyObject) {
         
-        if manzelkaPrijem.on {
+        if manzelkaPrijem.isOn {
             
             slevaZaPoplatnika = slevaZaPoplatnika + 2070
         } else {
@@ -227,27 +227,24 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     
     func numberFormattingInt(number: Int) -> String {
         
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        
-        return formatter.stringFromNumber(number)!
-        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter.string(from: NSNumber(value: number))!
     }
     
     func numberFormatting(number: Float) -> String {
         
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        
-        return formatter.stringFromNumber(number)!
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter.string(from: NSNumber(value: number))!
         
     }
     
     func condenseWhitespace(string: String) -> String {
         
-        let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({!$0.characters.isEmpty})
+        let components = NSString(string: string).components(separatedBy: NSCharacterSet.whitespacesAndNewlines).filter({!$0.isEmpty})
         
-        return components.joinWithSeparator("")
+        return components.joined(separator: "")
     }
     
     //MARK: - share graph via email
@@ -256,7 +253,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
         
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
             self.showSendMailErrorAlert()
         }
@@ -279,25 +276,26 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     //MARK: - formatovani text fieldu
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
         if textField == hrubaMzdaTextField {
-            if string.characters.count > 0 {
-                let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-                let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            if string.count > 0 {
+                let disallowedCharacterSet = NSCharacterSet(charactersIn: "0123456789").inverted
+                //let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+                let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
                 
-                let resultingStringLengthIsLegal = prospectiveText.characters.count <= 7
+                let resultingStringLengthIsLegal = prospectiveText.count <= 7
                 
-                let scanner = NSScanner(string: prospectiveText)
-                let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+                let scanner = Scanner(string: prospectiveText)
+                let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
                 
                 result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
             }
@@ -305,11 +303,11 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
         return result
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField.text != "" {
         
-            textField.text = textField.text?.chopSuffix(2).condenseWhitespace()
+            textField.text = textField.text?.chopSuffix(count: 2).condenseWhitespace()
         
         }
         
@@ -330,7 +328,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
             num = 10000
         }
         
-        hrubaMzdaTextField.text = num.currencyFormattingWithSymbol("Kč")
+        hrubaMzdaTextField.text = num.currencyFormattingWithSymbol(currencySymbol: "Kč")
         
         spocitat()
 
@@ -338,7 +336,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     
     //MARK: - schovat klavesnici
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()

@@ -14,7 +14,7 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
     
     @IBOutlet weak var upravitButton: UIBarButtonItem!
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
     var clientID = Int()
     
     var filtered:[String] = []
@@ -29,7 +29,7 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
         
         //timhle muzu smazat vsechny soubory
@@ -38,7 +38,7 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
         if defaults.dictionaryRepresentation().keys.contains("clientsArray") != true {
             
             let arr: [Int] = []
-            defaults.setObject(arr, forKey: "clientsArray")
+            defaults.set(arr, forKey: "clientsArray")
         
         }
         
@@ -50,19 +50,19 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
         
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         //print vsech ulozenych dat v userdefaults
         //print(defaults.dictionaryRepresentation())
         
-        if self.defaults.arrayForKey("clientsArray")?.count < 1 {
+        if let arr = self.defaults.array(forKey: "clientsArray"), arr.count < 1 {
             
-            self.upravitButton.enabled = false
+            self.upravitButton.isEnabled = false
             
         } else {
             
-            self.upravitButton.enabled = true
+            self.upravitButton.isEnabled = true
         }
         
         cellLabels.removeAll()
@@ -71,12 +71,12 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
-        if searchController.active {
+        if searchController.isActive {
             
-            searchController.active = false
+            searchController.isActive = false
             
         }
     }
@@ -86,16 +86,16 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
     
     @IBAction func upravitPoradi(sender: AnyObject) {
         
-        if tableView.editing == false {
+        if tableView.isEditing == false {
             
             tableView.setEditing(true, animated: true)
-            upravitButton.style = .Done
+            upravitButton.style = .done
             upravitButton.title = "Hotovo"
             
         } else {
             
             tableView.setEditing(false, animated: true)
-            upravitButton.style = .Plain
+            upravitButton.style = .plain
             upravitButton.title = "Upravit"
         }
     }
@@ -103,17 +103,17 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
 
         return 1
         
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.isActive && searchController.searchBar.text != "" {
             
             return filtered.count
             
@@ -123,11 +123,11 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("novyKlient", forIndexPath: indexPath) as! KartaKlientaCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "novyKlient", for: indexPath as IndexPath) as! KartaKlientaCell
         
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.isActive && searchController.searchBar.text != "" {
             
             cell.textLabel?.text = filtered[indexPath.row]
         
@@ -142,32 +142,32 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
     }
     
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         var index = indexPath.row
         
-        if searchController.active {
+        if searchController.isActive {
             
             let path = tableView.indexPathForSelectedRow
-            let currentCell = tableView.cellForRowAtIndexPath(path!) as! KartaKlientaCell
+            let currentCell = tableView.cellForRow(at: path!) as! KartaKlientaCell
             let textLabel = currentCell.textLabel?.text
             
-            index = cellLabels.indexOf(textLabel!)!
+            index = cellLabels.index(of: textLabel!)!
             
         }
         
-        clientID = defaults.arrayForKey("clientsArray")![index] as! Int
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        clientID = defaults.array(forKey: "clientsArray")![index] as! Int
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
-        self.performSegueWithIdentifier("existingClient", sender: self)
+        self.performSegue(withIdentifier: "existingClient", sender: self)
     
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "existingClient" {
             
-            let destination = segue.destinationViewController as! UINavigationController
+            let destination = segue.destination as! UINavigationController
             let vc = destination.topViewController as! NovyKlientTableViewController
             
             vc.clientID = clientID
@@ -177,7 +177,7 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
         
         if segue.identifier == "newClient" {
             
-            let destination = segue.destinationViewController as! UINavigationController
+            let destination = segue.destination as! UINavigationController
             let vc = destination.topViewController as! NovyKlientTableViewController
             
             vc.clientID = 0
@@ -187,49 +187,49 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
     
     //MARK: editing tableview rows
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
         if searchController.active {
             
-            return UITableViewCellEditingStyle.None
+            return UITableViewCellEditingStyle.none
         
         } else {
             
-            return UITableViewCellEditingStyle.Delete
+            return UITableViewCellEditingStyle.delete
 
         }
         
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        let optionMenu = UIAlertController(title: nil, message: "Opravdu chcete smazat údaje klienta? Data budou smazána a nenávratně ztracena.", preferredStyle: .ActionSheet)
+        let optionMenu = UIAlertController(title: nil, message: "Opravdu chcete smazat údaje klienta? Data budou smazána a nenávratně ztracena.", preferredStyle: .actionSheet)
         
-        let deleteAction = UIAlertAction(title: "Smazat údaje klienta", style: .Destructive, handler: {
+        let deleteAction = UIAlertAction(title: "Smazat údaje klienta", style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
             
-            var clientsArray = self.defaults.arrayForKey("clientsArray")
-            self.defaults.removeObjectForKey("\(clientsArray![indexPath.row])")
-            clientsArray?.removeAtIndex(indexPath.row)
-            self.defaults.setObject(clientsArray, forKey: "clientsArray")
+            var clientsArray = self.defaults.array(forKey: "clientsArray")
+            self.defaults.removeObject(forKey: "\(clientsArray![indexPath.row])")
+            clientsArray?.remove(at: indexPath.row)
+            self.defaults.set(clientsArray, forKey: "clientsArray")
             
             self.generateCellLabels()
             tableView.reloadData()
             
-            if self.defaults.arrayForKey("clientsArray")?.count < 1 {
+            if (self.defaults.array(forKey: "clientsArray")?.count)! < 1 {
                 
                 tableView.setEditing(false, animated: true)
-                self.upravitButton.style = .Plain
+                self.upravitButton.style = .plain
                 self.upravitButton.title = "Upravit"
-                self.upravitButton.enabled = false
+                self.upravitButton.isEnabled = false
                 
             } else {
                 
-                self.upravitButton.enabled = true
+                self.upravitButton.isEnabled = true
             }
         })
         
-        let dismissAction = UIAlertAction(title: "Zrušit", style: .Cancel, handler: {
+        let dismissAction = UIAlertAction(title: "Zrušit", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             
         })
@@ -237,35 +237,36 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(dismissAction)
         
-        self.presentViewController(optionMenu, animated: true, completion: nil)
+        self.present(optionMenu, animated: true, completion: nil)
         
     }
     
-    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         
-        var clientsArray = defaults.objectForKey("clientsArray") as! [Int]
+        var clientsArray = defaults.object(forKey: "clientsArray") as! [Int]
         let polozka = clientsArray[sourceIndexPath.row]
-        clientsArray.removeAtIndex(sourceIndexPath.row)
-        clientsArray.insert(polozka, atIndex: destinationIndexPath.row)
-        defaults.setObject(clientsArray, forKey: "clientsArray")
+        clientsArray.remove(at: sourceIndexPath.row)
+        clientsArray.insert(polozka, at: destinationIndexPath.row)
+        defaults.set(clientsArray, forKey: "clientsArray")
         
         generateCellLabels()
         tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         return true
     }
     
     func generateCellLabels() {
         
-        let clientsArray = defaults.arrayForKey("clientsArray") as! [Int]
+        let clientsArray = defaults.array(forKey: "clientsArray") as! [Int]
         print(clientsArray)
         
         var arr: [String] = []
         
-        for var i = 0; i < clientsArray.count; i += 1 {
+        var i = 0
+        while i < clientsArray.count {
             
             let ID = clientsArray[i] as! Int
             let client = defaults.objectForKey("\(ID)")
@@ -297,6 +298,7 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
             }
             
             arr.append(str)
+            i += 1
         }
         
         cellLabels = arr
@@ -307,7 +309,7 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
     @IBAction func newClient(sender: AnyObject) {
         
         //resetStruct()
-        self.performSegueWithIdentifier("newClient", sender: self)
+        self.performSegue(withIdentifier: "newClient", sender: self)
         
     }
     
@@ -318,7 +320,8 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
         
         filtered = cellLabels.filter { str in
             
-            return str.lowercaseString.containsString(searchText.lowercaseString)
+            //return str.lowercaseString.containsString(searchText.lowercaseString)
+            return str.lowercased().contains(searchText.lowercased())
             
         }
         
@@ -329,10 +332,7 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
 }
 
 extension KartaKlientaTableViewController: UISearchResultsUpdating {
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        
-        filterContentForSearchText(searchController.searchBar.text!)
-        
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
 }

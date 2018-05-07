@@ -18,33 +18,30 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
-        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .Plain, target: self, action: #selector(ZabezpeceniPrijmuTableViewController.forward))
-        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .Plain, target: self, action: #selector(ZabezpeceniPrijmuTableViewController.backward))
+        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(ZabezpeceniPrijmuTableViewController.forward))
+        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .plain, target: self, action: #selector(ZabezpeceniPrijmuTableViewController.backward))
         navigationItem.setRightBarButtonItems([forwardButton, backwardButton], animated: true)
         
         self.title = "Zabezpečení příjmů"
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
         
         if udajeKlienta.rodinnyStav != "Svobodný" {
-            
             int = 1
-            
         } else {
-            
             int = 0
         }
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         if udajeKlienta.chceResitZajisteniPrijmu == true {
             
@@ -128,21 +125,21 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("chceResit") as! ChceResitZabezpeceniPrijmu
+            let cell = tableView.dequeueReusableCell(withIdentifier: "chceResit") as! ChceResitZabezpeceniPrijmu
             
             cell.switcher.addTarget(self, action: #selector(ZabezpeceniPrijmuTableViewController.chceResitSwitch(_:)), forControlEvents: .ValueChanged)
             
             if udajeKlienta.chceResitZajisteniPrijmu == true {
                 
-                cell.switcher.on = true
+                cell.switcher.isOn = true
                 
             } else {
                 
-                cell.switcher.on = false
+                cell.switcher.isOn = false
             }
             
             return cell
@@ -151,7 +148,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             
            if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("pracovniPomer") as! PracovniPomer
+            let cell = tableView.dequeueReusableCell(withIdentifier: "pracovniPomer") as! PracovniPomer
             
                 cell.pracovniPomer.text = udajeKlienta.pracovniPomer
                 
@@ -159,14 +156,14 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             
            } else if indexPath.row == 1 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("prijem") as! Prijmy
+            let cell = tableView.dequeueReusableCell(withIdentifier: "prijem") as! Prijmy
                 
                 cell.prijem.tag = 1
                 cell.prijem.delegate = self
             
-                if udajeKlienta.prijmy > 0 {
+                if let prijmy = udajeKlienta.prijmy, prijmy > 0 {
             
-                    cell.prijem.text = udajeKlienta.prijmy!.currencyFormattingWithSymbol("Kč")
+                    cell.prijem.text = prijmy.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
                 }
             
@@ -174,14 +171,14 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             
             } else if indexPath.row == 2 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("vydaje") as! Vydaje
+                let cell = tableView.dequeueReusableCell(withIdentifier: "vydaje") as! Vydaje
                 
                 cell.vydaje.tag = 2
                 cell.vydaje.delegate = self
             
-                if udajeKlienta.vydaje > 0 {
+                if let vydaje = udajeKlienta.vydaje, vydaje > 0 {
                     
-                    cell.vydaje.text = udajeKlienta.vydaje!.currencyFormattingWithSymbol("Kč")
+                    cell.vydaje.text = vydaje.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
                 }
             
@@ -189,12 +186,12 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             
             } else if indexPath.row == 3 {
             
-                let cell = tableView.dequeueReusableCellWithIdentifier("denniPrijem") as! Prijmy
+                let cell = tableView.dequeueReusableCell(withIdentifier: "denniPrijem") as! Prijmy
             
-                if udajeKlienta.denniPrijmy > 0 {
+                if let prijmy = udajeKlienta.denniPrijmy, prijmy > 0 {
                 
-                    cell.denniPrijem.textColor = UIColor.blackColor()
-                    cell.denniPrijem.text = udajeKlienta.denniPrijmy!.currencyFormattingWithSymbol("Kč")
+                    cell.denniPrijem.textColor = UIColor.black
+                    cell.denniPrijem.text = prijmy.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
                 } else {
                 
@@ -207,12 +204,12 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("denniVydaje") as! Vydaje
+            let cell = tableView.dequeueReusableCell(withIdentifier: "denniVydaje") as! Vydaje
             
-                if udajeKlienta.denniVydaje > 0 {
+                if let vydaje = udajeKlienta.denniVydaje, vydaje > 0 {
                 
-                    cell.denniVydaje.textColor = UIColor.blackColor()
-                    cell.denniVydaje.text = udajeKlienta.denniVydaje!.currencyFormattingWithSymbol("Kč")
+                    cell.denniVydaje.textColor = UIColor.black
+                    cell.denniVydaje.text = vydaje.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
                 } else {
                 
@@ -227,11 +224,11 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         
         } else if indexPath.section == 2 + int {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("uver") as! Uver
+            let cell = tableView.dequeueReusableCell(withIdentifier: "uver") as! Uver
             
-            if udajeKlienta.mesicniSplatkaUveru > 0 && udajeKlienta.maUver == true {
+            if let splatka = udajeKlienta.mesicniSplatkaUveru, splatka > 0, udajeKlienta.maUver == true {
                 
-                let castka = udajeKlienta.mesicniSplatkaUveru!.currencyFormattingWithSymbol("Kč")
+                let castka = splatka.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
                 cell.uver.text = "\(castka) měsíčně"
                 
@@ -245,21 +242,21 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             
         } else if indexPath.section == 3 + int {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("zabezpeceniPrijmu") as! ZabezpeceniPrijmu
+            let cell = tableView.dequeueReusableCell(withIdentifier: "zabezpeceniPrijmu") as! ZabezpeceniPrijmu
             
             cell.zabezpeceniPrijmu.tag = 3
             cell.zabezpeceniPrijmu.delegate = self
             
-            if udajeKlienta.zajisteniPrijmuCastka > 0 {
+            if let castka = udajeKlienta.zajisteniPrijmuCastka, castka > 0 {
                 
-                cell.zabezpeceniPrijmu.text = udajeKlienta.zajisteniPrijmuCastka!.currencyFormattingWithSymbol("Kč")
+                cell.zabezpeceniPrijmu.text = castka.currencyFormattingWithSymbol(currencySymbol: "Kč")
             }
             
             return cell
             
         } else if indexPath.section == 4 + int {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("poznamky") as! ZabezpeceniPrijmuPoznamky
+            let cell = tableView.dequeueReusableCell(withIdentifier: "poznamky") as! ZabezpeceniPrijmuPoznamky
             
             cell.zabezpeceniPrijmuPoznamky.tag = 7
             cell.zabezpeceniPrijmuPoznamky.delegate = self
@@ -271,7 +268,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("pracovniPomer") as! PracovniPomer
+                let cell = tableView.dequeueReusableCell(withIdentifier: "pracovniPomer") as! PracovniPomer
                 
                 cell.pracovniPomer.text = udajeKlienta.pracovniPomerPartner
                 
@@ -279,14 +276,14 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
                 
             } else if indexPath.row == 1 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("prijem") as! Prijmy
+                let cell = tableView.dequeueReusableCell(withIdentifier: "prijem") as! Prijmy
                 
                 cell.prijem.tag = 4
                 cell.prijem.delegate = self
                 
-                if udajeKlienta.prijmyPartner > 0 {
+                if let prijmyPartnera = udajeKlienta.prijmyPartner, prijmyPartnera > 0 {
                     
-                    cell.prijem.text = udajeKlienta.prijmyPartner!.currencyFormattingWithSymbol("Kč")
+                    cell.prijem.text = prijmyPartnera.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 }
                 
@@ -294,14 +291,14 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
                 
             } else if indexPath.row == 2 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("vydaje") as! Vydaje
+                let cell = tableView.dequeueReusableCell(withIdentifier: "vydaje") as! Vydaje
                 
                 cell.vydaje.tag = 5
                 cell.vydaje.delegate = self
                 
-                if udajeKlienta.vydajePartner > 0 {
+                if let vydajePartnera = udajeKlienta.vydajePartner, vydajePartnera > 0 {
                     
-                    cell.vydaje.text = udajeKlienta.vydajePartner!.currencyFormattingWithSymbol("Kč")
+                    cell.vydaje.text = vydajePartnera.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 }
                 
@@ -309,12 +306,12 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
                 
             } else if indexPath.row == 3 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("denniPrijem") as! Prijmy
+                let cell = tableView.dequeueReusableCell(withIdentifier: "denniPrijem") as! Prijmy
                 
-                if udajeKlienta.denniPrijmyPartner > 0 {
+                if let denniPrijmyPartner = udajeKlienta.denniPrijmyPartner, denniPrijmyPartner > 0 {
                     
-                    cell.denniPrijem.textColor = UIColor.blackColor()
-                    cell.denniPrijem.text = udajeKlienta.denniPrijmyPartner!.currencyFormattingWithSymbol("Kč")
+                    cell.denniPrijem.textColor = UIColor.black
+                    cell.denniPrijem.text = denniPrijmyPartner.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 } else {
                     
@@ -327,12 +324,12 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("denniVydaje") as! Vydaje
+                let cell = tableView.dequeueReusableCell(withIdentifier: "denniVydaje") as! Vydaje
                 
-                if udajeKlienta.denniVydajePartner > 0 {
+                if let denniVydajePartner = udajeKlienta.denniVydajePartner, denniVydajePartner > 0 {
                     
-                    cell.denniVydaje.textColor = UIColor.blackColor()
-                    cell.denniVydaje.text = udajeKlienta.denniVydajePartner!.currencyFormattingWithSymbol("Kč")
+                    cell.denniVydaje.textColor = UIColor.black
+                    cell.denniVydaje.text = denniVydajePartner.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 } else {
                     
@@ -348,7 +345,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     }
         
         
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 1 {
             
@@ -375,23 +372,23 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         return nil
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = UITableViewHeaderFooterView()
-        headerView.backgroundView?.backgroundColor = UIColor.clearColor()
+        headerView.backgroundView?.backgroundColor = UIColor.clear
         
         return headerView
     }
     
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
         let footView = UITableViewHeaderFooterView()
-        footView.backgroundView?.backgroundColor = UIColor.clearColor()
+        footView.backgroundView?.backgroundColor = UIColor.clear
         
         return footView
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         if section == 4 + int {
             
@@ -401,7 +398,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         return nil
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 4 + int {
             
@@ -413,8 +410,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("didselect row")
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 1 {
             
@@ -422,7 +418,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
                 
                 isClientSegue = true
                 
-                self.performSegueWithIdentifier("pracovniPomerSegue", sender: self)
+                self.performSegue(withIdentifier: "pracovniPomerSegue", sender: self)
 
             }
         
@@ -432,7 +428,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
                 
                 isClientSegue = false
                 
-                self.performSegueWithIdentifier("pracovniPomerSegue", sender: self)
+                self.performSegue(withIdentifier: "pracovniPomerSegue", sender: self)
             
             }
         }
@@ -442,25 +438,25 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     
     //MARK: - passing data to global variable
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         selectedRow = textField.tag
         
         if textField.text != "" {
             
-            textField.text = textField.text?.chopSuffix(2).condenseWhitespace()
+            textField.text = textField.text?.chopSuffix(count: 2).condenseWhitespace()
         
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if selectedRow == 1 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
             
                 udajeKlienta.prijmy = Int((textField.text! as NSString).intValue)
-                textField.text = udajeKlienta.prijmy?.currencyFormattingWithSymbol("Kč")
+                textField.text = udajeKlienta.prijmy?.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             } else {
                 
@@ -469,14 +465,14 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             }
             
             isIncomeHigherThanExpenses()
-            vypocetZajisteni(true)
+            vypocetZajisteni(isClient: true)
             
         } else if selectedRow == 2 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
             
                 udajeKlienta.vydaje = Int((textField.text! as NSString).intValue)
-                textField.text = udajeKlienta.vydaje?.currencyFormattingWithSymbol("Kč")
+                textField.text = udajeKlienta.vydaje?.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             } else {
                 
@@ -485,14 +481,14 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             }
             
             isIncomeHigherThanExpenses()
-            vypocetZajisteni(true)
+            vypocetZajisteni(isClient: true)
         
         } else if selectedRow == 3 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
                 
                 udajeKlienta.zajisteniPrijmuCastka = Int((textField.text! as NSString).intValue)
-                textField.text = udajeKlienta.zajisteniPrijmuCastka?.currencyFormattingWithSymbol("Kč")
+                textField.text = udajeKlienta.zajisteniPrijmuCastka?.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else {
                 
@@ -502,10 +498,10 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         
         } else if selectedRow == 4 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
                 
                 udajeKlienta.prijmyPartner = Int((textField.text! as NSString).intValue)
-                textField.text = udajeKlienta.prijmyPartner?.currencyFormattingWithSymbol("Kč")
+                textField.text = udajeKlienta.prijmyPartner?.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else {
                 
@@ -514,14 +510,14 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             }
             
             isIncomeHigherThanExpenses()
-            vypocetZajisteni(false)
+            vypocetZajisteni(isClient: false)
         
         } else {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
                 
                 udajeKlienta.vydajePartner = Int((textField.text! as NSString).intValue)
-                textField.text = udajeKlienta.vydajePartner?.currencyFormattingWithSymbol("Kč")
+                textField.text = udajeKlienta.vydajePartner?.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else {
                 
@@ -530,12 +526,12 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             }
             
             isIncomeHigherThanExpenses()
-            vypocetZajisteni(false)
+            vypocetZajisteni(isClient: false)
         }
         
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         udajeKlienta.zajisteniPrijmuPoznamky = textView.text
     }
@@ -546,21 +542,21 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         
         if isClient {
             
-            if udajeKlienta.prijmy > 0 {
+            if let prijmy = udajeKlienta.prijmy, prijmy > 0 {
                 
-                udajeKlienta.denniPrijmy = (udajeKlienta.prijmy!/30)/2
+                udajeKlienta.denniPrijmy = (prijmy/30)/2
                 
             }
             
-            if udajeKlienta.vydaje > 0 {
+            if let vydaje = udajeKlienta.vydaje, vydaje > 0 {
                 
-                udajeKlienta.denniVydaje = udajeKlienta.vydaje!/30
+                udajeKlienta.denniVydaje = vydaje/30
             }
             
             
-            if udajeKlienta.pracovniPomer == "OSVČ" && udajeKlienta.denniPrijmy != nil {
+            if udajeKlienta.pracovniPomer == "OSVČ", let denniPrijmy = udajeKlienta.denniPrijmy {
                 
-                udajeKlienta.denniPrijmy = udajeKlienta.denniPrijmy!*2
+                udajeKlienta.denniPrijmy = denniPrijmy*2
                 
             }
             
@@ -568,31 +564,31 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         
         } else {
             
-            if udajeKlienta.prijmyPartner > 0 {
+            if let prijmyPartner = udajeKlienta.prijmyPartner, prijmyPartner > 0 {
                 
-                udajeKlienta.denniPrijmyPartner = (udajeKlienta.prijmyPartner!/30)/2
-                
-            }
-            
-            if udajeKlienta.vydajePartner > 0 {
-                
-                udajeKlienta.denniVydajePartner = udajeKlienta.vydajePartner!/30
-            }
-            
-            
-            if udajeKlienta.pracovniPomerPartner == "OSVČ" && udajeKlienta.denniPrijmyPartner != nil {
-                
-                udajeKlienta.denniPrijmyPartner = udajeKlienta.denniPrijmyPartner!*2
+                udajeKlienta.denniPrijmyPartner = (prijmyPartner/30)/2
                 
             }
             
-            let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 2))
+            if let vydajePartner = udajeKlienta.vydajePartner, vydajePartner > 0 {
+                
+                udajeKlienta.denniVydajePartner = vydajePartner/30
+            }
+            
+            
+            if udajeKlienta.pracovniPomerPartner == "OSVČ", let denniPrijmyPartner = udajeKlienta.denniPrijmyPartner {
+                
+                udajeKlienta.denniPrijmyPartner = denniPrijmyPartner*2
+                
+            }
+            
+            let cell1 = tableView.cellForRow(at: IndexPath(row: 3, section: 2))
             let label1 = cell1?.contentView.viewWithTag(5) as! UILabel?
             
-            if udajeKlienta.denniPrijmyPartner > 0 {
+            if let denniPrijmyPartner = udajeKlienta.denniPrijmyPartner, denniPrijmyPartner > 0 {
                 
-                label1?.textColor = UIColor.blackColor()
-                label1?.text = udajeKlienta.denniPrijmyPartner!.currencyFormattingWithSymbol("Kč")
+                label1?.textColor = UIColor.black
+                label1?.text = denniPrijmyPartner.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else {
                 
@@ -601,13 +597,13 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
                 
             }
             
-            let cell2 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 4, inSection: 2))
+            let cell2 = tableView.cellForRow(at: IndexPath(row: 4, section: 2))
             let label2 = cell2?.contentView.viewWithTag(6) as! UILabel?
             
-            if udajeKlienta.denniVydajePartner > 0 {
+            if let denniVydajePartner = udajeKlienta.denniVydajePartner, denniVydajePartner > 0 {
                 
-                label2?.textColor = UIColor.blackColor()
-                label2?.text = udajeKlienta.denniVydajePartner!.currencyFormattingWithSymbol("Kč")
+                label2?.textColor = UIColor.black
+                label2?.text = udajeKlienta.denniVydajePartner!.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else {
                 
@@ -621,9 +617,9 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     
     //MARK: - textField formatting
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
         if textField.tag >= 2 {
             
@@ -694,12 +690,12 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     }
     
     
-    func forward() {
+    @objc func forward() {
         
         moveOn(3)
     }
     
-    func backward() {
+    @objc func backward() {
         
         moveOn(1)
     }

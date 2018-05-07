@@ -16,12 +16,12 @@ class BytCiDumTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkedCell = cellLabels.indexOf(udajeKlienta.bytCiDum)!
+        checkedCell = cellLabels.index(of: udajeKlienta.bytCiDum)!
         self.title = "Bydlení"
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
         
     }
@@ -33,50 +33,46 @@ class BytCiDumTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
         return 1
         
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         return 2
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
         
         cell.textLabel?.text = cellLabels[indexPath.row]
         
         if indexPath.row == checkedCell {
             
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
         }
         
         return cell
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.row != checkedCell {
             
-            let tappedCell = tableView.cellForRowAtIndexPath(indexPath)
-            
-            tappedCell?.accessoryType = UITableViewCellAccessoryType.Checkmark
-            
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: checkedCell, inSection: 0))?.accessoryType = UITableViewCellAccessoryType.None
-            
+            let tappedCell = tableView.cellForRow(at: indexPath as IndexPath)
+            tappedCell?.accessoryType = UITableViewCellAccessoryType.checkmark
+            tableView.cellForRow(at: IndexPath(row: checkedCell, section: 0))?.accessoryType = .none
             checkedCell = indexPath.row
         }
         
         udajeKlienta.bytCiDum = cellLabels[checkedCell]
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
 
 }

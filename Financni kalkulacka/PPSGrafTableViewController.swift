@@ -429,8 +429,8 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        
-        return formatter.stringFromNumber(number)!.stringByReplacingOccurrencesOfString(",", withString: " ")
+        //MARK: - to be resolved
+        return formatter.stringFromNumber(NSNumber(number))!.stringByReplacingOccurrencesOfString(",", withString: " ")
     }
     
     //MARK: - share graph via email

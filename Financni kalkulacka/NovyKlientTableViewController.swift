@@ -19,11 +19,11 @@ class NovyKlientTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hotovo", style: .Plain, target: self, action: #selector(NovyKlientTableViewController.hotovoButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hotovo", style: .plain, target: self, action: #selector(NovyKlientTableViewController.hotovoButton))
         
         if clientID != Int() {
         
-            fillStruct(clientID)
+            fillStruct(clientID: clientID)
         
         } else {
             
@@ -32,13 +32,13 @@ class NovyKlientTableViewController: UITableViewController {
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
         
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         if udajeKlienta.krestniJmeno == nil || udajeKlienta.prijmeni == nil {
             
@@ -55,7 +55,7 @@ class NovyKlientTableViewController: UITableViewController {
         
         jeVyplnenoArr = [udajeKlienta.jeVyplnenoUdaje, udajeKlienta.jeVyplnenoZajisteniPrijmu, udajeKlienta.jeVyplnenoBydleni, udajeKlienta.jeVyplnenoDeti, udajeKlienta.jeVyplnenoDuchod, udajeKlienta.jeVyplnenoDane, udajeKlienta.jeVyplnenoOstatniPozadavky, udajeKlienta.jeVyplnenoPriority]
         
-        if udajeKlienta.realnaCastkaNaProjekt > 0 {
+        if let realnaCastkaNaProjekt = udajeKlienta.realnaCastkaNaProjekt, realnaCastkaNaProjekt > 0 {
             
             jeVyplnenoArr.append(true)
             
@@ -70,26 +70,26 @@ class NovyKlientTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return labels.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! NovyKlientCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! NovyKlientCell
 
         cell.poradi.text = "\(indexPath.row + 1)."
         cell.lbl.text = labels[indexPath.row]
-        cell.poradi.textColor = UIColor.blackColor()
-        cell.lbl.textColor = UIColor.blackColor()
-        cell.userInteractionEnabled = true
-        cell.accessoryType = .DisclosureIndicator
+        cell.poradi.textColor = UIColor.black
+        cell.lbl.textColor = UIColor.black
+        cell.isUserInteractionEnabled = true
+        cell.accessoryType = .disclosureIndicator
         
         
         if jeVyplnenoArr[indexPath.row] == true {
@@ -103,31 +103,31 @@ class NovyKlientTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        self.performSegueWithIdentifier(ids[indexPath.row], sender: self)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.performSegue(withIdentifier: ids[indexPath.row], sender: self)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
     
     
-    func hotovoButton() {
+    @objc func hotovoButton() {
         
         print("hotovo")
         
         var arr: [String] = []
         arr = arr.actionSheetStrings()
         
-        let optionMenu = UIAlertController(title: arr[0], message: arr[1], preferredStyle: .ActionSheet)
+        let optionMenu = UIAlertController(title: arr[0], message: arr[1], preferredStyle: .actionSheet)
         
-        let deleteAction = UIAlertAction(title: arr[2], style: .Default, handler: {
+        let deleteAction = UIAlertAction(title: arr[2], style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             
             self.exportData()
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         })
         
-        let saveAction = UIAlertAction(title: arr[3], style: .Cancel, handler: {
+        let saveAction = UIAlertAction(title: arr[3], style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             
         })
@@ -135,7 +135,7 @@ class NovyKlientTableViewController: UITableViewController {
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(saveAction)
         
-        self.presentViewController(optionMenu, animated: true, completion: nil)
+        self.present(optionMenu, animated: true, completion: nil)
     }
 
 }

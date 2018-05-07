@@ -68,17 +68,14 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
 
         self.title = "PPS"
         
-        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Graf", style: .Plain, target: self, action: #selector(PPSTableViewController.segueToGraph))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Graf", style: .plain, target: self, action: #selector(PPSTableViewController.segueToGraph))
         
         if isSegueFromKartaKlienta {
-            
             num = 1
-            sections.insert(1, atIndex: 0)
-            
+            sections.insert(1, at: 0)
         } else {
-            
             num = 0
         }
         
@@ -86,7 +83,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
         if value1 != Int() {
             
-            textField1Value = value1.currencyFormattingWithSymbol("Kč")
+            textField1Value = value1.currencyFormattingWithSymbol(currencySymbol: "Kč")
             slider1Value = Float(value1)/100000
             stepper1Value = Double(value1)
             
@@ -96,7 +93,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
         if value2 != Int() {
             
-            textField2Value = value2.currencyFormattingWithSymbol("let")
+            textField2Value = value2.currencyFormattingWithSymbol(currencySymbol: "let")
             slider2Value = Float(value2)
             stepper2Value = Double(value2)
             
@@ -106,7 +103,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
         if value3 != Float() {
             
-            textField3Value = value3.currencyFormattingWithSymbol("%")
+            textField3Value = value3.currencyFormattingWithSymbol(currencySymbol: "%")
             slider3Value = Float(value3)*10
             stepper3Value = Double(value3)*10
             
@@ -116,7 +113,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
         if value4 != Int() {
             
-            textField4Value = value4.currencyFormattingWithSymbol("Kč")
+            textField4Value = value4.currencyFormattingWithSymbol(currencySymbol: "Kč")
             slider4Value = Float(value4)/100
             stepper4Value = Double(value4)
             
@@ -126,7 +123,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
         if value5 != Int() {
             
-            textField5Value = value5.currencyFormattingWithSymbol("let")
+            textField5Value = value5.currencyFormattingWithSymbol(currencySymbol: "let")
             slider5Value = Float(value5)
             stepper5Value = Double(value5)
             
@@ -136,7 +133,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
         if value6 != Float() {
             
-            textField6Value = value6.currencyFormattingWithSymbol("%")
+            textField6Value = value6.currencyFormattingWithSymbol(currencySymbol: "%")
             slider6Value = Float(value6)*10
             stepper6Value = Double(value6)*10
             
@@ -154,6 +151,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         //preformatovat pujcenou castku
         let castkaBezMezerCelkem = textField1Value.condenseWhitespace()
         //formatovani urokove sazby
+        //MARK: - to be resolved
         let urokCarka = textField3Value.stringByReplacingOccurrencesOfString(",", withString: ".", options: [], range: nil)
         
         let castkaCelkem = Float((castkaBezMezerCelkem as NSString).floatValue) //jistina
@@ -475,7 +473,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 0 + num || indexPath.section == 1 + num {
             
@@ -493,7 +491,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 0 + num {
             
@@ -756,7 +754,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
             
         } else if textField.tag == 3 {
             
-            let str = textField.text?.stringByReplacingOccurrencesOfString(",", withString: ".")
+            let str = textField.text?.replacingOccurrences(of: ",", with: ".")
             var num = Float((str! as NSString).floatValue)
             
             if num > 20 {
@@ -771,7 +769,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
             
             slider3Value = num*10
             stepper3Value = Double(num)*10
-            textField3Value = num.currencyFormattingWithSymbol("%")
+            textField3Value = num.currencyFormattingWithSymbol(currencySymbol: "%")
             
             pocitani()
         
@@ -818,7 +816,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
             
         } else if textField.tag == 6 {
             
-            let str = textField.text?.stringByReplacingOccurrencesOfString(",", withString: ".")
+            let str = textField.text?.replacingOccurrences(of: ",", with: ".")
             var num = Float((str! as NSString).floatValue)
             
             if num > 20 {
@@ -833,7 +831,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
             
             slider6Value = num*10
             stepper6Value = Double(num)*10
-            textField6Value = num.currencyFormattingWithSymbol("%")
+            textField6Value = num.currencyFormattingWithSymbol(currencySymbol: "%")
             
             pocitani()
         }
@@ -867,13 +865,13 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
                 
             }
             
-            let resultingStringLengthIsLegal = prospectiveText.characters.count <= int
+            let resultingStringLengthIsLegal = prospectiveText.count <= int
             
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789.,").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789.,").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
             
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
             
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
             
@@ -885,7 +883,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: - schovat klavesnici
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -895,16 +893,16 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: - segue
     
-    func segueToGraph() {
+    @objc func segueToGraph() {
         
-        self.performSegueWithIdentifier("grafPPS", sender: self)
+        self.performSegue(withIdentifier: "grafPPS", sender: self)
     }
     
-    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
+    func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
         
         if segue.identifier == "grafPPS" {
             
-            let svc = segue.destinationViewController as! PPSGrafTableViewController
+            let svc = segue.destination as! PPSGrafTableViewController
             
             svc.poleSporeni = sporeniSegue
             svc.poleJistin = jistinaSegue

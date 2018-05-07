@@ -17,17 +17,17 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         
         self.title = "Klient"
         
-        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "Zpět", style: plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
-        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .Plain, target: self, action: #selector(ZakladniUdajeTableViewController.forward))
+        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(ZakladniUdajeTableViewController.forward))
         navigationItem.rightBarButtonItem = forwardButton
         
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hotovo", style: .Plain, target: self, action: "hotovoButton")
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
     }
     
@@ -48,23 +48,23 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         return 8
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
         
-            let cell = tableView.dequeueReusableCellWithIdentifier("krestniJmeno") as! KrestniJmeno
+            let cell = tableView.dequeueReusableCell(withIdentifier: "krestniJmeno") as! KrestniJmeno
             
             cell.krestniJmeno.tag = 1
             cell.krestniJmeno.delegate = self
@@ -75,7 +75,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         
         } else if indexPath.row == 1 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("prijmeni") as! Prijmeni
+            let cell = tableView.dequeueReusableCell(withIdentifier: "prijmeni") as! Prijmeni
             
             cell.prijmeni.tag = 2
             cell.prijmeni.delegate = self
@@ -86,14 +86,14 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         
         } else if indexPath.row == 2 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("vek") as! Vek
+            let cell = tableView.dequeueReusableCell(withIdentifier: "vek") as! Vek
             
             cell.vek.tag = 3
             cell.vek.delegate = self
             
-            if udajeKlienta.vek > 0 {
+            if let vek = udajeKlienta.vek, vek > 0 {
                 
-                cell.vek.text = "\(udajeKlienta.vek!)"
+                cell.vek.text = "\(vek)"
                 
             }
             
@@ -102,7 +102,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         
         } else if indexPath.row == 3 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("povolani") as! Povolani
+            let cell = tableView.dequeueReusableCell(withIdentifier: "povolani") as! Povolani
             
             cell.povolani.tag = 4
             cell.povolani.delegate = self
@@ -113,14 +113,14 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
             
         } else if indexPath.row == 4 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("deti") as! Deti
+            let cell = tableView.dequeueReusableCell(withIdentifier: "deti") as! Deti
             
             cell.deti.tag = 5
             cell.deti.delegate = self
             
-            if udajeKlienta.pocetDeti != nil {
+            if let pocetDeti = udajeKlienta.pocetDeti {
             
-                cell.deti.text = "\(udajeKlienta.pocetDeti!)"
+                cell.deti.text = "\(pocetDeti)"
             
             }
             
@@ -128,7 +128,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
             
         } else if indexPath.row == 5 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("rodinnyStav") as! RodinnyStav
+            let cell = tableView.dequeueReusableCell(withIdentifier: "rodinnyStav") as! RodinnyStav
             
             cell.rodinnyStav.text = udajeKlienta.rodinnyStav
             
@@ -136,7 +136,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
             
         } else if indexPath.row == 6 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("sport") as! Sport
+            let cell = tableView.dequeueReusableCell(withIdentifier: "sport") as! Sport
             
             cell.sport.tag = 6
             cell.sport.delegate = self
@@ -147,7 +147,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
             
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("zdravotniStav") as! ZdravotniStav
+            let cell = tableView.dequeueReusableCell(withIdentifier: "zdravotniStav") as! ZdravotniStav
             
             cell.zdravotniStav.text = udajeKlienta.zdravotniStav
                         
@@ -155,7 +155,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         }
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         return "Další bod: Zabezpečení příjmů"
     }
