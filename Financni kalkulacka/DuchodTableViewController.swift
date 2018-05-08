@@ -18,28 +18,28 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
-        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .Plain, target: self, action: #selector(DuchodTableViewController.forward))
-        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .Plain, target: self, action: #selector(DuchodTableViewController.backward))
+        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(DuchodTableViewController.forward))
+        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .plain, target: self, action: #selector(DuchodTableViewController.backward))
         navigationItem.setRightBarButtonItems([forwardButton, backwardButton], animated: true)
         
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hotovo", style: .Plain, target: self, action: "hotovoButton")
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
         
         
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         tableView.reloadData()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         endEditingNow()
@@ -48,7 +48,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
         if udajeKlienta.chceResitDuchod == true {
@@ -59,7 +59,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if udajeKlienta.chceResitDuchod == true {
@@ -79,21 +79,21 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         return 1
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("chceResitDuchod") as! ChceResitDuchod
+            let cell = tableView.dequeueReusableCell(withIdentifier: "chceResitDuchod") as! ChceResitDuchod
             
-            cell.switcher.addTarget(self, action: #selector(DuchodTableViewController.chceResitSwitch(_:)), forControlEvents: .ValueChanged)
+            cell.switcher.addTarget(self, action: #selector(DuchodTableViewController.chceResitSwitch(sender:)), for: .valueChanged)
             
             if udajeKlienta.chceResitDuchod == true {
                 
-                cell.switcher.on = true
+                cell.switcher.isOn = true
                 
             } else {
                 
-                cell.switcher.on = false
+                cell.switcher.isOn = false
                 
             }
             
@@ -101,14 +101,14 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
         } else if indexPath.section == 1 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("predstavaDuchodu") as! PredstavaDuchodu
+            let cell = tableView.dequeueReusableCell(withIdentifier: "predstavaDuchodu") as! PredstavaDuchodu
             
             cell.predstavaDuchodu.delegate = self
             cell.predstavaDuchodu.tag = 1
             
-            if udajeKlienta.duchodVek > 0 {
+            if let duchodVek = udajeKlienta.duchodVek, duchodVek > 0 {
                 
-                cell.predstavaDuchodu.text = udajeKlienta.duchodVek?.currencyFormattingWithSymbol("let")
+                cell.predstavaDuchodu.text = duchodVek.currencyFormattingWithSymbol(currencySymbol: "let")
             
             }
             
@@ -118,7 +118,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("pripravaNaDuchod") as! PripravaNaDuchod
+                let cell = tableView.dequeueReusableCell(withIdentifier: "pripravaNaDuchod") as! PripravaNaDuchod
                 
                 cell.pripravaNaDuchod.text = udajeKlienta.pripravaNaDuchod
                 
@@ -126,14 +126,14 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("jakDlouho") as! JakDlouho
+                let cell = tableView.dequeueReusableCell(withIdentifier: "jakDlouho") as! JakDlouho
                 
                 cell.jakDlouho.delegate = self
                 cell.jakDlouho.tag = 2
                 
                 if udajeKlienta.jakDlouho != nil {
                 
-                    cell.jakDlouho.text = udajeKlienta.jakDlouho?.currencyFormattingWithSymbol("let")
+                    cell.jakDlouho.text = udajeKlienta.jakDlouho?.currencyFormattingWithSymbol(currencySymbol: "let")
 
                 } else {
                     
@@ -148,7 +148,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("chtelBysteSePripravit") as! ChtelBysteSePripravit
+                let cell = tableView.dequeueReusableCell(withIdentifier: "chtelBysteSePripravit") as! ChtelBysteSePripravit
                 
                 cell.chtelBysteSePripravit.text = udajeKlienta.chtelBysteSePripravit
                 
@@ -156,14 +156,14 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("predstavovanaCastka") as! PripravaNaDuchod
+                let cell = tableView.dequeueReusableCell(withIdentifier: "predstavovanaCastka") as! PripravaNaDuchod
                 
                 cell.predstavovanaCastka.delegate = self
                 cell.predstavovanaCastka.tag = 3
                 
-                if udajeKlienta.predstavovanaCastka > 0 {
+                if let castka = udajeKlienta.predstavovanaCastka, castka > 0 {
                  
-                    cell.predstavovanaCastka.text = udajeKlienta.predstavovanaCastka!.currencyFormattingWithSymbol("Kč")
+                    cell.predstavovanaCastka.text = castka.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
                 }
                 
@@ -172,27 +172,27 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
         } else if indexPath.section == 4 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
             
             return cell!
             
         } else if indexPath.section == 5 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("duchodVynalozenaCastka") as! DuchodVynalozenaCastka
+            let cell = tableView.dequeueReusableCell(withIdentifier: "duchodVynalozenaCastka") as! DuchodVynalozenaCastka
             
             cell.duchodVynalozenaCastka.delegate = self
             cell.duchodVynalozenaCastka.tag = 4
             
-            if udajeKlienta.duchodVynalozenaCastka > 0 {
+            if let castka = udajeKlienta.duchodVynalozenaCastka, castka > 0 {
                 
-                cell.duchodVynalozenaCastka.text = udajeKlienta.duchodVynalozenaCastka!.currencyFormattingWithSymbol("Kč")
+                cell.duchodVynalozenaCastka.text = castka.currencyFormattingWithSymbol(currencySymbol: "Kč")
             }
             
             return cell
         
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("duchodPoznamky") as! DuchodPoznamky
+            let cell = tableView.dequeueReusableCell(withIdentifier: "duchodPoznamky") as! DuchodPoznamky
             
             cell.duchodPoznamky.text = udajeKlienta.duchodPoznamky
             cell.duchodPoznamky.delegate = self
@@ -201,7 +201,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 1 {
             
@@ -231,7 +231,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         return nil
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         if section == 3 {
             
@@ -247,7 +247,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         return nil
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 6 {
             
@@ -264,29 +264,29 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        
-        if string.characters.count > 0 {
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
+        if string.count > 0 {
             
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
             var resultingStringLengthIsLegal = Bool()
             
             if textField.tag == 1 || textField.tag == 2 {
                 
-                resultingStringLengthIsLegal = prospectiveText.characters.count <= 2
+                resultingStringLengthIsLegal = prospectiveText.count <= 2
                 
             } else if textField.tag == 3 {
                 
-                resultingStringLengthIsLegal = prospectiveText.characters.count <= 9
+                resultingStringLengthIsLegal = prospectiveText.count <= 9
                 
             } else {
                 
-                resultingStringLengthIsLegal = prospectiveText.characters.count <= 6
+                resultingStringLengthIsLegal = prospectiveText.count <= 6
             }
             
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
             
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
             
@@ -297,7 +297,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
     }
 
 
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField.tag == 1 {
             
@@ -333,14 +333,14 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         textField.text = textField.text?.condenseWhitespace()
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField.tag == 1 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
                 
                 udajeKlienta.duchodVek = Int((textField.text! as NSString).intValue)
-                textField.text = udajeKlienta.duchodVek?.currencyFormattingWithSymbol("let")
+                textField.text = udajeKlienta.duchodVek?.currencyFormattingWithSymbol(currencySymbol: "let")
                 
             } else {
                 
@@ -350,10 +350,10 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
         } else if textField.tag == 2 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
             
                 udajeKlienta.jakDlouho = Int((textField.text! as NSString).intValue)
-                textField.text = udajeKlienta.jakDlouho?.currencyFormattingWithSymbol("let")
+                textField.text = udajeKlienta.jakDlouho?.currencyFormattingWithSymbol(currencySymbol: "let")
                 
             } else {
                 
@@ -364,10 +364,10 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
         } else if textField.tag == 3 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
                 
                 udajeKlienta.predstavovanaCastka = Int((textField.text! as NSString).intValue)
-                textField.text = udajeKlienta.predstavovanaCastka?.currencyFormattingWithSymbol("Kč")
+                textField.text = udajeKlienta.predstavovanaCastka?.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else {
                 
@@ -378,10 +378,10 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
         } else {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
                 
                 udajeKlienta.duchodVynalozenaCastka = Int((textField.text! as NSString).intValue)
-                textField.text = udajeKlienta.duchodVynalozenaCastka?.currencyFormattingWithSymbol("Kč")
+                textField.text = udajeKlienta.duchodVynalozenaCastka?.currencyFormattingWithSymbol(currencySymbol: "Kč")
 
             } else {
                 
@@ -393,7 +393,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         udajeKlienta.duchodPoznamky = textView.text
         
@@ -401,7 +401,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
     
     //MARK: - toolbar & button to hide keyboard
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -409,7 +409,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         return true
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
         let toolbar = UIToolbar()
         textView.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -421,15 +421,15 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
     
     @IBAction func zpet(sender: AnyObject) {
         
-        moveOn(0)
+        moveOn(moveID: 0)
         
     }
     
     //MARK: - chceResitSwitch
     
-    func chceResitSwitch(sender: UISwitch) {
+    @objc func chceResitSwitch(sender: UISwitch) {
         
-        if sender.on == true {
+        if sender.isOn == true {
             
             udajeKlienta.chceResitDuchod = true
             
@@ -440,7 +440,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
         }
         
-        prioritiesUpdate("Důchod", chceResit: sender.on)
+        prioritiesUpdate(label: "Důchod", chceResit: sender.isOn)
         
         tableView.reloadData()
         
@@ -448,25 +448,25 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
     
     //MARK: - segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "pripravaNaDuchodSegue" {
             
-            let destination = segue.destinationViewController as! PripravaNaDuchodTableViewController
+            let destination = segue.destination as! PripravaNaDuchodTableViewController
             
             destination.parametr = 0
         }
         
         if segue.identifier == "chtelBysteSePripravitNaDuchodSegue" {
             
-            let destination = segue.destinationViewController as! PripravaNaDuchodTableViewController
+            let destination = segue.destination as! PripravaNaDuchodTableViewController
             
             destination.parametr = 1
         }
         
         if segue.identifier == "grafSegue" {
             
-            let destination = segue.destinationViewController as! SavingsTableViewController
+            let destination = segue.destination as! SavingsTableViewController
             
             destination.isSegueFromKartaKlienta = true
         }
@@ -474,12 +474,12 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
     
     func backward() {
         
-        moveOn(4)
+        moveOn(moveID: 4)
     }
     
     func forward() {
         
-        moveOn(6)
+        moveOn(moveID: 6)
     }
     
     //MARK: - infoChecks
@@ -490,25 +490,25 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         
         if hasProvidedAllInfo().0 == false && udajeKlienta.chceResitDuchod {
             
-            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .Cancel, handler: nil))
+            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .cancel, handler: nil))
             
-            alert.addAction(UIAlertAction(title: "Pokračovat", style: .Default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Pokračovat", style: .default, handler: { (action) in
                 
                 if moveID > 0 {
                     
-                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("\(moveID)")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "\(moveID)")
                     self.navigationController?.pushViewController(vc!, animated: false)
                     
                 } else {
                     
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.navigationController?.popToRootViewController(animated: true)
                     
                 }
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         
         } else {
             
@@ -516,12 +516,12 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
             
             if moveID > 0 {
                 
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("\(moveID)")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "\(moveID)")
                 self.navigationController?.pushViewController(vc!, animated: false)
                 
             } else {
                 
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                self.navigationController?.popToRootViewController(animated: true)
                 
             }
             

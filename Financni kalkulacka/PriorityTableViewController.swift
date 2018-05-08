@@ -17,11 +17,11 @@ class PriorityTableViewController: UITableViewController {
 
         self.title = "Priority"
         
-        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
-        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .Plain, target: self, action: #selector(PriorityTableViewController.forward))
-        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .Plain, target: self, action: #selector(PriorityTableViewController.backward))
+        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(PriorityTableViewController.forward))
+        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .plain, target: self, action: #selector(PriorityTableViewController.backward))
         navigationItem.setRightBarButtonItems([forwardButton, backwardButton], animated: true)
         
         tableView.setEditing(true, animated: true)
@@ -30,12 +30,12 @@ class PriorityTableViewController: UITableViewController {
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         polozky = udajeKlienta.priority
@@ -43,7 +43,7 @@ class PriorityTableViewController: UITableViewController {
 
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         udajeKlienta.jeVyplnenoPriority = true
@@ -52,32 +52,32 @@ class PriorityTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         return polozky.count
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("priority") as! Priority
+        let cell = tableView.dequeueReusableCell(withIdentifier: "priority") as! Priority
         
         let poradi = "\(indexPath.row + 1). "
         let polozka = NSMutableAttributedString(string: polozky[indexPath.row])
         
         let attributedString = NSMutableAttributedString()
         
-        let attrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(20)]
+        let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 20)]
         let boldString = NSMutableAttributedString(string: poradi, attributes: attrs)
         
-        attributedString.appendAttributedString(boldString)
-        attributedString.appendAttributedString(polozka)
+        attributedString.append(boldString)
+        attributedString.append(polozka)
         
         cell.polozka.attributedText = attributedString
         
@@ -86,33 +86,33 @@ class PriorityTableViewController: UITableViewController {
         
     }
     
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         return true
         
     }
 
-    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         
         let polozka = polozky[sourceIndexPath.row]
-        polozky.removeAtIndex(sourceIndexPath.row)
-        polozky.insert(polozka, atIndex: destinationIndexPath.row)
+        polozky.remove(at: sourceIndexPath.row)
+        polozky.insert(polozka, at: destinationIndexPath.row)
         
         tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
-        return UITableViewCellEditingStyle.None
+        return .none
         
     }
     
-    override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         return false
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         return "Další bod: Finanční rozvaha"
     }
@@ -120,22 +120,22 @@ class PriorityTableViewController: UITableViewController {
     @IBAction func zpet(sender: AnyObject) {
         
         udajeKlienta.priority = polozky
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
-    func backward() {
+    @objc func backward() {
         
         udajeKlienta.priority = polozky
         
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("7")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "7")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     
-    func forward() {
+    @objc func forward() {
         
         udajeKlienta.priority = polozky
         
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("9")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "9")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     

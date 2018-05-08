@@ -20,11 +20,11 @@ class PracovniPomerTableViewController: UITableViewController {
         
         if isClient {
         
-            checkedCell = cellLabels.indexOf(udajeKlienta.pracovniPomer)!
+            checkedCell = cellLabels.index(of: udajeKlienta.pracovniPomer)!
         
         } else {
             
-            checkedCell = cellLabels.indexOf(udajeKlienta.pracovniPomerPartner)!
+            checkedCell = cellLabels.index(of: udajeKlienta.pracovniPomerPartner)!
         
         }
         
@@ -32,7 +32,7 @@ class PracovniPomerTableViewController: UITableViewController {
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
     }
 
@@ -43,41 +43,39 @@ class PracovniPomerTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 2
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         // Configure the cell...
         
         cell.textLabel?.text = cellLabels[indexPath.row]
         
         if indexPath.row == checkedCell {
             
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell.accessoryType = .checkmark
         }
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.row != checkedCell {
             
-            let tappedCell = tableView.cellForRowAtIndexPath(indexPath)
+            let tappedCell = tableView.cellForRow(at: indexPath as IndexPath)
             
-            tappedCell?.accessoryType = UITableViewCellAccessoryType.Checkmark
-            
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: checkedCell, inSection: 0))?.accessoryType = UITableViewCellAccessoryType.None
-            
+            tappedCell?.accessoryType = .checkmark
+            tableView.cellForRow(at: IndexPath(row: checkedCell, section: 0))?.accessoryType = .none
             checkedCell = indexPath.row
         }
         
@@ -90,7 +88,7 @@ class PracovniPomerTableViewController: UITableViewController {
             udajeKlienta.pracovniPomerPartner = cellLabels[checkedCell]
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
     

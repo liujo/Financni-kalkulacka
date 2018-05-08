@@ -11,21 +11,23 @@ import CoreText
 
 class PDFRendering: NSObject {
     
+    let rect = CGRect(x: 0, y: 0, width: 612, height: 792)
+    
     func drawText(textToDraw: String, inFrame frameRect: CGRect) {
         
-        let stringRef: CFStringRef = textToDraw
+        let stringRef: CFString = textToDraw as CFString
         
         // prepare the text using a core text framesetter
-        let currentText : CFAttributedStringRef = CFAttributedStringCreate(nil, stringRef, nil)
-        let framesetter : CTFramesetterRef = CTFramesetterCreateWithAttributedString(currentText)
+        let currentText : CFAttributedString = CFAttributedStringCreate(nil, stringRef, nil)
+        let framesetter : CTFramesetter = CTFramesetterCreateWithAttributedString(currentText)
         
-        let framePath = CGPathCreateMutable()
+        let framePath = CGMutablePath()
         CGPathAddRect(framePath, nil, frameRect)
         
         let currentRange = CFRangeMake(0, 0)
         let frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, nil)
         
-        let currentContext = UIGraphicsGetCurrentContext()
+        guard let currentContext = UIGraphicsGetCurrentContext() else { return }
         
         CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
         
@@ -35,40 +37,38 @@ class PDFRendering: NSObject {
         CTFrameDraw(frameRef, currentContext!)
         
         CGContextScaleCTM(currentContext, 1.0, -1.0)
-        CGContextTranslateCTM(currentContext, 0, (-1)*frameRect.origin.y*2)
-        
+        CGContext.translateBy(currentContext, 0, (-1)*frameRect.origin.y*2)
     }
     
     func drawImage(imageToDraw: UIImage, inRect rect: CGRect) {
         
-        imageToDraw.drawInRect(rect)
+        imageToDraw.draw(in: rect)
     }
     
     func drawPDF(fileName: String) {
         
-        UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil)
+        UIGraphicsBeginPDFContextToFile(fileName, CGRect(), nil)
         
-        UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
+        UIGraphicsBeginPDFPageWithInfo(rect, nil)
         
         self.drawLabels()
         
-        UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
+        UIGraphicsBeginPDFPageWithInfo(rect, nil)
         
         let img = UIImage(named: "text")
-        let frame = CGRectMake(0, 0, 612, 792)
-        self.drawImage(img!, inRect: frame)
+        self.drawImage(imageToDraw: img!, inRect: rect)
         
         UIGraphicsEndPDFContext()
     }
     
     func drawLabels() {
         
-        let objects = NSBundle.mainBundle().loadNibNamed("pdf1", owner: nil, options: nil)
+        guard let objects = Bundle.main.loadNibNamed("pdf1", owner: nil, options: nil) else { return }
         let mainView = objects[0] as! UIView
         
         for view in mainView.subviews {
             
-            if view.isKindOfClass(UILabel) {
+            if view.isKind(of: UILabel.self) {
                 
                 let label : UILabel = view as! UILabel
                 
@@ -77,7 +77,7 @@ class PDFRendering: NSObject {
                     label.text = "Hokej"
                 }
                 
-                self.drawText(label.text!, inFrame: label.frame)
+                self.drawText(textToDraw: label.text!, inFrame: label.frame)
                 
             }
             

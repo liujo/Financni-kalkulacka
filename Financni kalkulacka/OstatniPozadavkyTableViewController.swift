@@ -15,22 +15,22 @@ class OstatniPozadavkyTableViewController: UITableViewController, UITextViewDele
 
         self.title = "Ostatní požadavky"
         
-        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
-        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .Plain, target: self, action: #selector(OstatniPozadavkyTableViewController.forward))
-        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .Plain, target: self, action: #selector(OstatniPozadavkyTableViewController.backward))
+        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(OstatniPozadavkyTableViewController.forward))
+        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .plain, target: self, action: #selector(OstatniPozadavkyTableViewController.backward))
         navigationItem.setRightBarButtonItems([forwardButton, backwardButton], animated: true)
         
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hotovo", style: .Plain, target: self, action: "hotovoButton")
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         udajeKlienta.jeVyplnenoOstatniPozadavky = true
@@ -40,19 +40,19 @@ class OstatniPozadavkyTableViewController: UITableViewController, UITextViewDele
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 1
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ostatniPozadavky") as! OstatniPozadavky
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ostatniPozadavky") as! OstatniPozadavky
         
         cell.ostatniPozadavky.text = udajeKlienta.ostatniPozadavky
 
@@ -61,41 +61,41 @@ class OstatniPozadavkyTableViewController: UITableViewController, UITextViewDele
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         return 44*6
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return "Další požadavky klienta"
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         return "Další bod: Priority"
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         udajeKlienta.ostatniPozadavky = textView.text
         
         if textView.text == "" {
             
             udajeKlienta.chceResitOstatniPozadavky = false
-            prioritiesUpdate("Ostatní požadavky", chceResit: false)
+            prioritiesUpdate(label: "Ostatní požadavky", chceResit: false)
             
         } else {
             
             udajeKlienta.chceResitOstatniPozadavky = true
-            prioritiesUpdate("Ostatní požadavky", chceResit: true)
+            prioritiesUpdate(label: "Ostatní požadavky", chceResit: true)
             
         }
         
         
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
         let toolbar = UIToolbar()
         textView.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -107,19 +107,19 @@ class OstatniPozadavkyTableViewController: UITableViewController, UITextViewDele
     
     @IBAction func zpet(sender: AnyObject) {
         
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
         
     }
     
     func backward() {
         
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("6")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "6")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     
     func forward() {
         
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("8")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "8")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     

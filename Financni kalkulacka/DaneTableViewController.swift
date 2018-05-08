@@ -15,22 +15,22 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
 
         self.title = "Daňové úlevy"
         
-        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
-        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .Plain, target: self, action: #selector(DaneTableViewController.forward))
-        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .Plain, target: self, action: #selector(DaneTableViewController.backward))
+        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(DaneTableViewController.forward))
+        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .plain, target: self, action: #selector(DaneTableViewController.backward))
         navigationItem.setRightBarButtonItems([forwardButton, backwardButton], animated: true)
         
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hotovo", style: .Plain, target: self, action: "hotovoButton")
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         udajeKlienta.jeVyplnenoDane = true
@@ -40,32 +40,32 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 1
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("chceteResitDane") as! ChceteResitDane
+            let cell = tableView.dequeueReusableCell(withIdentifier: "chceteResitDane") as! ChceteResitDane
             
-            cell.switcher.addTarget(self, action: #selector(DaneTableViewController.chceResitSwitch(_:)), forControlEvents: .ValueChanged)
+            cell.switcher.addTarget(self, action: #selector(DaneTableViewController.chceResitSwitch(sender:)), for: .valueChanged)
             
             if udajeKlienta.chceteResitDane == true {
                 
-                cell.switcher.on = true
+                cell.switcher.isOn = true
                 
             } else {
                 
-                cell.switcher.on = false
+                cell.switcher.isOn = false
                 
             }
             
@@ -73,7 +73,7 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
             
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("danePoznamky") as! DanePoznamky
+            let cell = tableView.dequeueReusableCell(withIdentifier: "danePoznamky") as! DanePoznamky
             
             cell.danePoznamky.text = udajeKlienta.danePoznamky
             cell.danePoznamky.delegate = self
@@ -82,7 +82,7 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 1 {
             
@@ -93,7 +93,7 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
         return nil
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         if section == 1 {
             
@@ -103,7 +103,7 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
         return nil
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 1 {
             
@@ -117,7 +117,7 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
     
     //MARK: - passing data to struct
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         udajeKlienta.danePoznamky = textView.text
     
@@ -125,7 +125,7 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
     
     //MARK: - toolbar & button to hide keyboard
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
         let toolbar = UIToolbar()
         textView.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -136,9 +136,9 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
         
     //MARK: - chceResitSwitch
     
-    func chceResitSwitch(sender: UISwitch) {
+    @objc func chceResitSwitch(sender: UISwitch) {
         
-        if sender.on == true {
+        if sender.isOn == true {
             
             udajeKlienta.chceteResitDane = true
             
@@ -148,24 +148,24 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
             
         }
         
-        prioritiesUpdate("Daňové úlevy a státní dotace", chceResit: sender.on)
+        prioritiesUpdate(label: "Daňové úlevy a státní dotace", chceResit: sender.isOn)
         
     }
    
     @IBAction func zpet(sender: AnyObject) {
         
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func backward() {
         
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("5")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "5")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     
     func forward() {
         
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("7")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "7")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     

@@ -22,17 +22,17 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
         
         if parametr == 0 {
             
-            checkedCell = cellLabels.indexOf(udajeKlienta.spokojenostSBydlenim)!
+            checkedCell = cellLabels.index(of: udajeKlienta.spokojenostSBydlenim)!
             
         } else {
             
-            checkedCell = cellLabels.indexOf(udajeKlienta.planujeVetsi)!
+            checkedCell = cellLabels.index(of: udajeKlienta.planujeVetsi)!
             
         }
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
     }
 
@@ -43,12 +43,12 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if section == 0 {
@@ -61,7 +61,7 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         
         if indexPath.section == 1 {
@@ -76,7 +76,7 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
     
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 0 {
             
@@ -88,17 +88,17 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
         }
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
             
             cell.textLabel?.text = cellLabels[indexPath.row]
             
             if checkedCell == indexPath.row {
                 
-                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                cell.accessoryType = UITableViewCellAccessoryType.checkmark
                 
             }
             
@@ -106,7 +106,7 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
         
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("poznamky") as! SpokojenostSNemovitosti
+            let cell = tableView.dequeueReusableCell(withIdentifier: "poznamky") as! SpokojenostSNemovitosti
             
             if parametr == 0 {
             
@@ -125,15 +125,15 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.row != checkedCell {
             
-            let tappedCell = tableView.cellForRowAtIndexPath(indexPath)
+            let tappedCell = tableView.cellForRow(at: indexPath as IndexPath)
             
-            tappedCell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            tappedCell?.accessoryType = .checkmark
             
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: checkedCell, inSection: 0))?.accessoryType = UITableViewCellAccessoryType.None
+            tableView.cellForRow(at: NSIndexPath(forRow: checkedCell, inSection: 0) as IndexPath)?.accessoryType = .none
             
             checkedCell = indexPath.row
         }
@@ -150,12 +150,12 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
         
         tableView.reloadData()
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     
     }
     
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         if parametr == 0 {
             
@@ -169,7 +169,7 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
         
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
         let toolbar = UIToolbar()
         textView.inputAccessoryView = toolbar.hideKeyboardToolbar()

@@ -162,35 +162,35 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
     
     //MARK: - textField formatting
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
         if textField.tag == 3 || textField.tag == 5 {
             
-            if string.characters.count > 0 {
+            if string.count > 0 {
                 
-                var disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789.,").invertedSet
+                var disallowedCharacterSet = CharacterSet(charactersIn: "0123456789.,").inverted
                 var resultingStringLengthIsLegal = Bool()
                 
                 if textField.tag == 3 {
                     
-                    resultingStringLengthIsLegal = prospectiveText.characters.count <= 2
+                    resultingStringLengthIsLegal = prospectiveText.count <= 2
                     
                 } else {
                     
-                    resultingStringLengthIsLegal = prospectiveText.characters.count <= 1
-                    disallowedCharacterSet = NSCharacterSet(charactersInString: "01234").invertedSet
+                    resultingStringLengthIsLegal = prospectiveText.count <= 1
+                    disallowedCharacterSet = CharacterSet(charactersIn: "01234").inverted
                 }
                 
-                let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+                let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
                 
-                let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-                let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+                let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+                let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
                 
                 result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
-                                
+                
             }
         }
         
@@ -200,16 +200,16 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
     
     //MARK: - passing data to struct
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         selectedRow = textField.tag
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if selectedRow == 1 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
             
                 udajeKlienta.krestniJmeno = textField.text!
             
@@ -221,7 +221,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         
         } else if selectedRow == 2 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
             
                 udajeKlienta.prijmeni = textField.text!
             
@@ -234,7 +234,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
             
         } else if selectedRow == 3 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
             
                 udajeKlienta.vek = Int((textField.text! as NSString).intValue)
             
@@ -247,7 +247,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
             
         } else if selectedRow == 4 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
             
                 udajeKlienta.povolani = textField.text!
             
@@ -259,7 +259,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
             
         } else if selectedRow == 5 {
             
-            if textField.text?.characters.count != 0 {
+            if textField.text?.count != 0 {
             
                 udajeKlienta.pocetDeti = Int((textField.text! as NSString).intValue)
             
@@ -278,11 +278,11 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
     
     //MARK: - press return key to go to other textfield
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         let nextTage=textField.tag+1;
         // Try to find next responder
-        let nextResponder=textField.superview?.superview?.superview?.viewWithTag(nextTage) as UIResponder!
+        let nextResponder=textField.superview?.superview?.superview?.viewWithTag(nextTage) as UIResponder?
         
         if (nextResponder != nil){
             // Found next responder, so set it.
@@ -299,7 +299,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
     
     //MARK: - hideKeyboardToolbar
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -309,13 +309,13 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
     
     @IBAction func zpetButton(sender: AnyObject) {
         
-        moveOn(false)
+        moveOn(isMovingForward: false)
         
     }
     
     func forward() {
                 
-        moveOn(true)
+        moveOn(isMovingForward: true)
         
     }
     
@@ -325,35 +325,35 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         
         if hasProvidedAllInfo().0 == false {
             
-            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .Cancel, handler: nil))
+            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .cancel, handler: nil))
             
-            alert.addAction(UIAlertAction(title: "Pokračovat", style: .Default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Pokračovat", style: .default, handler: { (action) in
                 
                 if isMovingForward {
                     
-                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("2")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "2")
                     self.navigationController?.pushViewController(vc!, animated: false)
                     
                 } else {
                     
-                    self.navigationController?.popViewControllerAnimated(true)
+                    self.navigationController?.popViewController(animated: true)
                 }
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
         } else {
             
             if isMovingForward {
                 
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("2")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "2")
                 self.navigationController?.pushViewController(vc!, animated: false)
                 
             } else {
                 
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -366,7 +366,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         let povolani = "Povolání"
         let pocetDeti = "Počet dětí"
         
-        var values: [AnyObject?] = [udajeKlienta.krestniJmeno, udajeKlienta.prijmeni, udajeKlienta.vek, udajeKlienta.povolani, udajeKlienta.pocetDeti]
+        var values: [AnyObject?] = [udajeKlienta.krestniJmeno as AnyObject, udajeKlienta.prijmeni as AnyObject, udajeKlienta.vek as AnyObject, udajeKlienta.povolani as AnyObject, udajeKlienta.pocetDeti as AnyObject]
         var labels: [String] = [krestniJmeno, prijmeni, vek, povolani, pocetDeti]
         
         var arr: [String] = []

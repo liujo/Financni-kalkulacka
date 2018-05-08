@@ -20,21 +20,21 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         self.title = "Bydlení"
         
-        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
-        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .Plain, target: self, action: #selector(BydleniTableViewController.forward))
-        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .Plain, target: self, action: #selector(BydleniTableViewController.backward))
+        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(BydleniTableViewController.forward))
+        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .plain, target: self, action: #selector(BydleniTableViewController.backward))
         navigationItem.setRightBarButtonItems([forwardButton, backwardButton], animated: true)
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
     }
 
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         if udajeKlienta.vlastniCiNajemnni == "Nájemní" {
@@ -49,7 +49,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         tableView.reloadData()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         endEditingNow()
@@ -58,7 +58,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
         if udajeKlienta.chceResitBydleni == true {
@@ -78,7 +78,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         }
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if udajeKlienta.chceResitBydleni == true {
@@ -99,22 +99,20 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         }
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->
         UITableViewCell {
             
         if indexPath.section == 0 {
                 
-            let cell = tableView.dequeueReusableCellWithIdentifier("chceResitBydleni") as! ChceResitBydleni
-            
-            cell.switcher.addTarget(self, action: #selector(BydleniTableViewController.chceResitSwitch(_:)), forControlEvents: .ValueChanged)
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "chceResitBydleni") as! ChceResitBydleni
+            cell.switcher.addTarget(self, action: #selector(BydleniTableViewController.chceResitSwitch(sender:)), for: .valueChanged)
             if udajeKlienta.chceResitBydleni == true {
                 
-                cell.switcher.on = true
+                cell.switcher.isOn = true
                 
             } else {
                 
-                cell.switcher.on = false
+                cell.switcher.isOn = false
             
             }
             
@@ -124,7 +122,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("bytCiDum") as! BytCiDum
+                let cell = tableView.dequeueReusableCell(withIdentifier: "bytCiDum") as! BytCiDum
                 
                 cell.bytCiDum.text = udajeKlienta.bytCiDum
                 
@@ -132,11 +130,11 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("vlastniCiNajemni") as! VlastniCiNajemni
+                let cell = tableView.dequeueReusableCell(withIdentifier: "vlastniCiNajemni") as! VlastniCiNajemni
                 
                 if udajeKlienta.vlastniCiNajemnni == "Nájemní" {
                     
-                    let najemne = udajeKlienta.najemne.currencyFormattingWithSymbol("Kč") + " nájemné"
+                    let najemne = udajeKlienta.najemne.currencyFormattingWithSymbol(currencySymbol: "Kč") + " nájemné"
                     
                     if udajeKlienta.najemne == 0 {
                     
@@ -160,7 +158,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("spokojenostSNemovitosti") as! SpokojenostSNemovitosti
+                let cell = tableView.dequeueReusableCell(withIdentifier: "spokojenostSNemovitosti") as! SpokojenostSNemovitosti
                 
                 cell.spokojenostSBydlenim.text = udajeKlienta.spokojenostSBydlenim
                 
@@ -168,7 +166,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("planujeVetsi") as! PlanujeVetsi
+                let cell = tableView.dequeueReusableCell(withIdentifier: "planujeVetsi") as! PlanujeVetsi
                 
                 cell.planujeVetsi.text = udajeKlienta.planujeVetsi
                 
@@ -178,20 +176,20 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
         } else if indexPath.section == 3 + num {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("programPredcasnehoSplaceni") as! ProgramPredcasnehoSplaceni
+            let cell = tableView.dequeueReusableCell(withIdentifier: "programPredcasnehoSplaceni") as! ProgramPredcasnehoSplaceni
             
             return cell
             
         } else if indexPath.section == 4 + num {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("zajisteniBydleni") as! ZajisteniBydleni
+            let cell = tableView.dequeueReusableCell(withIdentifier: "zajisteniBydleni") as! ZajisteniBydleni
             
             cell.zajisteniBydleni.delegate = self
             cell.zajisteniBydleni.tag = 1
             
-            if udajeKlienta.zajisteniBydleniCastka > 0 {
+            if let castka = udajeKlienta.zajisteniBydleniCastka, castka > 0 {
                 
-                cell.zajisteniBydleni.text = udajeKlienta.zajisteniBydleniCastka!.currencyFormattingWithSymbol("Kč")
+                cell.zajisteniBydleni.text = castka.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             }
             
@@ -199,7 +197,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
         } else if indexPath.section == 5 + num {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("zajisteniBydleniPoznamky") as! ZajisteniBydleniPoznamky
+            let cell = tableView.dequeueReusableCell(withIdentifier: "zajisteniBydleniPoznamky") as! ZajisteniBydleniPoznamky
             
             cell.zajisteniBydleniPoznamky.delegate = self
             cell.zajisteniBydleniPoznamky.text = udajeKlienta.zajisteniBydleniPoznamky
@@ -208,13 +206,13 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
         } else if num == 1 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("propocetNajmu") as! PropocetNajmu
+            let cell = tableView.dequeueReusableCell(withIdentifier: "propocetNajmu") as! PropocetNajmu
             
             if indexPath.row == 2 {
                 
                 cell.propocetNajmuPopisek.text = "20 let"
                 let najemne = udajeKlienta.najemne*20*12
-                cell.propocetNajmuVysledek.text = najemne.currencyFormattingWithSymbol("Kč")
+                cell.propocetNajmuVysledek.text = najemne.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else {
                 
@@ -222,7 +220,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
                 cell.propocetNajmuPopisek.text = "\(5+nasobitel) let"
                 
                 let najemne = (5+nasobitel)*12*udajeKlienta.najemne
-                cell.propocetNajmuVysledek.text = najemne.currencyFormattingWithSymbol("Kč")
+                cell.propocetNajmuVysledek.text = najemne.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             }
             
@@ -230,12 +228,12 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath as IndexPath)
     
         return cell
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 1 {
             
@@ -266,7 +264,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         var sctn = 5
         
@@ -285,7 +283,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         return nil
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         var int = Int()
         
@@ -310,17 +308,17 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     //MARK: - textField formatting
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        textField.text = textField.text?.chopSuffix(2).condenseWhitespace()
+        textField.text = textField.text?.chopSuffix(count: 2).condenseWhitespace()
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if textField.text?.characters.count != 0 {
+        if textField.text?.count != 0 {
         
             udajeKlienta.zajisteniBydleniCastka = Int((textField.text! as NSString).intValue)
-            textField.text = udajeKlienta.zajisteniBydleniCastka!.currencyFormattingWithSymbol("Kč")
+            textField.text = udajeKlienta.zajisteniBydleniCastka!.currencyFormattingWithSymbol(currencySymbol: "Kč")
         
         } else {
             
@@ -330,7 +328,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
         let toolbar = UIToolbar()
         textView.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -339,24 +337,24 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
 
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         udajeKlienta.zajisteniBydleniPoznamky = textView.text
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
-        if string.characters.count > 0 {
+        if string.count > 0 {
             
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
+
+            let resultingStringLengthIsLegal = prospectiveText.count <= 6
             
-            let resultingStringLengthIsLegal = prospectiveText.characters.count <= 6
-            
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
             
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
             
@@ -366,7 +364,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         
         let toolbar = UIToolbar()
@@ -380,27 +378,27 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     @IBAction func zpet(sender: AnyObject) {
 
-        moveOn(0)
+        moveOn(moveID: 0)
     }
     
-    func backward() {
+    @objc func backward() {
         
-        moveOn(2)
+        moveOn(moveID: 2)
     }
     
         
-    func forward() {
+    @objc func forward() {
         
-        moveOn(4)
+        moveOn(moveID: 4)
     }
     
     //MARK: - segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "spokojenostSegue" {
             
-            let destination = segue.destinationViewController as! SpokojenostBydleniTableViewController
+            let destination = segue.destination as! SpokojenostBydleniTableViewController
             
             destination.cellLabels = ["Ano", "Mám výhrady"]
             destination.parametr = 0
@@ -410,7 +408,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         if segue.identifier == "planujeVetsiSegue" {
             
-            let destination = segue.destinationViewController as! SpokojenostBydleniTableViewController
+            let destination = segue.destination as! SpokojenostBydleniTableViewController
             
             destination.cellLabels = ["Ano", "Ne"]
             destination.parametr = 1
@@ -420,7 +418,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         if segue.identifier == "PPSsegue" {
             
-            let destination = segue.destinationViewController as! PPSTableViewController
+            let destination = segue.destination as! PPSTableViewController
             
             destination.isSegueFromKartaKlienta = true
         }
@@ -435,25 +433,25 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         if hasProvidedInfo().0 == false && udajeKlienta.chceResitBydleni {
             
-            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedInfo().1)" , preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .Cancel, handler: nil))
+            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedInfo().1)" , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .cancel, handler: nil))
             
-            alert.addAction(UIAlertAction(title: "Pokračovat", style: .Default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Pokračovat", style: .default, handler: { (action) in
                 
                 if moveID > 0 {
                     
-                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("\(moveID)")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "\(moveID)")
                     self.navigationController?.pushViewController(vc!, animated: false)
                     
                 } else {
                     
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.navigationController?.popToRootViewController(animated: true)
                     
                 }
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         
         } else {
             
@@ -461,12 +459,12 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
             if moveID > 0 {
                 
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("\(moveID)")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "\(moveID)")
                 self.navigationController?.pushViewController(vc!, animated: false)
                 
             } else {
                 
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                self.navigationController?.popToRootViewController(animated: true)
                 
             }
         }
@@ -489,9 +487,9 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     //MARK: - chceResitSwitch
     
-    func chceResitSwitch(sender: UISwitch) {
+    @objc func chceResitSwitch(sender: UISwitch) {
         
-        if sender.on == true {
+        if sender.isOn == true {
             
             udajeKlienta.chceResitBydleni = true
             
@@ -502,7 +500,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
         }
         
-        prioritiesUpdate("Bydlení", chceResit: sender.on)
+        prioritiesUpdate(label: "Bydlení", chceResit: sender.isOn)
         
         tableView.reloadData()
         

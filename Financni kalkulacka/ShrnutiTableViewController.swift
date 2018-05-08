@@ -19,28 +19,27 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
 
         self.title = "Finanční rozvaha"
         
-        let hotovo = UIBarButtonItem(title: "Hotovo", style: .Plain, target: self, action: #selector(ShrnutiTableViewController.hotovoButton))
-        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .Plain, target: self, action: #selector(ShrnutiTableViewController.backward))
+        let hotovo = UIBarButtonItem(title: "Hotovo", style: .plain, target: self, action: #selector(ShrnutiTableViewController.hotovoButton))
+        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .plain, target: self, action: #selector(ShrnutiTableViewController.backward))
         self.navigationItem.setRightBarButtonItems([hotovo, backwardButton], animated: true)
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
         
-        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
         if udajeKlienta.priority.count == 0 {
-            
-            sections.removeAtIndex(4)
+            sections.remove(at: 4)
             
         }
     }
 
     
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         self.view.endEditing(true)
@@ -49,7 +48,7 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
         if udajeKlienta.priority.count == 0 {
@@ -63,30 +62,30 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
         
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         return sections[section]
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("celkovePrijmyDomacnosti") as! CelkovePrijmyDomacnosti
+                let cell = tableView.dequeueReusableCell(withIdentifier: "celkovePrijmyDomacnosti") as! CelkovePrijmyDomacnosti
                 
                 var str = String()
                 
                 if udajeKlienta.prijmy != nil {
                     
-                    str = udajeKlienta.prijmy!.currencyFormattingWithSymbol("Kč")
+                    str = udajeKlienta.prijmy!.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 } else {
                     
-                    str = 0.currencyFormattingWithSymbol("Kč")
+                    str = 0.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 }
                 
@@ -96,17 +95,17 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
             
             } else if indexPath.row == 1 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("celkoveVydajeDomacnosti") as! CelkoveVydajeDomacnosti
+                let cell = tableView.dequeueReusableCell(withIdentifier: "celkoveVydajeDomacnosti") as! CelkoveVydajeDomacnosti
                 
                 var str = String()
                 
                 if udajeKlienta.vydaje != nil {
                     
-                    str = udajeKlienta.vydaje!.currencyFormattingWithSymbol("Kč")
+                    str = udajeKlienta.vydaje!.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 } else {
                     
-                    str = 0.currencyFormattingWithSymbol("Kč")
+                    str = 0.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 }
                 
@@ -116,18 +115,18 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("rozdilMeziPrijmyAVydaji") as! RozdilMeziPrijmyAVydaji
+                let cell = tableView.dequeueReusableCell(withIdentifier: "rozdilMeziPrijmyAVydaji") as! RozdilMeziPrijmyAVydaji
                 
                 var str = String()
                 
                 if udajeKlienta.vydaje != nil && udajeKlienta.prijmy != nil {
                 
                     let vysledek = udajeKlienta.prijmy! - udajeKlienta.vydaje!
-                    str = vysledek.currencyFormattingWithSymbol("Kč")
+                    str = vysledek.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 } else {
                     
-                    str = 0.currencyFormattingWithSymbol("Kč")
+                    str = 0.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 }
                 
@@ -141,7 +140,7 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("celkovaCastkaNaProjekt") as! CelkovaCastkaNaProjekt
+                let cell = tableView.dequeueReusableCell(withIdentifier: "celkovaCastkaNaProjekt") as! CelkovaCastkaNaProjekt
                 
                 var vysledek = Int()
                 
@@ -157,24 +156,24 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
                     
                 }
                 
-                cell.celkovaCastkaNaProjekt.text = vysledek.currencyFormattingWithSymbol("Kč")
+                cell.celkovaCastkaNaProjekt.text = vysledek.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
                 return cell
             
             } else if indexPath.row == 1 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("pulkaRozdilu") as! PulkaRozdilu
+                let cell = tableView.dequeueReusableCell(withIdentifier: "pulkaRozdilu") as! PulkaRozdilu
                 
                 var str = String()
                 
                 if udajeKlienta.vydaje != nil && udajeKlienta.prijmy != nil {
                     
                     let vysledek = (udajeKlienta.prijmy! - udajeKlienta.vydaje!)/2
-                    str = vysledek.currencyFormattingWithSymbol("Kč")
+                    str = vysledek.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 } else {
                     
-                    str = 0.currencyFormattingWithSymbol("Kč")
+                    str = 0.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 }
                 
@@ -184,11 +183,11 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("realnaCastkaNaProjekt") as! RealnaCastkaNaProjekt
+                let cell = tableView.dequeueReusableCell(withIdentifier: "realnaCastkaNaProjekt") as! RealnaCastkaNaProjekt
                 
-                if udajeKlienta.realnaCastkaNaProjekt > 0 {
+                if let realnaCastkaNaProjekt = udajeKlienta.realnaCastkaNaProjekt, realnaCastkaNaProjekt > 0 {
                     
-                    cell.realnaCastkaNaProjekt.text = udajeKlienta.realnaCastkaNaProjekt!.currencyFormattingWithSymbol("Kč")
+                    cell.realnaCastkaNaProjekt.text = realnaCastkaNaProjekt.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 }
                 
                 cell.realnaCastkaNaProjekt.delegate = self
@@ -199,7 +198,7 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         } else if indexPath.section == 2 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("castka") as! CastkaNaPredmet
+            let cell = tableView.dequeueReusableCell(withIdentifier: "castka") as! CastkaNaPredmet
             
             let castky = [udajeKlienta.zajisteniPrijmuCastka, udajeKlienta.zajisteniBydleniCastka, udajeKlienta.detiVynalozenaCastka, udajeKlienta.duchodVynalozenaCastka]
             
@@ -211,11 +210,11 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
             
             if castky[indexPath.row] != nil {
                 
-                str = castky[indexPath.row]!.currencyFormattingWithSymbol("Kč")
+                str = castky[indexPath.row]!.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             } else {
                 
-                str = 0.currencyFormattingWithSymbol("Kč")
+                str = 0.currencyFormattingWithSymbol(currencySymbol: "Kč")
             }
             
             cell.castka.text = str
@@ -224,7 +223,7 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         } else if indexPath.section == 3 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("ostatniPozadavkyRekapitulace") as! OstatniPozadavkyRekapitulace
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ostatniPozadavkyRekapitulace") as! OstatniPozadavkyRekapitulace
             
             cell.ostatniPozadavkyRekapitulace.text = udajeKlienta.ostatniPozadavky
             cell.ostatniPozadavkyRekapitulace.delegate = self
@@ -233,18 +232,18 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
         
         } else if indexPath.section == 4 && udajeKlienta.priority.count != 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("priority") as! PriorityRekapitulace
+            let cell = tableView.dequeueReusableCell(withIdentifier: "priority") as! PriorityRekapitulace
             
             let poradi = "\(indexPath.row + 1). "
             
             let polozka = NSMutableAttributedString(string: udajeKlienta.priority[indexPath.row])
             let attributedString = NSMutableAttributedString()
             
-            let attrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(20)]
+            let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 20)]
             let boldString = NSMutableAttributedString(string: poradi, attributes: attrs)
             
-            attributedString.appendAttributedString(boldString)
-            attributedString.appendAttributedString(polozka)
+            attributedString.append(boldString)
+            attributedString.append(polozka)
             
             cell.priority.attributedText = attributedString
             
@@ -252,13 +251,13 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
             
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("exportDoEmailu") as! ExportDoEmailu
+            let cell = tableView.dequeueReusableCell(withIdentifier: "exportDoEmailu") as! ExportDoEmailu
             
             return cell
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 3 {
             
@@ -273,7 +272,7 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
         return nil
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 3 {
             
@@ -286,7 +285,7 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         var num = 5
         
@@ -322,17 +321,17 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
             
             if jeVyplnenoVsude == false {
                 
-                let alert = UIAlertController(title: nil, message: "Prosím doplňte všechny sekce Karty Klienta pro zobrazení PDF", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: nil, message: "Prosím doplňte všechny sekce Karty Klienta pro zobrazení PDF", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 
             } else {
                 
-                self.performSegueWithIdentifier("PDFsegue", sender: self)
+                self.performSegue(withIdentifier: "PDFsegue", sender: self)
             }
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
     func reloadTable() {
@@ -347,18 +346,18 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        
-        if string.characters.count > 0 {
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
+        if string.count > 0 {
             
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
             var resultingStringLengthIsLegal = Bool()
             
-            resultingStringLengthIsLegal = prospectiveText.characters.count <= 6
+            resultingStringLengthIsLegal = prospectiveText.count <= 6
                 
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
             
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
             
@@ -368,43 +367,43 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
         
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        textField.text = textField.text?.stringByReplacingOccurrencesOfString("Kč", withString: "")
+        textField.text = textField.text?.replacingOccurrences(of: "Kč", with: "")
         textField.text = textField.text!.condenseWhitespace()
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         udajeKlienta.realnaCastkaNaProjekt = Int((textField.text! as NSString).intValue)
         
-        if udajeKlienta.realnaCastkaNaProjekt > 0 {
+        if let realnaCastkaNaProjekt = udajeKlienta.realnaCastkaNaProjekt, realnaCastkaNaProjekt > 0 {
             
-            textField.text = udajeKlienta.realnaCastkaNaProjekt!.currencyFormattingWithSymbol("Kč")
+            textField.text = udajeKlienta.realnaCastkaNaProjekt!.currencyFormattingWithSymbol(currencySymbol: "Kč")
         }
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         udajeKlienta.ostatniPozadavky = textView.text
         
         if textView.text != "" {
             
             udajeKlienta.chceResitOstatniPozadavky = true
-            prioritiesUpdate("Ostatní požadavky", chceResit: true)
+            prioritiesUpdate(label: "Ostatní požadavky", chceResit: true)
             reloadTable()
             
         } else {
             
             udajeKlienta.chceResitOstatniPozadavky = false
-            prioritiesUpdate("Ostatní požadavky", chceResit: false)
+            prioritiesUpdate(label: "Ostatní požadavky", chceResit: false)
             reloadTable()
         }
     }
     
     //MARK: - toolbar & button to hide keyboard
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -413,7 +412,7 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
         
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
         let toolbar = UIToolbar()
         textView.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -425,30 +424,30 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
     
     @IBAction func zpet(sender: AnyObject) {
         
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
-    func backward() {
+    @objc func backward() {
         
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("8")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "8")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     
-    func hotovoButton() {
+    @objc func hotovoButton() {
         
         var arr: [String] = []
         arr = arr.actionSheetStrings()
         
-        let optionMenu = UIAlertController(title: arr[0], message: arr[1], preferredStyle: .ActionSheet)
+        let optionMenu = UIAlertController(title: arr[0], message: arr[1], preferredStyle: .actionSheet)
         
-        let deleteAction = UIAlertAction(title: arr[2], style: .Default, handler: {
+        let deleteAction = UIAlertAction(title: arr[2], style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             
             self.exportData()
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         })
         
-        let saveAction = UIAlertAction(title: arr[3], style: .Cancel, handler: {
+        let saveAction = UIAlertAction(title: arr[3], style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             
         })
@@ -456,7 +455,7 @@ class ShrnutiTableViewController: UITableViewController, UITextFieldDelegate, UI
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(saveAction)
         
-        self.presentViewController(optionMenu, animated: true, completion: nil)
+        self.present(optionMenu, animated: true, completion: nil)
     }
 
     

@@ -18,11 +18,11 @@ class VlastniCiNajemTableViewController: UITableViewController, UITextFieldDeleg
         super.viewDidLoad()
 
         self.title = "Bydlení"
-        checkedCell = cellLabels.indexOf(udajeKlienta.vlastniCiNajemnni)!
+        checkedCell = cellLabels.index(of: udajeKlienta.vlastniCiNajemnni)!
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
     }
 
@@ -61,28 +61,28 @@ class VlastniCiNajemTableViewController: UITableViewController, UITextFieldDeleg
 
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
             
             cell.textLabel?.text = cellLabels[indexPath.row]
             
             if checkedCell == indexPath.row {
                 
-                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                cell.accessoryType = UITableViewCellAccessoryType.checkmark
             }
             
             return cell
         
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("najemne") as! VlastniCiNajemni
+            let cell = tableView.dequeueReusableCell(withIdentifier: "najemne") as! VlastniCiNajemni
             
             if udajeKlienta.najemne > 0 {
                 
-                cell.najemne.text = udajeKlienta.najemne.currencyFormattingWithSymbol("Kč")
+                cell.najemne.text = udajeKlienta.najemne.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             }
             
@@ -92,18 +92,16 @@ class VlastniCiNajemTableViewController: UITableViewController, UITextFieldDeleg
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 0 {
             
             if indexPath.row != checkedCell {
                 
-                let tappedCell = tableView.cellForRowAtIndexPath(indexPath)
+                let tappedCell = tableView.cellForRow(at: indexPath as IndexPath)
                 
-                tappedCell?.accessoryType = UITableViewCellAccessoryType.Checkmark
-                
-                tableView.cellForRowAtIndexPath(NSIndexPath(forRow: checkedCell, inSection: 0))?.accessoryType = UITableViewCellAccessoryType.None
-                
+                tappedCell?.accessoryType = .checkmark
+                tableView.cellForRow(at: IndexPath(row: checkedCell, section: 0))?.accessoryType = .none
                 checkedCell = indexPath.row
             }
             
@@ -120,7 +118,7 @@ class VlastniCiNajemTableViewController: UITableViewController, UITextFieldDeleg
             
             tableView.reloadData()
             
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     
         }
         

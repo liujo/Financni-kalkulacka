@@ -59,10 +59,10 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         self.title = "Náhled PDF"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(PDFViewController.sendEmail))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(PDFViewController.sendEmail))
         
-        webView.opaque = false
-        webView.backgroundColor = UIColor.lightGrayColor()
+        webView.isOpaque = false
+        webView.backgroundColor = UIColor.lightGray
         webView.scalesPageToFit = true
         
         //firstPage
@@ -74,7 +74,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             detiBool = (true, false)
         }
         
-        let sectionViews = [zakladniUdajeSection(), prioritySection(), detiSection(detiBool.0), detiSection2(detiBool.1), zajisteniPrijmuSection(), bydleniSection(), duchodSection(), daneSection(), ostatniPozadavkySection(), klientNechceResit(), shrnutiSection()]
+        let sectionViews = [zakladniUdajeSection(), prioritySection(), detiSection(includeFooter: detiBool.0), detiSection2(includeSecondPart: detiBool.1), zajisteniPrijmuSection(), bydleniSection(), duchodSection(), daneSection(), ostatniPozadavkySection(), klientNechceResit(), shrnutiSection()]
 
         let bools = [true, true, udajeKlienta.chceResitDeti, udajeKlienta.chceResitDeti, udajeKlienta.chceResitZajisteniPrijmu, udajeKlienta.chceResitBydleni, udajeKlienta.chceResitDuchod, udajeKlienta.chceteResitDane, udajeKlienta.chceResitOstatniPozadavky, true, true]
         
@@ -85,16 +85,13 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         for view in sectionViews {
             
             let sectionView = view
-            let int = sectionViews.indexOf(sectionView)!
+            let int = sectionViews.index(of: sectionView)!
             
             if bools[int] && height + Int(sectionView.bounds.height) + 12 < 1066 {
                 
-                print("appended")
-                
-                sectionView.frame =
-                    CGRectMake(25, CGFloat(height), sectionView.bounds.width, sectionView.bounds.height)
+                sectionView.frame = CGRect(x: 25, y: CGFloat(height), width: sectionView.bounds.width, height: sectionView.bounds.height)
                 sectionView.layer.borderWidth = 0.5
-                sectionView.layer.borderColor = UIColor.blackColor().CGColor
+                sectionView.layer.borderColor = UIColor.black.cgColor
                 sectionView.layer.cornerRadius = 7.5
                 page1.addSubview(sectionView)
                 
@@ -108,10 +105,9 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                 page1 = UIView.loadFromNibNamed("pdf")!
                 height = 104
                 
-                sectionView.frame =
-                    CGRectMake(25, CGFloat(height), sectionView.bounds.width, sectionView.bounds.height)
+                sectionView.frame = CGRect(x: 25, y: CGFloat(height), width: sectionView.bounds.width, height: sectionView.bounds.height)
                 sectionView.layer.borderWidth = 0.5
-                sectionView.layer.borderColor = UIColor.blackColor().CGColor
+                sectionView.layer.borderColor = UIColor.black.cgColor
                 sectionView.layer.cornerRadius = 7.5
                 page1.addSubview(sectionView)
                 
@@ -129,8 +125,8 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         }
         
         
-        createPdfFromView(views, saveToDocumentsWithFileName: "pdf1")
-        showPDF("pdf1")
+        createPdfFromView(views: views, saveToDocumentsWithFileName: "pdf1")
+        showPDF(fileName: "pdf1")
     }
     
     //MARK: - fill sections with info
@@ -150,38 +146,38 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         var data: [AnyObject?] = [
             
-            jmeno,
-            udajeKlienta.vek,
-            udajeKlienta.povolani,
-            udajeKlienta.sport,
-            udajeKlienta.zdravotniStav,
-            udajeKlienta.rodinnyStav,
-            udajeKlienta.pracovniPomer,
-            udajeKlienta.pocetDeti,
-            udajeKlienta.prijmy?.currencyFormattingWithSymbol("Kč"),
-            udajeKlienta.vydaje?.currencyFormattingWithSymbol("Kč"),
+            jmeno as AnyObject,
+            udajeKlienta.vek as AnyObject,
+            udajeKlienta.povolani as AnyObject,
+            udajeKlienta.sport as AnyObject,
+            udajeKlienta.zdravotniStav as AnyObject,
+            udajeKlienta.rodinnyStav as AnyObject,
+            udajeKlienta.pracovniPomer as AnyObject,
+            udajeKlienta.pocetDeti as AnyObject,
+            udajeKlienta.prijmy?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
+            udajeKlienta.vydaje?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
             
             ]
         
         if udajeKlienta.rodinnyStav != "Svobodný" {
             
-            data.append("Partner(ka)")
-            data.append(udajeKlienta.pracovniPomerPartner)
-            data.append(udajeKlienta.prijmyPartner)
-            data.append(udajeKlienta.vydajePartner)
-            data.append("Pracovní poměr")
-            data.append("Příjem")
-            data.append("Výdaje")
+            data.append("Partner(ka)" as AnyObject)
+            data.append(udajeKlienta.pracovniPomerPartner as AnyObject)
+            data.append(udajeKlienta.prijmyPartner as AnyObject)
+            data.append(udajeKlienta.vydajePartner as AnyObject)
+            data.append("Pracovní poměr" as AnyObject)
+            data.append("Příjem" as AnyObject)
+            data.append("Výdaje" as AnyObject)
             
         } else {
             
-            data.append(String())
-            data.append(String())
-            data.append(String())
-            data.append(String())
-            data.append(String())
-            data.append(String())
-            data.append(String())
+            data.append(String() as AnyObject)
+            data.append(String() as AnyObject)
+            data.append(String() as AnyObject)
+            data.append(String() as AnyObject)
+            data.append(String() as AnyObject)
+            data.append(String() as AnyObject)
+            data.append(String() as AnyObject)
             
         }
         
@@ -193,7 +189,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
             if thing == nil {
                 
-                data[i] = String()
+                data[i] = String() as AnyObject
             }
             
             i += 1
@@ -273,25 +269,25 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         var data: [AnyObject?] = [
             
-            udajeKlienta.maUver,
-            udajeKlienta.dluznaCastka?.currencyFormattingWithSymbol("Kč"),
-            udajeKlienta.mesicniSplatkaUveru?.currencyFormattingWithSymbol("Kč"),
-            udajeKlienta.rokFixace,
-            udajeKlienta.denniPrijmy?.currencyFormattingWithSymbol("Kč"),
-            udajeKlienta.denniVydaje?.currencyFormattingWithSymbol("Kč"),
-            udajeKlienta.zajisteniPrijmuPoznamky,
-            udajeKlienta.zajisteniPrijmuCastka?.currencyFormattingWithSymbol("Kč"),
+            udajeKlienta.maUver as AnyObject,
+            udajeKlienta.dluznaCastka?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
+            udajeKlienta.mesicniSplatkaUveru?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
+            udajeKlienta.rokFixace as AnyObject,
+            udajeKlienta.denniPrijmy?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
+            udajeKlienta.denniVydaje?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
+            udajeKlienta.zajisteniPrijmuPoznamky as AnyObject,
+            udajeKlienta.zajisteniPrijmuCastka?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
             
         ]
         
         
         if udajeKlienta.maUver {
             
-            data[0] = "Ano"
+            data[0] = "Ano" as AnyObject
             
         } else {
             
-            data[0] = "Ne"
+            data[0] = "Ne" as AnyObject
         }
         
         var i = 0
@@ -301,7 +297,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
             if thing == nil {
                 
-                data[i] = String()
+                data[i] = String() as AnyObject
                 
             }
             
@@ -371,12 +367,12 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         var data: [AnyObject?] = [
             
-            udajeKlienta.bytCiDum,
-            udajeKlienta.vlastniCiNajemnni,
-            spokojenostSBydlenim,
-            udajeKlienta.planujeVetsi,
-            udajeKlienta.zajisteniBydleniCastka?.currencyFormattingWithSymbol("Kč"),
-            str
+            udajeKlienta.bytCiDum as AnyObject,
+            udajeKlienta.vlastniCiNajemnni as AnyObject,
+            spokojenostSBydlenim as AnyObject,
+            udajeKlienta.planujeVetsi as AnyObject,
+            udajeKlienta.zajisteniBydleniCastka?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
+            str as AnyObject
             
             ]
         
@@ -387,7 +383,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
             if thing == nil {
                 
-                data[i] = String()
+                data[i] = String() as AnyObject
                 
             }
             
@@ -550,7 +546,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         let rok = udajeKlienta.grafBydleniMesicSplaceni/12
         let mesic = udajeKlienta.grafBydleniMesicSplaceni % 12
         
-        for var i = 1; i <= rok; i++ {
+        for i in 1...rok {
             
             placeholderArr1.append("\(i).")
             
@@ -562,7 +558,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
         }
         
-        placeholderArr1.insert("0.", atIndex: 0)
+        placeholderArr1.insert("0.", at: 0)
         roky = placeholderArr1
         bydleniRoky = roky
         
@@ -1210,13 +1206,13 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, numberOfVerticalValuesAtLineIndex lineIndex: UInt) -> UInt {
+    func lineChartView(_ lineChartView: JBLineChartView!, numberOfVerticalValuesAtLineIndex lineIndex: UInt) -> UInt {
         
         return UInt(roky.count)
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, verticalValueForHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, verticalValueForHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
         
         if lineIndex == 0 {
             
@@ -1233,11 +1229,11 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         if lineIndex == 0 {
             
-            return UIColor.greenColor()
+            return UIColor.green
         
         } else {
             
-            return UIColor.blueColor()
+            return UIColor.blue
         }
         
     }
@@ -1297,20 +1293,21 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         var placeholderArr = [String]()
         var placeholderArr1 = [Int]()
         
-        for var i = 1; i <= udajeKlienta.grafDobaSporeni[int - 1]; i++ {
+        //for var i = 1; i <= udajeKlienta.grafDobaSporeni[int - 1]; i++ {
+        for i in 1...udajeKlienta.grafDobaSporeni[int - 1] {
             
-            let value = vypocetKrivkyGrafArray1Deti(i, int: int - 1) + grafArray2[i - 1]
+            let value = vypocetKrivkyGrafArray1Deti(rok: i, int: int - 1) + grafArray2[i - 1]
             
             placeholderArr1.append(value)
             placeholderArr.append("\(i).")
         }
         
-        grafArray2.insert(0, atIndex: 0)
+        grafArray2.insert(0, at: 0)
         
-        placeholderArr1.insert(0, atIndex: 0)
+        placeholderArr1.insert(0, at: 0)
         grafArray1 = placeholderArr1
         
-        placeholderArr.insert("0.", atIndex: 0)
+        placeholderArr.insert("0.", at: 0)
         roky = placeholderArr
         
         maxValue = CGFloat(grafArray1[grafArray1.count - 1])
@@ -1364,13 +1361,13 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         var data: [AnyObject?] = [
             
-            udajeKlienta.duchodVek,
-            udajeKlienta.pripravaNaDuchod,
-            udajeKlienta.jakDlouho,
-            udajeKlienta.chtelBysteSePripravit,
-            udajeKlienta.predstavovanaCastka?.currencyFormattingWithSymbol("Kč"),
-            udajeKlienta.duchodVynalozenaCastka?.currencyFormattingWithSymbol("Kč"),
-            udajeKlienta.duchodPoznamky
+            udajeKlienta.duchodVek as AnyObject,
+            udajeKlienta.pripravaNaDuchod as AnyObject,
+            udajeKlienta.jakDlouho as AnyObject,
+            udajeKlienta.chtelBysteSePripravit as AnyObject,
+            udajeKlienta.predstavovanaCastka?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
+            udajeKlienta.duchodVynalozenaCastka?.currencyFormattingWithSymbol(currencySymbol: "Kč") as AnyObject,
+            udajeKlienta.duchodPoznamky as AnyObject
             
         ]
         
@@ -1381,7 +1378,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
             if thing == nil {
                 
-                data[i] = String()
+                data[i] = String() as AnyObject
                 
             }
             
@@ -1535,7 +1532,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
             
@@ -1571,11 +1568,11 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("headerCell") as! GraphHeaderTableCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! GraphHeaderTableCell
             
             var label2 = String()
             var label3 = String()
@@ -1599,7 +1596,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! GraphTableCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! GraphTableCell
             
             if indexPath.row % 2 == 0 {
                 
@@ -1607,7 +1604,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                 
             } else {
                 
-                cell.backgroundColor = UIColor.whiteColor()
+                cell.backgroundColor = UIColor.white
             }
             
             var string1 = String()
@@ -1617,38 +1614,38 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             if tableView.tag == 1 {
                 
                 string1 = bydleniRoky[indexPath.row]
-                string2 = bydleniGrafArray1[indexPath.row].currencyFormattingWithSymbol("Kč")
-                string3 = bydleniGrafArray2[indexPath.row].currencyFormattingWithSymbol("Kč")
+                string2 = bydleniGrafArray1[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
+                string3 = bydleniGrafArray2[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else if tableView.tag == 2 {
                 
                 string1 = duchodRoky[indexPath.row]
-                string2 = duchodGrafArray1[indexPath.row].currencyFormattingWithSymbol("Kč")
-                string3 = duchodGrafArray2[indexPath.row].currencyFormattingWithSymbol("Kč")
+                string2 = duchodGrafArray1[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
+                string3 = duchodGrafArray2[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else if tableView.tag == 3 {
                 
                 string1 = dite1Roky[indexPath.row]
-                string2 = dite1GrafArray1[indexPath.row].currencyFormattingWithSymbol("Kč")
-                string3 = dite1GrafArray2[indexPath.row].currencyFormattingWithSymbol("Kč")
+                string2 = dite1GrafArray1[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
+                string3 = dite1GrafArray2[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else if tableView.tag == 4 {
                 
                 string1 = dite2Roky[indexPath.row]
-                string2 = dite2GrafArray1[indexPath.row].currencyFormattingWithSymbol("Kč")
-                string3 = dite2GrafArray2[indexPath.row].currencyFormattingWithSymbol("Kč")
+                string2 = dite2GrafArray1[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
+                string3 = dite2GrafArray2[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else if tableView.tag == 5 {
                 
                 string1 = dite3Roky[indexPath.row]
-                string2 = dite3GrafArray1[indexPath.row].currencyFormattingWithSymbol("Kč")
-                string3 = dite3GrafArray2[indexPath.row].currencyFormattingWithSymbol("Kč")
+                string2 = dite3GrafArray1[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
+                string3 = dite3GrafArray2[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             } else {
                 
                 string1 = dite4Roky[indexPath.row]
-                string2 = dite4GrafArray1[indexPath.row].currencyFormattingWithSymbol("Kč")
-                string3 = dite4GrafArray2[indexPath.row].currencyFormattingWithSymbol("Kč")
+                string2 = dite4GrafArray1[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
+                string3 = dite4GrafArray2[indexPath.row].currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             }
             
@@ -1662,7 +1659,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
             
@@ -1685,22 +1682,23 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         print(udajeKlienta.grafDuchodDobaSporeni)
         
-        for var i = 1; i <= udajeKlienta.grafDuchodDobaSporeni; i += 1 {
+        //for var i = 1; i <= udajeKlienta.grafDuchodDobaSporeni; i += 1 {
+        for i in 1...udajeKlienta.grafDuchodDobaSporeni {
             
-            let value = vypocetKrivkyGrafArray1Duchod(i) + grafArray2[i - 1]
+            let value = vypocetKrivkyGrafArray1Duchod(rok: i) + grafArray2[i - 1]
             
             placeholderArr1.append(value)
             placeholderArr.append("\(i).")
         }
         
-        grafArray2.insert(0, atIndex: 0)
+        grafArray2.insert(0, at: 0)
         duchodGrafArray2 = grafArray2
         
-        placeholderArr.insert("0.", atIndex: 0)
+        placeholderArr.insert("0.", at: 0)
         roky = placeholderArr
         duchodRoky = roky
         
-        placeholderArr1.insert(0, atIndex: 0)
+        placeholderArr1.insert(0, at: 0)
         grafArray1 = placeholderArr1
         duchodGrafArray1 = grafArray1
         
@@ -1741,7 +1739,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             str = "Ne"
         }
         
-        values.insert(str, atIndex: 0)
+        values.insert(str, at: 0)
         
         let sectionView = UIView.loadFromNibNamed("Dane")!
         for subview in sectionView.subviews {
@@ -1838,7 +1836,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             }
         }
         
-        let sectionView = UIView.loadFromNibNamed("KlientNechceResit")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "KlientNechceResit")!
         for subview in sectionView.subviews {
             
             if subview.isKindOfClass(UILabel) && subview.tag > 0 {
@@ -1924,22 +1922,22 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         let data = [
             
-            value1.currencyFormattingWithSymbol("Kč"),
-            value2.currencyFormattingWithSymbol("Kč"),
-            value3.currencyFormattingWithSymbol("Kč"),
-            value4.currencyFormattingWithSymbol("Kč"),
-            (value1 + value2 + value3 + value4).currencyFormattingWithSymbol("Kč"),
-            ((value5 - value6)/2).currencyFormattingWithSymbol("Kč"),
-            udajeKlienta.realnaCastkaNaProjekt!.currencyFormattingWithSymbol("Kč"),
-            value5.currencyFormattingWithSymbol("Kč"),
-            value6.currencyFormattingWithSymbol("Kč")
+            value1.currencyFormattingWithSymbol(currencySymbol: "Kč"),
+            value2.currencyFormattingWithSymbol(currencySymbol: "Kč"),
+            value3.currencyFormattingWithSymbol(currencySymbol: "Kč"),
+            value4.currencyFormattingWithSymbol(currencySymbol: "Kč"),
+            (value1 + value2 + value3 + value4).currencyFormattingWithSymbol(currencySymbol: "Kč"),
+            ((value5 - value6)/2).currencyFormattingWithSymbol(currencySymbol: "Kč"),
+            udajeKlienta.realnaCastkaNaProjekt!.currencyFormattingWithSymbol(currencySymbol: "Kč"),
+            value5.currencyFormattingWithSymbol(currencySymbol: "Kč"),
+            value6.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
         ]
         
-        let sectionView = UIView.loadFromNibNamed("Shrnuti")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "Shrnuti")!
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UILabel) && subview.tag > 0 {
+            if subview.isKind(of: UILabel.self) && subview.tag > 0 {
                 
                 let label = subview as! UILabel
                 label.text = data[subview.tag - 1]
@@ -1954,13 +1952,13 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
     
     func showPDF(fileName: String) {
         
-        let arraysPaths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        let arraysPaths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let path = arraysPaths[0]
         let pdfFileName = path + "/" + fileName + ".pdf"
         
         filePath = pdfFileName
         
-        let url = NSURL.fileURLWithPath(pdfFileName)
+        let url = NSURL.fileURL(withPath: pdfFileName)
         let request = NSURLRequest(URL: url)
         webView.scalesPageToFit = true
         webView.loadRequest(request)
@@ -1976,28 +1974,28 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         for page in views {
             
             UIGraphicsBeginPDFPage()
-            page.layer.renderInContext(pdfContext)
+            page.layer.render(in: pdfContext)
             
         }
         
         UIGraphicsEndPDFContext()
         
-        if let documentDirectories = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first {
+        if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
             let documentsFileName = documentDirectories + "/" + fileName + ".pdf"
             debugPrint(documentsFileName)
-            pdfData.writeToFile(documentsFileName, atomically: true)
+            pdfData.write(toFile: documentsFileName, atomically: true)
         }
     }
     
     //MARK: - share graph via email
     
-    func sendEmail() {
+    @objc func sendEmail() {
         
         let mailComposeViewController = configuredMailComposeViewController()
         
         if MFMailComposeViewController.canSendMail() {
             
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         
         } else {
         
@@ -2017,7 +2015,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         let pdfData = NSData(contentsOfFile: filePath)
         
-        mailComposerVC.addAttachmentData(pdfData!, mimeType: "application/pdf", fileName: "pdf1")
+        mailComposerVC.addAttachmentData(pdfData! as Data, mimeType: "application/pdf", fileName: "pdf1")
         
         return mailComposerVC
     }
@@ -2029,24 +2027,24 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
     
     // MARK: MFMailComposeViewControllerDelegate Method
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
 }
 
 extension UIView {
     
-    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> UIView? {
+    class func loadFromNibNamed(nibNamed: String, bundle : Bundle? = nil) -> UIView? {
         return UINib(
             nibName: nibNamed,
             bundle: bundle
-            ).instantiateWithOwner(nil, options: nil)[0] as? UIView
+            ).instantiate(withOwner: nil, options: nil)[0] as? UIView
     }
     
     func copyView() -> UIView {
         
-        return NSKeyedUnarchiver.unarchiveObjectWithData(NSKeyedArchiver.archivedDataWithRootObject(self))! as! UIView
+        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self))! as! UIView
         
     }
 }

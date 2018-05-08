@@ -49,16 +49,16 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
             
         }
         
-        let backButton = UIBarButtonItem(image: UIImage(named: "zpet"), style: .Plain, target: self, action: #selector(DiteSporeniTableViewController.zpetButton))
+        let backButton = UIBarButtonItem(image: UIImage(named: "zpet"), style: .plain, target: self, action: #selector(DiteSporeniTableViewController.zpetButton))
         navigationItem.leftBarButtonItem = backButton
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Graf", style: .Plain, target: self, action: #selector(DiteSporeniTableViewController.segueToGraph))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Graf", style: .plain, target: self, action: #selector(DiteSporeniTableViewController.segueToGraph))
         
         let value1 = udajeKlienta.detiMesicneSporeni[kidID]
         
         if value1 != Int() {
             
-            textField1Value = value1.currencyFormattingWithSymbol("Kč")
+            textField1Value = value1.currencyFormattingWithSymbol(currencySymbol: "Kč")
             slider1Value = Float(value1)/100
             stepper1Value = Double(value1)
             
@@ -68,7 +68,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         
         if value2 != Int() {
             
-            textField2Value = value2.currencyFormattingWithSymbol("let")
+            textField2Value = value2.currencyFormattingWithSymbol(currencySymbol: "let")
             slider2Value = Float(value2)
             stepper2Value = Double(value2)
             
@@ -78,7 +78,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         
         if value3 != Float() {
             
-            textField3Value = value3.currencyFormattingWithSymbol("%")
+            textField3Value = value3.currencyFormattingWithSymbol(currencySymbol: "%")
             slider3Value = Float(value3)*10
             stepper3Value = Double(value3)*10
             
@@ -88,7 +88,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         pocitani()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         endEditingNow()
@@ -98,8 +98,8 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
     func pocitani() {
         
         let num = textField1Value.condenseWhitespace() //formatovani mesicni platby
-        let urokCarka = textField3Value.stringByReplacingOccurrencesOfString(",", withString: ".", options: [], range: nil)//vymena carky za tecku
-        
+        let urokCarka = textField3Value.replacingOccurrences(of: ",", with: ".")//vymena carky za tecku
+
         let mesicniUlozka:Float = Float((num as NSString).floatValue)
         let doba:Float = Float((textField2Value as NSString).floatValue)
         let urok:Float = Float((urokCarka as NSString).floatValue) //roky
@@ -111,7 +111,8 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         
         var d = Int()
         
-        for var i:Float = Float(1); i <= dobaNaMesice; i++ {
+        //for var i:Float = Float(1); i <= dobaNaMesice; i++ {
+        for i in 1 ... Int(dobaNaMesice) {
             
             nasporenaCastka = nasporenaCastka + mesicniUlozka + nasporenaCastka*urokRozdelen
             
@@ -119,7 +120,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
                 
                 //storeNumber += Int(round(nasporenaCastka)) - i*12*mesicniUlozka
                 let a = round(nasporenaCastka)
-                let b = i*mesicniUlozka
+                let b = Float(i)*mesicniUlozka
                 var c = a - b
                 c = round(c)
                 d = Int(c)
@@ -139,8 +140,8 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         let nasporenaCastkaInt:Int = Int(nasporenaCastka)
         let celkemUrokInt:Int = Int(celkemUrok)
         
-        label1Value = nasporenaCastkaInt.currencyFormattingWithSymbol("Kč")
-        label2Value = celkemUrokInt.currencyFormattingWithSymbol("Kč")
+        label1Value = nasporenaCastkaInt.currencyFormattingWithSymbol(currencySymbol: "Kč")
+        label2Value = celkemUrokInt.currencyFormattingWithSymbol(currencySymbol: "Kč")
         
         //user defaults values
         udajeKlienta.detiMesicneSporeni[kidID] = Int(mesicniUlozka)
@@ -182,12 +183,12 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 3
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if section == 0 {
@@ -206,11 +207,11 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("jmeno") as! diteJmeno
+            let cell = tableView.dequeueReusableCell(withIdentifier: "jmeno") as! diteJmeno
             
             cell.diteJmeno.delegate = self
             cell.diteJmeno.tag = 1
@@ -222,48 +223,48 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("mesicniPlatba") as! detiMesicniPlatba
+                let cell = tableView.dequeueReusableCell(withIdentifier: "mesicniPlatba") as! detiMesicniPlatba
                 
                 cell.mesicniPlatbaTextField.delegate = self
                 cell.mesicniPlatbaTextField.tag = 2
                 cell.mesicniPlatbaTextField.text = textField1Value
                 
-                cell.mesicniPlatbaSlider.addTarget(self, action: #selector(DiteSporeniTableViewController.mesicniPlatbaSliderAction(_:)), forControlEvents: .ValueChanged)
+                cell.mesicniPlatbaSlider.addTarget(self, action: #selector(DiteSporeniTableViewController.mesicniPlatbaSliderAction(sender:)), for: .valueChanged)
                 cell.mesicniPlatbaSlider.value = slider1Value
                 
-                cell.mesicniPlatbaStepper.addTarget(self, action: #selector(DiteSporeniTableViewController.mesicniPlatbaStepperAction(_:)), forControlEvents: .ValueChanged)
+                cell.mesicniPlatbaStepper.addTarget(self, action: #selector(DiteSporeniTableViewController.mesicniPlatbaStepperAction(sender:)), for: .valueChanged)
                 cell.mesicniPlatbaStepper.value = stepper1Value
                 
                 return cell
                 
             } else if indexPath.row == 1 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("doba") as! detiDoba
+                let cell = tableView.dequeueReusableCell(withIdentifier: "doba") as! detiDoba
                 
                 cell.dobaTextField.delegate = self
                 cell.dobaTextField.tag = 3
                 cell.dobaTextField.text = textField2Value
                 
-                cell.dobaSlider.addTarget(self, action: #selector(DiteSporeniTableViewController.dobaSliderAction(_:)), forControlEvents: .ValueChanged)
+                cell.dobaSlider.addTarget(self, action: #selector(DiteSporeniTableViewController.dobaSliderAction(sender:)), for: .valueChanged)
                 cell.dobaSlider.value = slider2Value
                 
-                cell.dobaStepper.addTarget(self, action: #selector(DiteSporeniTableViewController.dobaStepperAction(_:)), forControlEvents: .ValueChanged)
+                cell.dobaStepper.addTarget(self, action: #selector(DiteSporeniTableViewController.dobaStepperAction(sender:)), for: .valueChanged)
                 cell.dobaStepper.value = stepper2Value
                 
                 return cell
             
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("rocniUrok") as! rocniUrok
+                let cell = tableView.dequeueReusableCell(withIdentifier: "rocniUrok") as! rocniUrok
                 
                 cell.urokTextField.delegate = self
                 cell.urokTextField.tag = 4
                 cell.urokTextField.text = textField3Value
                 
-                cell.urokSlider.addTarget(self, action: #selector(DiteSporeniTableViewController.urokSliderAction(_:)), forControlEvents: .ValueChanged)
+                cell.urokSlider.addTarget(self, action: #selector(DiteSporeniTableViewController.urokSliderAction(sender:)), for: .valueChanged)
                 cell.urokSlider.value = slider3Value
                 
-                cell.urokStepper.addTarget(self, action: #selector(DiteSporeniTableViewController.urokStepperAction(_:)), forControlEvents: .ValueChanged)
+                cell.urokStepper.addTarget(self, action: #selector(DiteSporeniTableViewController.urokStepperAction(sender:)), for: .valueChanged)
                 cell.urokStepper.value = stepper3Value
                 
                 return cell
@@ -273,7 +274,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("celkemNasporeno") as! detiLabels
+                let cell = tableView.dequeueReusableCell(withIdentifier: "celkemNasporeno") as! detiLabels
                 
                 cell.celkemNasporenoLabel.text = label1Value
                 
@@ -281,7 +282,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("vyplacenyUrok") as! detiLabels
+                let cell = tableView.dequeueReusableCell(withIdentifier: "vyplacenyUrok") as! detiLabels
                 
                 cell.vyplacenyUrokLabel.text = label2Value
                 
@@ -291,7 +292,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
             
@@ -307,11 +308,11 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
     
     //MARK: slider ibactions
     
-    func mesicniPlatbaSliderAction(sender: UISlider) {
+    @objc func mesicniPlatbaSliderAction(sender: UISlider) {
         
         let a = Int(sender.value)*100
         
-        textField1Value = a.currencyFormattingWithSymbol("Kč")
+        textField1Value = a.currencyFormattingWithSymbol(currencySymbol: "Kč")
         stepper1Value = Double(a)
         slider1Value = sender.value
         
@@ -319,11 +320,11 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         
     }
     
-    func dobaSliderAction(sender: UISlider) {
+    @objc func dobaSliderAction(sender: UISlider) {
         
         let b = Int(sender.value)
         
-        textField2Value = b.currencyFormattingWithSymbol("let")
+        textField2Value = b.currencyFormattingWithSymbol(currencySymbol: "let")
         stepper2Value = Double(b)
         slider2Value = sender.value
         
@@ -331,14 +332,14 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         
     }
     
-    func urokSliderAction(sender: UISlider) {
+    @objc func urokSliderAction(sender: UISlider) {
         
         var c = Float(sender.value)
         c = round(c)
         c = c * 0.1
         
         
-        textField3Value = c.currencyFormattingWithSymbol("%")
+        textField3Value = c.currencyFormattingWithSymbol(currencySymbol: "%")
         stepper3Value = Double(sender.value)
         slider3Value = sender.value
         
@@ -348,11 +349,11 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
     
     //MARK: - stepper ibactions
     
-    func mesicniPlatbaStepperAction(sender: UIStepper) {
+    @objc func mesicniPlatbaStepperAction(sender: UIStepper) {
         
         let a = Int(sender.value)
         
-        textField1Value = a.currencyFormattingWithSymbol("Kč")
+        textField1Value = a.currencyFormattingWithSymbol(currencySymbol: "Kč")
         slider1Value = Float(sender.value)/100
         stepper1Value = sender.value
         
@@ -360,11 +361,11 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         
     }
     
-    func dobaStepperAction(sender: UIStepper) {
+    @objc func dobaStepperAction(sender: UIStepper) {
         
         let b = Int(sender.value)
         
-        textField2Value = b.currencyFormattingWithSymbol("let")
+        textField2Value = b.currencyFormattingWithSymbol(currencySymbol: "let")
         slider2Value = Float(sender.value)
         stepper2Value = sender.value
         
@@ -372,13 +373,13 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         
     }
     
-    func urokStepperAction(sender: UIStepper) {
+    @objc func urokStepperAction(sender: UIStepper) {
         
         var c = Float(sender.value)
         c = round(c)
         c = c * 0.1
         
-        textField3Value = c.currencyFormattingWithSymbol("%")
+        textField3Value = c.currencyFormattingWithSymbol(currencySymbol: "%")
         slider3Value = Float(sender.value)
         stepper3Value = sender.value
         
@@ -388,7 +389,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
     
     //MARK: - textfield methods
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField.text != "" && textField.tag > 0 {
             
@@ -403,12 +404,12 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
                 int = 3
             }
             
-            textField.text = textField.text?.chopSuffix(int).condenseWhitespace()
+            textField.text = textField.text?.chopSuffix(count: int).condenseWhitespace()
             
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField.tag == 1 {
             
@@ -430,7 +431,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
             
             slider1Value = Float(num)/100
             stepper1Value = Double(num)
-            textField1Value = num.currencyFormattingWithSymbol("Kč")
+            textField1Value = num.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             pocitani()
             
@@ -451,13 +452,13 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
             
             slider2Value = Float(num)
             stepper2Value = Double(num)
-            textField2Value = num.currencyFormattingWithSymbol("let")
+            textField2Value = num.currencyFormattingWithSymbol(currencySymbol: "let")
             
             pocitani()
             
         } else if textField.tag == 4 {
             
-            let str = textField.text?.stringByReplacingOccurrencesOfString(",", withString: ".")
+            let str = textField.text?.replacingOccurrences(of: ",", with: ".")
             var num = Float((str! as NSString).floatValue)
             
             if num > 10 {
@@ -472,14 +473,14 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
             
             slider3Value = num*10
             stepper3Value = Double(num)*10
-            textField3Value = num.currencyFormattingWithSymbol("%")
+            textField3Value = num.currencyFormattingWithSymbol(currencySymbol: "%")
             
             pocitani()
         }
         
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -489,33 +490,33 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
     
     //MARK: - textfield formatting
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        
-        if string.characters.count > 0 && textField.tag > 1 {
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
+        if string.count > 0 && textField.tag > 1 {
             
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
             var resultingStringLengthIsLegal = Bool()
             
            if textField.tag == 2 {
                 
-                resultingStringLengthIsLegal = prospectiveText.characters.count <= 8
+                resultingStringLengthIsLegal = prospectiveText.count <= 8
                 
             } else if textField.tag == 3 {
                 
-                resultingStringLengthIsLegal = prospectiveText.characters.count <= 2
+                resultingStringLengthIsLegal = prospectiveText.count <= 2
                 
             } else if textField.tag == 4 {
                 
-                resultingStringLengthIsLegal = prospectiveText.characters.count <= 5
+                resultingStringLengthIsLegal = prospectiveText.count <= 5
                 
             }
             
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
-            
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
+
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
             
         }
@@ -526,11 +527,11 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
     
     //MARK: - prepareForSegue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         if segue.identifier == "sporeniGraf" {
             
-            let svc = segue.destinationViewController as! SavingsGrafTableViewController;
+            let svc = segue.destination as! SavingsGrafTableViewController;
             
             print(celkovaUlozkaGlobal)
             print(arrayOfInterestSegue)
@@ -542,32 +543,32 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         }
     }
     
-    func segueToGraph() {
+    @objc func segueToGraph() {
         
-        self.performSegueWithIdentifier("sporeniGraf", sender: self)
+        self.performSegue(withIdentifier: "sporeniGraf", sender: self)
         
     }
     
-    func zpetButton() {
+    @objc func zpetButton() {
         
         endEditingNow()
         
         if hasProvidedAllInfo().0 == false {
             
-            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .Cancel, handler: nil))
+            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .cancel, handler: nil))
             
-            alert.addAction(UIAlertAction(title: "Pokračovat", style: .Default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Pokračovat", style: .default, handler: { (action) in
                 
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
         } else {
             
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewController(animated: true)
         }
     
     }
@@ -580,7 +581,7 @@ class DiteSporeniTableViewController: UITableViewController, UITextFieldDelegate
         let doKdy = "Doba"
         let mesicne = "Měsíčně"
         
-        var values: [AnyObject?] = [udajeKlienta.detiJmena[kidID], textField1Value, textField2Value, textField3Value]
+        var values: [AnyObject?] = [udajeKlienta.detiJmena[kidID] as AnyObject, textField1Value as AnyObject, textField2Value as AnyObject, textField3Value as AnyObject]
         var labels = [jmeno, cilovaCastka, doKdy, mesicne]
         
         

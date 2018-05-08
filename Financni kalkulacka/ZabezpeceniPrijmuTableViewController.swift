@@ -45,11 +45,11 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         
         if udajeKlienta.chceResitZajisteniPrijmu == true {
             
-            vypocetZajisteni(true)
+            vypocetZajisteni(isClient: true)
             
             if int == 1 {
                 
-                vypocetZajisteni(false)
+                vypocetZajisteni(isClient: false)
             }
             
         }
@@ -58,7 +58,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
 
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         endEditingNow()
@@ -68,7 +68,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
         if udajeKlienta.chceResitZajisteniPrijmu == true {
@@ -89,7 +89,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         }
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if udajeKlienta.chceResitZajisteniPrijmu == true {
@@ -130,8 +130,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         if indexPath.section == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "chceResit") as! ChceResitZabezpeceniPrijmu
-            
-            cell.switcher.addTarget(self, action: #selector(ZabezpeceniPrijmuTableViewController.chceResitSwitch(_:)), forControlEvents: .ValueChanged)
+            cell.switcher.addTarget(self, action: #selector(ZabezpeceniPrijmuTableViewController.chceResitSwitch(sender:)), for: .valueChanged)
             
             if udajeKlienta.chceResitZajisteniPrijmu == true {
                 
@@ -623,15 +622,15 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         
         if textField.tag >= 2 {
             
-            if string.characters.count > 0 {
+            if string.count > 0 {
                 
-                let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-                let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+                let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
+                let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
+
+                let resultingStringLengthIsLegal = prospectiveText.count <= 6
                 
-                let resultingStringLengthIsLegal = prospectiveText.characters.count <= 6
-                
-                let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-                let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+                let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+                let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
                 
                 result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
                 
@@ -644,11 +643,11 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     
     //MARK: - press return key to go to other textfield
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         let nextTage=textField.tag+1;
         // Try to find next responder
-        let nextResponder=textField.superview?.superview?.superview?.viewWithTag(nextTage) as UIResponder!
+        let nextResponder=textField.superview?.superview?.superview?.viewWithTag(nextTage) as UIResponder?
         
         if (nextResponder != nil){
             // Found next responder, so set it.
@@ -664,7 +663,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     
     //MARK: - hideKeyboardToolbar
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -672,7 +671,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         return true
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
         let toolbar = UIToolbar()
         textView.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -686,18 +685,18 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     
     @IBAction func zpet(sender: AnyObject) {
         
-        moveOn(0)
+        moveOn(moveID: 0)
     }
     
     
     @objc func forward() {
         
-        moveOn(3)
+        moveOn(moveID: 3)
     }
     
     @objc func backward() {
         
-        moveOn(1)
+        moveOn(moveID: 1)
     }
     
     //MARK: - infoChecks
@@ -708,25 +707,25 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
         
         if hasProvidedAllInfo().0 == false && udajeKlienta.chceResitZajisteniPrijmu {
             
-            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .Cancel, handler: nil))
+            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .cancel, handler: nil))
             
-            alert.addAction(UIAlertAction(title: "Pokračovat", style: .Default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Pokračovat", style: .default, handler: { (action) in
                 
                 if moveID > 0 {
                     
-                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("\(moveID)")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "\(moveID)")
                     self.navigationController?.pushViewController(vc!, animated: false)
                     
                 } else {
                     
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.navigationController?.popToRootViewController(animated: true)
                     
                 }
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         
         } else {
             
@@ -734,12 +733,12 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             
             if moveID > 0 {
                 
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("\(moveID)")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "\(moveID)")
                 self.navigationController?.pushViewController(vc!, animated: false)
                 
             } else {
                 
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                self.navigationController?.popToRootViewController(animated: true)
                 
             }
         }
@@ -809,19 +808,19 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     
     func isIncomeHigherThanExpenses() {
         
-        if udajeKlienta.vydaje > udajeKlienta.prijmy {
+        if let vydaje = udajeKlienta.vydaje, let prijmy = udajeKlienta.prijmy, vydaje > prijmy {
             
-            let alert = UIAlertController(title: "Výdaje jsou vyšší než příjmy", message: nil , preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Výdaje jsou vyšší než příjmy", message: nil , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         
         }
         
-        if udajeKlienta.vydajePartner > udajeKlienta.prijmyPartner {
+        if let vydajePartner = udajeKlienta.vydajePartner, let prijmyPartner = udajeKlienta.prijmyPartner, vydajePartner > prijmyPartner {
             
-            let alert = UIAlertController(title: "Výdaje jsou vyšší než příjmy", message: nil , preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Výdaje jsou vyšší než příjmy", message: nil , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
         }
         
@@ -830,9 +829,9 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     
     //MARK: - chceResitSwitch
     
-    func chceResitSwitch(sender: UISwitch) {
+    @objc func chceResitSwitch(sender: UISwitch) {
         
-        if sender.on == true {
+        if sender.isOn == true {
             
             udajeKlienta.chceResitZajisteniPrijmu = true
 
@@ -843,7 +842,7 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
             
         }
         
-        prioritiesUpdate("Zabezpečení příjmů a rodiny", chceResit: sender.on)
+        prioritiesUpdate(label: "Zabezpečení příjmů a rodiny", chceResit: sender.isOn)
         
         tableView.reloadData()
         
@@ -851,11 +850,11 @@ class ZabezpeceniPrijmuTableViewController: UITableViewController, UITextFieldDe
     
     //MARK: - prepare for segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "pracovniPomerSegue" {
             
-            let destination = segue.destinationViewController as! PracovniPomerTableViewController
+            let destination = segue.destination as! PracovniPomerTableViewController
             
             destination.isClient = isClientSegue
             

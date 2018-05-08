@@ -23,11 +23,11 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
         
         if udajeKlienta.maUver {
             
-            checkedCell = cellLabels.indexOf("Ano")!
+            checkedCell = cellLabels.index(of: "Ano")!
         
         } else {
             
-            checkedCell = cellLabels.indexOf("Ne")!
+            checkedCell = cellLabels.index(of: "Ne")!
         }
 
         self.title = "Úvěr"
@@ -40,7 +40,7 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
         
     }
@@ -52,7 +52,7 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
         if udajeKlienta.maUver == false {
@@ -65,7 +65,7 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if section == 0 {
@@ -81,17 +81,17 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
         return 1
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
         
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
             
             cell.textLabel?.text = cellLabels[indexPath.row]
             
             if checkedCell == indexPath.row {
             
-                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                cell.accessoryType = .checkmark
             
             }
             
@@ -101,11 +101,11 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("dluznaCastka") as! Uver
+                let cell = tableView.dequeueReusableCell(withIdentifier: "dluznaCastka") as! Uver
                 
-                if udajeKlienta.dluznaCastka > 0 {
+                if let castka = udajeKlienta.dluznaCastka, castka > 0 {
                     
-                    cell.dluznaCastka.text = udajeKlienta.dluznaCastka!.currencyFormattingWithSymbol("Kč")
+                    cell.dluznaCastka.text = udajeKlienta.dluznaCastka!.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 }
                 
@@ -116,21 +116,20 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
                 
             } else if indexPath.row == 1 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("rokFixace") as! Uver
+                let cell = tableView.dequeueReusableCell(withIdentifier: "rokFixace") as! Uver
                 
                 cell.pickerView.dataSource = self
                 cell.pickerView.delegate = self
-                cell.pickerView.selectRow(choices.indexOf(udajeKlienta.rokFixace)!, inComponent: 0, animated: true)
-                
+                cell.pickerView.selectRow(choices.index(of: udajeKlienta.rokFixace)!, inComponent: 0, animated: true)
                 return cell
                 
             } else if indexPath.row == 2 {
             
-                let cell = tableView.dequeueReusableCellWithIdentifier("uver") as! Uver
+                let cell = tableView.dequeueReusableCell(withIdentifier: "uver") as! Uver
                 
-                if udajeKlienta.mesicniSplatkaUveru > 0 {
+                if udajeKlienta.mesicniSplatkaUveru! > 0 {
                     
-                    cell.uverCastka.text = udajeKlienta.mesicniSplatkaUveru!.currencyFormattingWithSymbol("Kč")
+                    cell.uverCastka.text = udajeKlienta.mesicniSplatkaUveru!.currencyFormattingWithSymbol(currencySymbol: "Kč")
                     
                 }
                 
@@ -142,22 +141,20 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
             }
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("slovnicekPojmu") as! Uver
+        let cell = tableView.dequeueReusableCell(withIdentifier: "slovnicekPojmu") as! Uver
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 0 {
             
             if indexPath.row != checkedCell {
                 
-                let tappedCell = tableView.cellForRowAtIndexPath(indexPath)
-                
-                tappedCell?.accessoryType = UITableViewCellAccessoryType.Checkmark
-                
-                tableView.cellForRowAtIndexPath(NSIndexPath(forRow: checkedCell, inSection: 0))?.accessoryType = UITableViewCellAccessoryType.None
+                let tappedCell = tableView.cellForRow(at: indexPath as IndexPath)
+                tappedCell?.accessoryType = .checkmark
+                tableView.cellForRow(at: IndexPath(row: checkedCell, section: 0))?.accessoryType = .none
                 
                 checkedCell = indexPath.row
             }
@@ -179,12 +176,12 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
         }
         
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
        
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 1 {
             
@@ -197,7 +194,7 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
         return UITableViewAutomaticDimension
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
 
         return UITableViewAutomaticDimension
@@ -208,7 +205,7 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
     //MARK: - pickerView methods
     
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         return choices.count
     
@@ -220,13 +217,13 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
     
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return "\(choices[row])"
     
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         udajeKlienta.rokFixace = choices[row]
         
@@ -238,7 +235,7 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
         
         if textField.text != "" {
         
-            textField.text = textField.text?.chopSuffix(2).condenseWhitespace()
+            textField.text = textField.text?.chopSuffix(count: 2).condenseWhitespace()
             
         }
     }
@@ -248,11 +245,10 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
         if textField.tag == 2 {
         
             udajeKlienta.mesicniSplatkaUveru = Int((textField.text! as NSString).intValue)
-            print(udajeKlienta.mesicniSplatkaUveru)
             
-            if udajeKlienta.mesicniSplatkaUveru > 0 {
+            if let splatka = udajeKlienta.mesicniSplatkaUveru, splatka > 0 {
             
-                textField.text = udajeKlienta.mesicniSplatkaUveru!.currencyFormattingWithSymbol("Kč")
+                textField.text = udajeKlienta.mesicniSplatkaUveru!.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             }
         
@@ -260,9 +256,9 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
             
             udajeKlienta.dluznaCastka = Int((textField.text! as NSString).intValue)
             
-            if udajeKlienta.dluznaCastka > 0 {
+            if let castka = udajeKlienta.dluznaCastka, castka > 0 {
 
-                textField.text = udajeKlienta.dluznaCastka!.currencyFormattingWithSymbol("Kč")
+                textField.text = udajeKlienta.dluznaCastka!.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             }
         }
@@ -270,18 +266,18 @@ class UverTableViewController: UITableViewController, UITextFieldDelegate, UIPic
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
             
-        if string.characters.count > 0 {
+        if string.count > 0 {
                 
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
+
+            let resultingStringLengthIsLegal = prospectiveText.count <= 10
                 
-            let resultingStringLengthIsLegal = prospectiveText.characters.count <= 10
-                
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
                 
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
                 

@@ -22,21 +22,21 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
 
         self.title = "Děti"
         
-        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
-        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .Plain, target: self, action: #selector(DetiTableViewController.forward))
-        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .Plain, target: self, action: #selector(DetiTableViewController.backward))
+        let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(DetiTableViewController.forward))
+        let backwardButton = UIBarButtonItem(image: UIImage(named: "backward.png"), style: .plain, target: self, action: #selector(DetiTableViewController.backward))
         navigationItem.setRightBarButtonItems([forwardButton, backwardButton], animated: true)
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
         
         cellCalculation()
         
-        if udajeKlienta.pocetDeti > 0 {
+        if udajeKlienta.pocetDeti! > 0 {
             
             topNum = 0
             bottomNum = 0
@@ -48,14 +48,14 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         tableView.reloadData()
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         endEditingNow()
@@ -64,12 +64,12 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
         if udajeKlienta.chceResitDeti == true {
             
-            if udajeKlienta.pocetDeti > 0 || udajeKlienta.pocetPlanovanychDeti == nil || udajeKlienta.pocetPlanovanychDeti == 0 {
+            if let pocetDeti = udajeKlienta.pocetDeti, pocetDeti > 0 || udajeKlienta.pocetPlanovanychDeti == nil || udajeKlienta.pocetPlanovanychDeti == 0 {
                 
                 return 6
                 
@@ -84,12 +84,12 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if udajeKlienta.chceResitDeti == true {
         
-            if udajeKlienta.pocetDeti > 0 {
+            if let pocetDeti = udajeKlienta.pocetDeti, pocetDeti > 0 {
                 
                 return numberOfRowsWithKids[section]!
                 
@@ -105,21 +105,21 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("chceResitDeti") as! ChceResitDeti
+            let cell = tableView.dequeueReusableCell(withIdentifier: "chceResitDeti") as! ChceResitDeti
             
-            cell.switcher.addTarget(self, action: #selector(DetiTableViewController.chceResitSwitch(_:)), forControlEvents: .ValueChanged)
+            cell.switcher.addTarget(self, action: #selector(DetiTableViewController.chceResitSwitch(sender:)), for: .valueChanged)
             
             if udajeKlienta.chceResitDeti == true {
                 
-                cell.switcher.on = true
+                cell.switcher.isOn = true
                 
             } else {
                 
-                cell.switcher.on = false
+                cell.switcher.isOn = false
                 
             }
             
@@ -127,21 +127,21 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
             
         } else if indexPath.section == 1 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("mateDeti") as! mateDeti
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mateDeti") as! mateDeti
             
             var str = "Ne"
             
-            if udajeKlienta.pocetDeti > 0 {
+            if let pocetDeti = udajeKlienta.pocetDeti, pocetDeti > 0 {
                 
-                str = "Ano, \(udajeKlienta.pocetDeti!) děti"
+                str = "Ano, \(pocetDeti) děti"
                 
-                if udajeKlienta.pocetDeti == 1 {
+                if pocetDeti == 1 {
                     
                     str = "Ano, 1 dítě"
                     
-                } else if udajeKlienta.pocetDeti > 4 {
+                } else if pocetDeti > 4 {
                     
-                    str = "Ano, \(udajeKlienta.pocetDeti!) dětí"
+                    str = "Ano, \(pocetDeti) dětí"
                     
                 }
                 
@@ -155,7 +155,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("planujeteDeti") as! planujeteDeti
+                let cell = tableView.dequeueReusableCell(withIdentifier: "planujeteDeti") as! planujeteDeti
                 
                 cell.planujeteDeti.text = udajeKlienta.planujeteDeti
                 
@@ -163,11 +163,11 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("kolik") as! kolikDeti
+                let cell = tableView.dequeueReusableCell(withIdentifier: "kolik") as! kolikDeti
                 
-                if udajeKlienta.pocetPlanovanychDeti > 0 {
+                if let pocetPlanovanychDeti = udajeKlienta.pocetPlanovanychDeti, pocetPlanovanychDeti > 0 {
                     
-                    cell.kolikDeti.text = "\(udajeKlienta.pocetPlanovanychDeti!)"
+                    cell.kolikDeti.text = "\(pocetPlanovanychDeti)"
                     
                 }
                 
@@ -181,7 +181,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
           
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("otazka1") as! mateDeti
+                let cell = tableView.dequeueReusableCell(withIdentifier: "otazka1") as! mateDeti
                 
                 var str = "Ano"
                 
@@ -196,7 +196,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
             
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("otazka2") as! mateDeti
+                let cell = tableView.dequeueReusableCell(withIdentifier: "otazka2") as! mateDeti
                 
                 var str = "Ano"
                 
@@ -212,7 +212,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
             
         } else if indexPath.section == 3 + topNum && (udajeKlienta.pocetDeti > 0 || udajeKlienta.pocetPlanovanychDeti > 0) {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("seznamDeti") as! diteSporeni
+            let cell = tableView.dequeueReusableCell(withIdentifier: "seznamDeti") as! diteSporeni
             
             var str = String()
             var num = String()
@@ -244,15 +244,15 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
         
         } else if indexPath.section == 4 + bottomNum {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("deti") as! DetiVynalozenaCastka
+            let cell = tableView.dequeueReusableCell(withIdentifier: "deti") as! DetiVynalozenaCastka
             
             if udajeKlienta.detiVynalozenaCastka == 0 && udajeKlienta.jeVyplnenoDeti {
                 
                 cell.detiVynalozenaCastka.text = "0"
                 
-            } else if udajeKlienta.detiVynalozenaCastka > 0 {
+            } else if let castka = udajeKlienta.detiVynalozenaCastka, castka > 0 {
                 
-                cell.detiVynalozenaCastka.text = udajeKlienta.detiVynalozenaCastka!.currencyFormattingWithSymbol("Kč")
+                cell.detiVynalozenaCastka.text = udajeKlienta.detiVynalozenaCastka!.currencyFormattingWithSymbol(currencySymbol: "Kč")
             }
             
             cell.detiVynalozenaCastka.tag = 2
@@ -262,7 +262,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
 
         } else if indexPath.section == 5 + bottomNum {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("detiPoznamky") as! DetiPoznamky
+            let cell = tableView.dequeueReusableCell(withIdentifier: "detiPoznamky") as! DetiPoznamky
             
             cell.detiPoznamky.text = "\(udajeKlienta.detiPoznamky)"
             cell.detiPoznamky.delegate = self
@@ -276,18 +276,17 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 3 + topNum {
             
             kidID = indexPath.row
-            self.performSegueWithIdentifier("diteSporeni", sender: self)
-            
+            self.performSegue(withIdentifier: "diteSporeni", sender: self)
         }
         
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         let sctn = 5 + bottomNum
         
@@ -301,7 +300,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 3 + topNum && (udajeKlienta.pocetDeti > 0 || udajeKlienta.pocetPlanovanychDeti > 0) {
             
@@ -321,7 +320,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
 
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         if udajeKlienta.pocetDeti == 0 && section == 1 {
             
@@ -342,32 +341,30 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     func cellCalculation() {
         
-        if udajeKlienta.pocetPlanovanychDeti > 0 {
+        if let pocetPlanovanychDeti = udajeKlienta.pocetPlanovanychDeti, pocetPlanovanychDeti > 0 {
             
             bottomNum = 1
             
             if numberOfRowsNoKids.count == 8 {
                 
-                numberOfRowsNoKids[4] = udajeKlienta.pocetPlanovanychDeti!
+                numberOfRowsNoKids[4] = pocetPlanovanychDeti
                 
             } else {
                 
-                numberOfRowsNoKids.insert(udajeKlienta.pocetPlanovanychDeti!, atIndex: 4)
+                numberOfRowsNoKids.insert(pocetPlanovanychDeti, at: 4)
 
             }
             
-        } else if udajeKlienta.pocetPlanovanychDeti < 1 {
+        } else if let pocetPlanovanychDeti = udajeKlienta.pocetPlanovanychDeti, pocetPlanovanychDeti < 1 || udajeKlienta.pocetPlanovanychDeti == nil {
             
             bottomNum = 0
             
             if numberOfRowsNoKids.count == 8 {
                 
-                numberOfRowsNoKids.removeAtIndex(4)
-                
+                numberOfRowsNoKids.remove(at: 4)
             }
         }
-        
-        print(numberOfRowsNoKids)
+
     }
     
     
@@ -375,27 +372,27 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        
-        if string.characters.count > 0 {
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
+        if string.count > 0 {
             
-            var disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
+            var disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
             var resultingStringLengthIsLegal = Bool()
             
             if textField.tag == 1 {
                 
-                resultingStringLengthIsLegal = prospectiveText.characters.count <= 1
-                disallowedCharacterSet = NSCharacterSet(charactersInString: "01234").invertedSet
+                resultingStringLengthIsLegal = prospectiveText.count <= 1
+                disallowedCharacterSet = CharacterSet(charactersIn: "01234").inverted
                 
             } else if textField.tag == 2 {
                 
-                resultingStringLengthIsLegal = prospectiveText.characters.count <= 7
+                resultingStringLengthIsLegal = prospectiveText.count <= 7
                 
             }
             
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
             
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
             
@@ -407,11 +404,11 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     //MARK: - passing data to struct
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
             
         if textField.text != "" {
         
-            textField.text = textField.text?.chopSuffix(2)
+            textField.text = textField.text?.chopSuffix(count: 2)
             
         }
         
@@ -419,7 +416,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
 
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField.tag == 1 {
             
@@ -433,9 +430,9 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
             
             udajeKlienta.detiVynalozenaCastka = Int((textField.text! as NSString).intValue)
             
-            if udajeKlienta.detiVynalozenaCastka > 0 {
+            if let castka = udajeKlienta.detiVynalozenaCastka, castka > 0 {
                 
-                textField.text = udajeKlienta.detiVynalozenaCastka!.currencyFormattingWithSymbol("Kč")
+                textField.text = castka.currencyFormattingWithSymbol(currencySymbol: "Kč")
                 
             }
             
@@ -443,7 +440,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
         
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         udajeKlienta.detiPoznamky = textView.text
         
@@ -451,11 +448,11 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     //MARK: - press return key to go to other textfield
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         let nextTage=textField.tag+1;
         // Try to find next responder
-        let nextResponder=textField.superview?.superview?.superview?.viewWithTag(nextTage) as UIResponder!
+        let nextResponder=textField.superview?.superview?.superview?.viewWithTag(nextTage) as UIResponder?
         
         if (nextResponder != nil){
             // Found next responder, so set it.
@@ -471,7 +468,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     //MARK: - toolbar & button to hide keyboard
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -479,7 +476,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
         return true
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
         let toolbar = UIToolbar()
         textView.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -491,9 +488,9 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     //MARK: - chceResitSwitch
     
-    func chceResitSwitch(sender: UISwitch) {
+    @objc func chceResitSwitch(sender: UISwitch) {
         
-        if sender.on == true {
+        if sender.isOn == true {
             
             udajeKlienta.chceResitDeti = true
             
@@ -504,7 +501,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
             
         }
         
-        prioritiesUpdate("Děti", chceResit: sender.on)
+        prioritiesUpdate(label: "Děti", chceResit: sender.isOn)
         
         tableView.reloadData()
         
@@ -512,29 +509,29 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     //MARK: - segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "planujeteDeti" {
             
-            let destination = segue.destinationViewController as! PlanujeteDetiTableViewController
+            let destination = segue.destination as! PlanujeteDetiTableViewController
             
             destination.int = 0
             
         } else if segue.identifier == "otazka1" {
             
-            let destination = segue.destinationViewController as! PlanujeteDetiTableViewController
+            let destination = segue.destination as! PlanujeteDetiTableViewController
             
             destination.int = 1
         
         } else if segue.identifier == "otazka2" {
             
-            let destination = segue.destinationViewController as! PlanujeteDetiTableViewController
+            let destination = segue.destination as! PlanujeteDetiTableViewController
             
             destination.int = 2
         
         } else if segue.identifier == "diteSporeni" {
             
-            let destination = segue.destinationViewController as! DiteSporeniTableViewController
+            let destination = segue.destination as! DiteSporeniTableViewController
             
             destination.kidID = kidID
             
@@ -543,17 +540,17 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     @IBAction func zpet(sender: AnyObject) {
         
-        moveOn(0)
+        moveOn(moveID: 0)
     }
     
-    func backward() {
+    @objc func backward() {
         
-        moveOn(3)
+        moveOn(moveID: 3)
     }
     
-    func forward() {
+    @objc func forward() {
     
-        moveOn(5)
+        moveOn(moveID: 5)
     
     }
     
@@ -565,25 +562,25 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
         
         if hasProvidedAllInfo().0 == false && udajeKlienta.chceResitDeti {
             
-            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .Cancel, handler: nil))
+            let alert = UIAlertController(title: "Opravdu chcete pokračovat?", message: "Zbývá doplnit tyto údaje:\n\n\(hasProvidedAllInfo().1)" , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Doplnit údaje", style: .cancel, handler: nil))
             
-            alert.addAction(UIAlertAction(title: "Pokračovat", style: .Default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Pokračovat", style: .default, handler: { (action) in
                 
                 if moveID > 0 {
                     
-                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("\(moveID)")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "\(moveID)")
                     self.navigationController?.pushViewController(vc!, animated: false)
                     
                 } else {
                     
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.navigationController?.popToRootViewController(animated: true)
                     
                 }
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
         } else {
             
@@ -591,12 +588,12 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
             
             if moveID > 0 {
                 
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("\(moveID)")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "\(moveID)")
                 self.navigationController?.pushViewController(vc!, animated: false)
                 
             } else {
                 
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                self.navigationController?.popToRootViewController(animated: true)
                 
             }
         }
@@ -608,7 +605,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
         var values: [Bool] = []
         var labels: [String] = []
         
-        if udajeKlienta.pocetDeti > 0 {
+        if let pocetDeti = udajeKlienta.pocetDeti, pocetDeti > 0 {
             
             labels.append("Vynaložená částka")
             
@@ -622,7 +619,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
                 
             }
             
-            for i in 0 ..< udajeKlienta.pocetDeti! {
+            for i in 0 ..< pocetDeti {
 
                 if udajeKlienta.detiJeVyplneno[i] == true {
                     
@@ -661,7 +658,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
                 
             }
             
-            if udajeKlienta.pocetPlanovanychDeti >= 0 {
+            if let pocetPlanovanychDeti = udajeKlienta.pocetPlanovanychDeti, pocetPlanovanychDeti >= 0 {
             
                 for i in 0 ..< udajeKlienta.pocetPlanovanychDeti! {
                 
