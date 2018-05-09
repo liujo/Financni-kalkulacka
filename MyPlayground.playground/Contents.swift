@@ -4,17 +4,16 @@ import UIKit
 //let urokCarka = str.stringByReplacingOccurrencesOfString(",", withString: ".", options: [], range: nil)
 //let carka = str.replacingOccurrences(of: ",", with: ".")
 
-var a: Int?
-var i = 1
-a = 0
+var str = "slovo123456"
+let count = 3
+let index = str.index(str.endIndex, offsetBy: -count)
+let substring = str[..<index]
+print(String(substring))
 
-if let aa = a, aa > 0 || i > 0 {
-    print("true")
-} else {
-    print("false")
-}
+//return self.substringToIndex(self.endIndex.advancedBy(-count))
 
 
-for i in 0 ... 10 {
-    print(i)
-}
+
+
+
+

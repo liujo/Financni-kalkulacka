@@ -12,20 +12,22 @@ extension String {
     
     func condenseWhitespace() -> String {
         
-        let components = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({!$0.characters.isEmpty})
+        let components = self.components(separatedBy: CharacterSet.whitespacesAndNewlines).filter({!$0.isEmpty})
         
-        return components.joinWithSeparator("")
+        return components.joined(separator: "")
     }
     
     func chopSuffix(count: Int = 1) -> String {
         
-        if self.characters.count < count {
+        if self.count < count {
             
             return self
         
         } else {
-        
-            return self.substringToIndex(self.endIndex.advancedBy(-count))
+            
+            let index = self.index(self.endIndex, offsetBy: -count)
+            let substring = self[..<index]
+            return String(substring)
         
         }
         
@@ -37,14 +39,14 @@ extension Int {
     
     func currencyFormattingWithSymbol(currencySymbol: String) -> String {
         
-        let customFormatter = NSNumberFormatter()
+        let customFormatter = NumberFormatter()
         
-        customFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        customFormatter.locale = NSLocale.init(localeIdentifier: "cs")
+        customFormatter.numberStyle = .currency
+        customFormatter.locale = Locale.init(identifier: "cs")
         customFormatter.currencySymbol = currencySymbol
         customFormatter.maximumFractionDigits = 0
         
-        return customFormatter.stringFromNumber(self)!
+        return customFormatter.string(from: NSNumber(value: self))!
         
     }
 }
@@ -53,14 +55,14 @@ extension Float {
     
     func currencyFormattingWithSymbol(currencySymbol: String) -> String {
         
-        let customFormatter = NSNumberFormatter()
+        let customFormatter = NumberFormatter()
         
-        customFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        customFormatter.locale = NSLocale.currentLocale()
+        customFormatter.numberStyle = .currency
+        customFormatter.locale = Locale.autoupdatingCurrent
         customFormatter.currencySymbol = currencySymbol
         customFormatter.maximumFractionDigits = 1
         
-        return customFormatter.stringFromNumber(self)!
+        return customFormatter.string(from: NSNumber(value: self))!
     }
 }
 
@@ -73,8 +75,8 @@ extension UIToolbar {
         keyboardDoneButtonView.sizeToFit()
         
         // Setup the buttons to be put in the system.
-        let item1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
-        let item2 = UIBarButtonItem(image: UIImage(named: "down.png")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(UIViewController.endEditingNow))
+        let item1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let item2 = UIBarButtonItem(image: UIImage(named: "down.png")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(UIViewController.endEditingNow))
         let toolbarButtons = [item1, item2]
         
         //Put the buttons into the ToolBar and display the tool bar
@@ -115,7 +117,7 @@ extension Array {
 
 extension UIViewController {
     
-    func endEditingNow(){
+    @objc func endEditingNow(){
         
         self.view.endEditing(true)
         
@@ -125,7 +127,7 @@ extension UIViewController {
     
     func prioritiesUpdate(label: String, chceResit: Bool) {
         
-        let index = udajeKlienta.priority.indexOf(label)
+        let index = udajeKlienta.priority.index(of: label)
         
         if index == nil {
             
@@ -139,7 +141,7 @@ extension UIViewController {
             
             if chceResit == false {
                 
-                udajeKlienta.priority.removeAtIndex(index!)
+                udajeKlienta.priority.remove(at: index!)
 
             }
             
@@ -153,7 +155,7 @@ extension UIViewController {
     
     func exportData() {
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         var clientID = UInt32()
 
         print("clientId", udajeKlienta.clientID)
@@ -183,9 +185,9 @@ extension UIViewController {
             print("new client ID", num)
             udajeKlienta.clientID = num
             
-            var clientsArray = defaults.arrayForKey("clientsArray") as! [Int]
-            clientsArray.insert(num, atIndex: 0)
-            defaults.setObject(clientsArray, forKey: "clientsArray")
+            var clientsArray = defaults.array(forKey: "clientsArray") as! [Int]
+            clientsArray.insert(num, at: 0)
+            defaults.set(clientsArray, forKey: "clientsArray")
         }
     
         
@@ -193,139 +195,139 @@ extension UIViewController {
     
         var dictionary: Dictionary<String, AnyObject> = [:]
         
-        dictionary["clientID"] = udajeKlienta.clientID
+        dictionary["clientID"] = udajeKlienta.clientID as AnyObject
         
         //zakladni udaje
-        dictionary["krestniJmeno"] = udajeKlienta.krestniJmeno
-        dictionary["prijmeni"] = udajeKlienta.prijmeni
-        dictionary["vek"] = udajeKlienta.vek
-        dictionary["povolani"] = udajeKlienta.povolani
-        dictionary["pocetDeti"] = udajeKlienta.pocetDeti
-        dictionary["rodinnyStav"] = udajeKlienta.rodinnyStav
-        dictionary["zdravotniStav"] = udajeKlienta.zdravotniStav
-        dictionary["sport"] = udajeKlienta.sport
+        dictionary["krestniJmeno"] = udajeKlienta.krestniJmeno as AnyObject
+        dictionary["prijmeni"] = udajeKlienta.prijmeni as AnyObject
+        dictionary["vek"] = udajeKlienta.vek as AnyObject
+        dictionary["povolani"] = udajeKlienta.povolani as AnyObject
+        dictionary["pocetDeti"] = udajeKlienta.pocetDeti as AnyObject
+        dictionary["rodinnyStav"] = udajeKlienta.rodinnyStav as AnyObject
+        dictionary["zdravotniStav"] = udajeKlienta.zdravotniStav as AnyObject
+        dictionary["sport"] = udajeKlienta.sport as AnyObject
         
-        dictionary["jeVyplnenoUdaje"] = udajeKlienta.jeVyplnenoUdaje
+        dictionary["jeVyplnenoUdaje"] = udajeKlienta.jeVyplnenoUdaje as AnyObject
         
         //zajisteni prijmu
-        dictionary["jeVyplnenoZajisteniPrijmu"] = udajeKlienta.jeVyplnenoZajisteniPrijmu
-        dictionary["chceResitZajisteniPrijmu"] = udajeKlienta.chceResitZajisteniPrijmu
+        dictionary["jeVyplnenoZajisteniPrijmu"] = udajeKlienta.jeVyplnenoZajisteniPrijmu as AnyObject
+        dictionary["chceResitZajisteniPrijmu"] = udajeKlienta.chceResitZajisteniPrijmu as AnyObject
         
-        dictionary["pracovniPomer"] = udajeKlienta.pracovniPomer
-        dictionary["prijmy"] = udajeKlienta.prijmy
-        dictionary["denniPrijmy"] = udajeKlienta.denniPrijmy
-        dictionary["vydaje"] = udajeKlienta.vydaje
-        dictionary["denniVydaje"] = udajeKlienta.denniVydaje
+        dictionary["pracovniPomer"] = udajeKlienta.pracovniPomer as AnyObject
+        dictionary["prijmy"] = udajeKlienta.prijmy as AnyObject
+        dictionary["denniPrijmy"] = udajeKlienta.denniPrijmy as AnyObject
+        dictionary["vydaje"] = udajeKlienta.vydaje as AnyObject
+        dictionary["denniVydaje"] = udajeKlienta.denniVydaje as AnyObject
         
-        dictionary["maUver"] = udajeKlienta.maUver
-        dictionary["mesicniSplatkaUveru"] = udajeKlienta.mesicniSplatkaUveru
-        dictionary["dluznaCastkaUver"] = udajeKlienta.dluznaCastka
-        dictionary["rokFixaceUver"] = udajeKlienta.rokFixace
+        dictionary["maUver"] = udajeKlienta.maUver as AnyObject
+        dictionary["mesicniSplatkaUveru"] = udajeKlienta.mesicniSplatkaUveru as AnyObject
+        dictionary["dluznaCastkaUver"] = udajeKlienta.dluznaCastka as AnyObject
+        dictionary["rokFixaceUver"] = udajeKlienta.rokFixace as AnyObject
         
-        dictionary["pracovniPomerPartner"] = udajeKlienta.pracovniPomerPartner
-        dictionary["prijmyPartner"] = udajeKlienta.prijmyPartner
-        dictionary["denniPrijmyPartner"] = udajeKlienta.denniPrijmyPartner
-        dictionary["vydajePartner"] = udajeKlienta.vydajePartner
-        dictionary["denniVydajePartner"] = udajeKlienta.denniVydajePartner
+        dictionary["pracovniPomerPartner"] = udajeKlienta.pracovniPomerPartner as AnyObject
+        dictionary["prijmyPartner"] = udajeKlienta.prijmyPartner as AnyObject
+        dictionary["denniPrijmyPartner"] = udajeKlienta.denniPrijmyPartner as AnyObject
+        dictionary["vydajePartner"] = udajeKlienta.vydajePartner as AnyObject
+        dictionary["denniVydajePartner"] = udajeKlienta.denniVydajePartner as AnyObject
         
-        dictionary["zajisteniPrijmuCastka"] = udajeKlienta.zajisteniPrijmuCastka
-        dictionary["zajisteniPrijmuPoznamky"] = udajeKlienta.zajisteniPrijmuPoznamky
+        dictionary["zajisteniPrijmuCastka"] = udajeKlienta.zajisteniPrijmuCastka as AnyObject
+        dictionary["zajisteniPrijmuPoznamky"] = udajeKlienta.zajisteniPrijmuPoznamky as AnyObject
         
         //bydleni
-        dictionary["chceResitBydleni"] = udajeKlienta.chceResitBydleni
-        dictionary["jeVyplnenoBydleni"] = udajeKlienta.jeVyplnenoBydleni
+        dictionary["chceResitBydleni"] = udajeKlienta.chceResitBydleni as AnyObject
+        dictionary["jeVyplnenoBydleni"] = udajeKlienta.jeVyplnenoBydleni as AnyObject
         
-        dictionary["bytCiDum"] = udajeKlienta.bytCiDum
-        dictionary["vlastniCiNajemni"] = udajeKlienta.vlastniCiNajemnni
-        dictionary["najemne"] = udajeKlienta.najemne
+        dictionary["bytCiDum"] = udajeKlienta.bytCiDum as AnyObject
+        dictionary["vlastniCiNajemni"] = udajeKlienta.vlastniCiNajemnni as AnyObject
+        dictionary["najemne"] = udajeKlienta.najemne as AnyObject
         
-        dictionary["spokojenostSBydlenim"] = udajeKlienta.spokojenostSBydlenim
-        dictionary["spokojenostSBydlenimPoznamky"] = udajeKlienta.spokojenostSBydlenimPoznamky
-        dictionary["planujeVetsiNemovitost"] = udajeKlienta.planujeVetsi
-        dictionary["planujeVetsiNemovitostPoznamky"] = udajeKlienta.planujeVetsiPoznamky
+        dictionary["spokojenostSBydlenim"] = udajeKlienta.spokojenostSBydlenim as AnyObject
+        dictionary["spokojenostSBydlenimPoznamky"] = udajeKlienta.spokojenostSBydlenimPoznamky as AnyObject
+        dictionary["planujeVetsiNemovitost"] = udajeKlienta.planujeVetsi as AnyObject
+        dictionary["planujeVetsiNemovitostPoznamky"] = udajeKlienta.planujeVetsiPoznamky as AnyObject
         
-        dictionary["chceGrafBydleni"] = udajeKlienta.chceGrafBydleni
-        dictionary["grafBydleniPoleSporeni"] = udajeKlienta.grafBydleniPoleSporeni
-        dictionary["grafBydleniPoleJistin"] = udajeKlienta.grafBydleniPoleJistin
-        dictionary["grafBydleniMesicSplaceni"] = udajeKlienta.grafBydleniMesicSplaceni
-        dictionary["grafBydleniHlaskaSplaceni"] = udajeKlienta.grafBydleniHlaskaSplaceni
+        dictionary["chceGrafBydleni"] = udajeKlienta.chceGrafBydleni as AnyObject
+        dictionary["grafBydleniPoleSporeni"] = udajeKlienta.grafBydleniPoleSporeni as AnyObject
+        dictionary["grafBydleniPoleJistin"] = udajeKlienta.grafBydleniPoleJistin as AnyObject
+        dictionary["grafBydleniMesicSplaceni"] = udajeKlienta.grafBydleniMesicSplaceni as AnyObject
+        dictionary["grafBydleniHlaskaSplaceni"] = udajeKlienta.grafBydleniHlaskaSplaceni as AnyObject
         
-        dictionary["bydleniVynalozenaCastka"] = udajeKlienta.zajisteniBydleniCastka
-        dictionary["bydleniPoznamky"] = udajeKlienta.zajisteniBydleniPoznamky
+        dictionary["bydleniVynalozenaCastka"] = udajeKlienta.zajisteniBydleniCastka as AnyObject
+        dictionary["bydleniPoznamky"] = udajeKlienta.zajisteniBydleniPoznamky as AnyObject
         
         //deti
-        dictionary["chceResitDeti"] = udajeKlienta.chceResitDeti
-        dictionary["jeVyplnenoDeti"] = udajeKlienta.jeVyplnenoDeti
+        dictionary["chceResitDeti"] = udajeKlienta.chceResitDeti as AnyObject
+        dictionary["jeVyplnenoDeti"] = udajeKlienta.jeVyplnenoDeti as AnyObject
         
-        dictionary["planujeteDeti"] = udajeKlienta.planujeteDeti
-        dictionary["pocetPlanovanychDeti"] = udajeKlienta.pocetPlanovanychDeti
-        dictionary["otazka1"] = udajeKlienta.otazka1
-        dictionary["otazka2"] = udajeKlienta.otazka2
+        dictionary["planujeteDeti"] = udajeKlienta.planujeteDeti as AnyObject
+        dictionary["pocetPlanovanychDeti"] = udajeKlienta.pocetPlanovanychDeti as AnyObject
+        dictionary["otazka1"] = udajeKlienta.otazka1 as AnyObject
+        dictionary["otazka2"] = udajeKlienta.otazka2 as AnyObject
         
-        dictionary["detiJmena"] = udajeKlienta.detiJmena
+        dictionary["detiJmena"] = udajeKlienta.detiJmena as AnyObject
         
-        dictionary["detiCilovaCastka"] = udajeKlienta.detiCilovaCastka
-        dictionary["detiDoKdySporeni"] = udajeKlienta.detiDoKdySporeni
-        dictionary["detiMesicneSporeni"] = udajeKlienta.detiMesicneSporeni
-        dictionary["detiUrok"] = udajeKlienta.detiUrok
-        dictionary["detiJeVyplneno"] = udajeKlienta.detiJeVyplneno
+        dictionary["detiCilovaCastka"] = udajeKlienta.detiCilovaCastka as AnyObject
+        dictionary["detiDoKdySporeni"] = udajeKlienta.detiDoKdySporeni as AnyObject
+        dictionary["detiMesicneSporeni"] = udajeKlienta.detiMesicneSporeni as AnyObject
+        dictionary["detiUrok"] = udajeKlienta.detiUrok as AnyObject
+        dictionary["detiJeVyplneno"] = udajeKlienta.detiJeVyplneno as AnyObject
         
-        dictionary["grafCelkovaUlozka"] = udajeKlienta.grafCelkovaUlozka
-        dictionary["grafDobaSporeni"] = udajeKlienta.grafDobaSporeni
+        dictionary["grafCelkovaUlozka"] = udajeKlienta.grafCelkovaUlozka as AnyObject
+        dictionary["grafDobaSporeni"] = udajeKlienta.grafDobaSporeni as AnyObject
         
-        dictionary["grafArrayUrok1"] = udajeKlienta.grafArrayUrok1
-        dictionary["grafArrayUrok2"] = udajeKlienta.grafArrayUrok2
-        dictionary["grafArrayUrok3"] = udajeKlienta.grafArrayUrok3
-        dictionary["grafArrayUrok4"] = udajeKlienta.grafArrayUrok4
+        dictionary["grafArrayUrok1"] = udajeKlienta.grafArrayUrok1 as AnyObject
+        dictionary["grafArrayUrok2"] = udajeKlienta.grafArrayUrok2 as AnyObject
+        dictionary["grafArrayUrok3"] = udajeKlienta.grafArrayUrok3 as AnyObject
+        dictionary["grafArrayUrok4"] = udajeKlienta.grafArrayUrok4 as AnyObject
         
-        dictionary["detiVynalozenaCastka"] = udajeKlienta.detiVynalozenaCastka
-        dictionary["detiPoznamky"] = udajeKlienta.detiPoznamky
+        dictionary["detiVynalozenaCastka"] = udajeKlienta.detiVynalozenaCastka as AnyObject
+        dictionary["detiPoznamky"] = udajeKlienta.detiPoznamky as AnyObject
         
         //duchod
-        dictionary["chceResitDuchod"] = udajeKlienta.chceResitDuchod
-        dictionary["jeVyplnenoDuchod"] = udajeKlienta.jeVyplnenoDuchod
+        dictionary["chceResitDuchod"] = udajeKlienta.chceResitDuchod as AnyObject
+        dictionary["jeVyplnenoDuchod"] = udajeKlienta.jeVyplnenoDuchod as AnyObject
         
-        dictionary["duchodVek"] = udajeKlienta.duchodVek
+        dictionary["duchodVek"] = udajeKlienta.duchodVek as AnyObject
         
-        dictionary["pripravaNaDuchod"] = udajeKlienta.pripravaNaDuchod
-        dictionary["jakDlouho"] = udajeKlienta.jakDlouho
+        dictionary["pripravaNaDuchod"] = udajeKlienta.pripravaNaDuchod as AnyObject
+        dictionary["jakDlouho"] = udajeKlienta.jakDlouho as AnyObject
         
-        dictionary["chtelBysteSePripravitNaDuchod"] = udajeKlienta.chtelBysteSePripravit
-        dictionary["predstavovanaCastkaVDuchodu"] = udajeKlienta.predstavovanaCastka
+        dictionary["chtelBysteSePripravitNaDuchod"] = udajeKlienta.chtelBysteSePripravit as AnyObject
+        dictionary["predstavovanaCastkaVDuchodu"] = udajeKlienta.predstavovanaCastka as AnyObject
         
-        dictionary["chceGrafDuchodu"] = udajeKlienta.chceGrafDuchodu
-        dictionary["grafDuchodCelkovaUlozka"] = udajeKlienta.grafDuchodCelkovaUlozka
-        dictionary["grafDuchodDobaSporeni"] = udajeKlienta.grafDuchodDobaSporeni
-        dictionary["grafDuchodUroky"] = udajeKlienta.grafDuchodUroky
+        dictionary["chceGrafDuchodu"] = udajeKlienta.chceGrafDuchodu as AnyObject
+        dictionary["grafDuchodCelkovaUlozka"] = udajeKlienta.grafDuchodCelkovaUlozka as AnyObject
+        dictionary["grafDuchodDobaSporeni"] = udajeKlienta.grafDuchodDobaSporeni as AnyObject
+        dictionary["grafDuchodUroky"] = udajeKlienta.grafDuchodUroky as AnyObject
         
-        dictionary["duchodVynalozenaCastka"] = udajeKlienta.duchodVynalozenaCastka
-        dictionary["duchodPoznamky"] = udajeKlienta.duchodPoznamky
+        dictionary["duchodVynalozenaCastka"] = udajeKlienta.duchodVynalozenaCastka as AnyObject
+        dictionary["duchodPoznamky"] = udajeKlienta.duchodPoznamky as AnyObject
         
         //dane
-        dictionary["chceteResitDane"] = udajeKlienta.chceteResitDane
-        dictionary["jeVyplnenoDane"] = udajeKlienta.jeVyplnenoDane
-        dictionary["danePoznamky"] = udajeKlienta.danePoznamky
+        dictionary["chceteResitDane"] = udajeKlienta.chceteResitDane as AnyObject
+        dictionary["jeVyplnenoDane"] = udajeKlienta.jeVyplnenoDane as AnyObject
+        dictionary["danePoznamky"] = udajeKlienta.danePoznamky as AnyObject
         
         //ostatni pozadavky
-        dictionary["ostatniPozadavky"] = udajeKlienta.ostatniPozadavky
-        dictionary["chceResitOstatniPozadavky"] = udajeKlienta.chceResitOstatniPozadavky
-        dictionary["jeVyplnenoOstatniPozadavky"] = udajeKlienta.jeVyplnenoOstatniPozadavky
+        dictionary["ostatniPozadavky"] = udajeKlienta.ostatniPozadavky as AnyObject
+        dictionary["chceResitOstatniPozadavky"] = udajeKlienta.chceResitOstatniPozadavky as AnyObject
+        dictionary["jeVyplnenoOstatniPozadavky"] = udajeKlienta.jeVyplnenoOstatniPozadavky as AnyObject
         
         //priority
-        dictionary["priority"] = udajeKlienta.priority
-        dictionary["jeVyplnenoPriority"] = udajeKlienta.jeVyplnenoPriority
+        dictionary["priority"] = udajeKlienta.priority as AnyObject
+        dictionary["jeVyplnenoPriority"] = udajeKlienta.jeVyplnenoPriority as AnyObject
         
         //shrnuti
-        dictionary["realnaCastkaNaProjekt"] = udajeKlienta.realnaCastkaNaProjekt
+        dictionary["realnaCastkaNaProjekt"] = udajeKlienta.realnaCastkaNaProjekt as AnyObject
         
         //ulozim dictionary do appky
-        let arr = defaults.arrayForKey("clientsArray") as! [Int]
+        let arr = defaults.array(forKey: "clientsArray") as! [Int]
         if arr.contains(udajeKlienta.clientID) {
             
-            defaults.removeObjectForKey("\(udajeKlienta.clientID)")
+            defaults.removeObject(forKey: "\(udajeKlienta.clientID)")
             
         }
-        defaults.setObject(dictionary, forKey: "\(udajeKlienta.clientID)")
+        defaults.set(dictionary, forKey: "\(udajeKlienta.clientID)")
         
         resetStruct()
         
@@ -333,137 +335,137 @@ extension UIViewController {
     
     func fillStruct(clientID: Int) {
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let clientInfo = defaults.objectForKey("\(clientID)")
-        
+        let defaults = UserDefaults.standard
+        let clientInfo = defaults.object(forKey: "\(clientID)") as! Dictionary<String, AnyObject>
+
         udajeKlienta.clientID = clientID
         
         //prvni screen: zakladni udaje
-        udajeKlienta.krestniJmeno = clientInfo!["krestniJmeno"] as? String
-        udajeKlienta.prijmeni = clientInfo!["prijmeni"] as? String
-        udajeKlienta.vek = clientInfo!["vek"] as? Int
-        udajeKlienta.povolani = clientInfo!["povolani"] as? String
-        udajeKlienta.pocetDeti = clientInfo!["pocetDeti"] as? Int
-        udajeKlienta.rodinnyStav = clientInfo!["rodinnyStav"] as! String
-        udajeKlienta.zdravotniStav = clientInfo!["zdravotniStav"] as! String
-        udajeKlienta.sport = clientInfo!["sport"] as? String
+        udajeKlienta.krestniJmeno = clientInfo["krestniJmeno"] as? String
+        udajeKlienta.prijmeni = clientInfo["prijmeni"] as? String
+        udajeKlienta.vek = clientInfo["vek"] as? Int
+        udajeKlienta.povolani = clientInfo["povolani"] as? String
+        udajeKlienta.pocetDeti = clientInfo["pocetDeti"] as? Int
+        udajeKlienta.rodinnyStav = clientInfo["rodinnyStav"] as! String
+        udajeKlienta.zdravotniStav = clientInfo["zdravotniStav"] as! String
+        udajeKlienta.sport = clientInfo["sport"] as? String
         
-        udajeKlienta.jeVyplnenoUdaje = clientInfo!["jeVyplnenoUdaje"] as! Bool
+        udajeKlienta.jeVyplnenoUdaje = clientInfo["jeVyplnenoUdaje"] as! Bool
         
         //druhy screen: zabezpeceni rodiny a prijmu
-        udajeKlienta.jeVyplnenoZajisteniPrijmu = clientInfo!["jeVyplnenoZajisteniPrijmu"] as! Bool
-        udajeKlienta.chceResitZajisteniPrijmu = clientInfo!["chceResitZajisteniPrijmu"] as! Bool
+        udajeKlienta.jeVyplnenoZajisteniPrijmu = clientInfo["jeVyplnenoZajisteniPrijmu"] as! Bool
+        udajeKlienta.chceResitZajisteniPrijmu = clientInfo["chceResitZajisteniPrijmu"] as! Bool
 
-        udajeKlienta.pracovniPomer = clientInfo!["pracovniPomer"] as! String
-        udajeKlienta.prijmy = clientInfo!["prijmy"] as? Int
-        udajeKlienta.denniPrijmy = clientInfo!["denniPrijmy"] as? Int
-        udajeKlienta.vydaje = clientInfo!["vydaje"] as? Int
-        udajeKlienta.denniVydaje = clientInfo!["denniVydaje"] as? Int
+        udajeKlienta.pracovniPomer = clientInfo["pracovniPomer"] as! String
+        udajeKlienta.prijmy = clientInfo["prijmy"] as? Int
+        udajeKlienta.denniPrijmy = clientInfo["denniPrijmy"] as? Int
+        udajeKlienta.vydaje = clientInfo["vydaje"] as? Int
+        udajeKlienta.denniVydaje = clientInfo["denniVydaje"] as? Int
         
-        udajeKlienta.maUver = clientInfo!["maUver"] as! Bool
-        udajeKlienta.mesicniSplatkaUveru = clientInfo!["mesicniSplatkaUveru"] as? Int
-        udajeKlienta.dluznaCastka = clientInfo!["dluznaCastkaUver"] as? Int
-        udajeKlienta.rokFixace = clientInfo!["rokFixaceUver"] as! Int
+        udajeKlienta.maUver = clientInfo["maUver"] as! Bool
+        udajeKlienta.mesicniSplatkaUveru = clientInfo["mesicniSplatkaUveru"] as? Int
+        udajeKlienta.dluznaCastka = clientInfo["dluznaCastkaUver"] as? Int
+        udajeKlienta.rokFixace = clientInfo["rokFixaceUver"] as! Int
         
-        udajeKlienta.pracovniPomerPartner = clientInfo!["pracovniPomerPartner"] as! String
-        udajeKlienta.prijmyPartner = clientInfo!["prijmyPartner"] as? Int
-        udajeKlienta.denniPrijmyPartner = clientInfo!["denniPrijmyPartner"] as? Int
-        udajeKlienta.vydajePartner = clientInfo!["vydajePartner"] as? Int
-        udajeKlienta.denniVydajePartner = clientInfo!["denniVydajePartner"] as? Int
+        udajeKlienta.pracovniPomerPartner = clientInfo["pracovniPomerPartner"] as! String
+        udajeKlienta.prijmyPartner = clientInfo["prijmyPartner"] as? Int
+        udajeKlienta.denniPrijmyPartner = clientInfo["denniPrijmyPartner"] as? Int
+        udajeKlienta.vydajePartner = clientInfo["vydajePartner"] as? Int
+        udajeKlienta.denniVydajePartner = clientInfo["denniVydajePartner"] as? Int
         
-        udajeKlienta.zajisteniPrijmuCastka = clientInfo!["zajisteniPrijmuCastka"] as? Int
-        udajeKlienta.zajisteniPrijmuPoznamky = clientInfo!["zajisteniPrijmuPoznamky"] as! String
+        udajeKlienta.zajisteniPrijmuCastka = clientInfo["zajisteniPrijmuCastka"] as? Int
+        udajeKlienta.zajisteniPrijmuPoznamky = clientInfo["zajisteniPrijmuPoznamky"] as! String
         
         //treti screen: bydleni
-        udajeKlienta.chceResitBydleni = clientInfo!["chceResitBydleni"] as! Bool
-        udajeKlienta.jeVyplnenoBydleni = clientInfo!["jeVyplnenoBydleni"] as! Bool
+        udajeKlienta.chceResitBydleni = clientInfo["chceResitBydleni"] as! Bool
+        udajeKlienta.jeVyplnenoBydleni = clientInfo["jeVyplnenoBydleni"] as! Bool
         
-        udajeKlienta.bytCiDum = clientInfo!["bytCiDum"] as! String
-        udajeKlienta.vlastniCiNajemnni = clientInfo!["vlastniCiNajemni"] as! String
-        udajeKlienta.najemne = clientInfo!["najemne"] as! Int
+        udajeKlienta.bytCiDum = clientInfo["bytCiDum"] as! String
+        udajeKlienta.vlastniCiNajemnni = clientInfo["vlastniCiNajemni"] as! String
+        udajeKlienta.najemne = clientInfo["najemne"] as! Int
         
-        udajeKlienta.spokojenostSBydlenim = clientInfo!["spokojenostSBydlenim"] as! String
-        udajeKlienta.spokojenostSBydlenimPoznamky = clientInfo!["spokojenostSBydlenimPoznamky"] as! String
-        udajeKlienta.planujeVetsi = clientInfo!["planujeVetsiNemovitost"] as! String
-        udajeKlienta.planujeVetsiPoznamky = clientInfo!["planujeVetsiNemovitostPoznamky"] as! String
+        udajeKlienta.spokojenostSBydlenim = clientInfo["spokojenostSBydlenim"] as! String
+        udajeKlienta.spokojenostSBydlenimPoznamky = clientInfo["spokojenostSBydlenimPoznamky"] as! String
+        udajeKlienta.planujeVetsi = clientInfo["planujeVetsiNemovitost"] as! String
+        udajeKlienta.planujeVetsiPoznamky = clientInfo["planujeVetsiNemovitostPoznamky"] as! String
         
-        udajeKlienta.chceGrafBydleni = clientInfo!["chceGrafBydleni"] as! Bool
-        udajeKlienta.grafBydleniPoleSporeni = clientInfo!["grafBydleniPoleSporeni"] as! [Int]
-        udajeKlienta.grafBydleniPoleJistin = clientInfo!["grafBydleniPoleJistin"] as! [Int]
-        udajeKlienta.grafBydleniMesicSplaceni = clientInfo!["grafBydleniMesicSplaceni"] as! Int
-        udajeKlienta.grafBydleniHlaskaSplaceni = clientInfo!["grafBydleniHlaskaSplaceni"] as! String
+        udajeKlienta.chceGrafBydleni = clientInfo["chceGrafBydleni"] as! Bool
+        udajeKlienta.grafBydleniPoleSporeni = clientInfo["grafBydleniPoleSporeni"] as! [Int]
+        udajeKlienta.grafBydleniPoleJistin = clientInfo["grafBydleniPoleJistin"] as! [Int]
+        udajeKlienta.grafBydleniMesicSplaceni = clientInfo["grafBydleniMesicSplaceni"] as! Int
+        udajeKlienta.grafBydleniHlaskaSplaceni = clientInfo["grafBydleniHlaskaSplaceni"] as! String
         
-        udajeKlienta.zajisteniBydleniCastka = clientInfo!["bydleniVynalozenaCastka"] as? Int
-        udajeKlienta.zajisteniBydleniPoznamky = clientInfo!["bydleniPoznamky"] as! String
+        udajeKlienta.zajisteniBydleniCastka = clientInfo["bydleniVynalozenaCastka"] as? Int
+        udajeKlienta.zajisteniBydleniPoznamky = clientInfo["bydleniPoznamky"] as! String
         
         //ctvrty screen: deti
-        udajeKlienta.chceResitDeti = clientInfo!["chceResitDeti"] as! Bool
-        udajeKlienta.jeVyplnenoDeti = clientInfo!["jeVyplnenoDeti"] as! Bool
+        udajeKlienta.chceResitDeti = clientInfo["chceResitDeti"] as! Bool
+        udajeKlienta.jeVyplnenoDeti = clientInfo["jeVyplnenoDeti"] as! Bool
 
-        udajeKlienta.planujeteDeti = clientInfo!["planujeteDeti"] as! String
-        udajeKlienta.pocetPlanovanychDeti = clientInfo!["pocetPlanovanychDeti"] as? Int
-        udajeKlienta.otazka1 = clientInfo!["otazka1"] as! Bool
-        udajeKlienta.otazka2 = clientInfo!["otazka2"] as! Bool
+        udajeKlienta.planujeteDeti = clientInfo["planujeteDeti"] as! String
+        udajeKlienta.pocetPlanovanychDeti = clientInfo["pocetPlanovanychDeti"] as? Int
+        udajeKlienta.otazka1 = clientInfo["otazka1"] as! Bool
+        udajeKlienta.otazka2 = clientInfo["otazka2"] as! Bool
         
-        udajeKlienta.detiJmena = clientInfo!["detiJmena"] as! [String]
+        udajeKlienta.detiJmena = clientInfo["detiJmena"] as! [String]
         
-        udajeKlienta.detiCilovaCastka = clientInfo!["detiCilovaCastka"] as! [Int]
-        udajeKlienta.detiDoKdySporeni = clientInfo!["detiDoKdySporeni"] as! [Int]
-        udajeKlienta.detiMesicneSporeni = clientInfo!["detiMesicneSporeni"] as! [Int]
-        udajeKlienta.detiUrok = clientInfo!["detiUrok"] as! [Float]
-        udajeKlienta.detiJeVyplneno = clientInfo!["detiJeVyplneno"] as! [Bool]
+        udajeKlienta.detiCilovaCastka = clientInfo["detiCilovaCastka"] as! [Int]
+        udajeKlienta.detiDoKdySporeni = clientInfo["detiDoKdySporeni"] as! [Int]
+        udajeKlienta.detiMesicneSporeni = clientInfo["detiMesicneSporeni"] as! [Int]
+        udajeKlienta.detiUrok = clientInfo["detiUrok"] as! [Float]
+        udajeKlienta.detiJeVyplneno = clientInfo["detiJeVyplneno"] as! [Bool]
         
-        udajeKlienta.grafCelkovaUlozka = clientInfo!["grafCelkovaUlozka"] as! [Int]
-        udajeKlienta.grafDobaSporeni = clientInfo!["grafDobaSporeni"] as! [Int]
+        udajeKlienta.grafCelkovaUlozka = clientInfo["grafCelkovaUlozka"] as! [Int]
+        udajeKlienta.grafDobaSporeni = clientInfo["grafDobaSporeni"] as! [Int]
         
-        udajeKlienta.grafArrayUrok1 = clientInfo!["grafArrayUrok1"] as! [Int]
-        udajeKlienta.grafArrayUrok2 = clientInfo!["grafArrayUrok2"] as! [Int]
-        udajeKlienta.grafArrayUrok3 = clientInfo!["grafArrayUrok3"] as! [Int]
-        udajeKlienta.grafArrayUrok4 = clientInfo!["grafArrayUrok4"] as! [Int]
+        udajeKlienta.grafArrayUrok1 = clientInfo["grafArrayUrok1"] as! [Int]
+        udajeKlienta.grafArrayUrok2 = clientInfo["grafArrayUrok2"] as! [Int]
+        udajeKlienta.grafArrayUrok3 = clientInfo["grafArrayUrok3"] as! [Int]
+        udajeKlienta.grafArrayUrok4 = clientInfo["grafArrayUrok4"] as! [Int]
         
-        udajeKlienta.detiVynalozenaCastka = clientInfo!["detiVynalozenaCastka"] as? Int
-        udajeKlienta.detiPoznamky = clientInfo!["detiPoznamky"] as! String
+        udajeKlienta.detiVynalozenaCastka = clientInfo["detiVynalozenaCastka"] as? Int
+        udajeKlienta.detiPoznamky = clientInfo["detiPoznamky"] as! String
         
         //paty screen: duchod
-        udajeKlienta.chceResitDuchod = clientInfo!["chceResitDuchod"] as! Bool
-        udajeKlienta.jeVyplnenoDuchod = clientInfo!["jeVyplnenoDuchod"] as! Bool
+        udajeKlienta.chceResitDuchod = clientInfo["chceResitDuchod"] as! Bool
+        udajeKlienta.jeVyplnenoDuchod = clientInfo["jeVyplnenoDuchod"] as! Bool
 
-        udajeKlienta.duchodVek = clientInfo!["duchodVek"] as? Int //vek odchodu do duchodu
+        udajeKlienta.duchodVek = clientInfo["duchodVek"] as? Int //vek odchodu do duchodu
         
-        udajeKlienta.pripravaNaDuchod = clientInfo!["pripravaNaDuchod"] as! String
-        udajeKlienta.jakDlouho = clientInfo!["jakDlouho"] as? Int
+        udajeKlienta.pripravaNaDuchod = clientInfo["pripravaNaDuchod"] as! String
+        udajeKlienta.jakDlouho = clientInfo["jakDlouho"] as? Int
         
-        udajeKlienta.chtelBysteSePripravit = clientInfo!["chtelBysteSePripravitNaDuchod"] as! String
-        udajeKlienta.predstavovanaCastka = clientInfo!["predstavovanaCastkaVDuchodu"] as? Int //celkem castka na cely duchod, napr 4M
+        udajeKlienta.chtelBysteSePripravit = clientInfo["chtelBysteSePripravitNaDuchod"] as! String
+        udajeKlienta.predstavovanaCastka = clientInfo["predstavovanaCastkaVDuchodu"] as? Int //celkem castka na cely duchod, napr 4M
         
-        udajeKlienta.chceGrafDuchodu = clientInfo!["chceGrafDuchodu"] as! Bool
-        udajeKlienta.grafDuchodCelkovaUlozka = clientInfo!["grafDuchodCelkovaUlozka"] as! Int
-        udajeKlienta.grafDuchodDobaSporeni = clientInfo!["grafDuchodDobaSporeni"] as! Int
-        udajeKlienta.grafDuchodUroky = clientInfo!["grafDuchodUroky"] as! [Int]
+        udajeKlienta.chceGrafDuchodu = clientInfo["chceGrafDuchodu"] as! Bool
+        udajeKlienta.grafDuchodCelkovaUlozka = clientInfo["grafDuchodCelkovaUlozka"] as! Int
+        udajeKlienta.grafDuchodDobaSporeni = clientInfo["grafDuchodDobaSporeni"] as! Int
+        udajeKlienta.grafDuchodUroky = clientInfo["grafDuchodUroky"] as! [Int]
         
-        udajeKlienta.duchodVynalozenaCastka = clientInfo!["duchodVynalozenaCastka"] as? Int
-        udajeKlienta.duchodPoznamky = clientInfo!["duchodPoznamky"] as! String
+        udajeKlienta.duchodVynalozenaCastka = clientInfo["duchodVynalozenaCastka"] as? Int
+        udajeKlienta.duchodPoznamky = clientInfo["duchodPoznamky"] as! String
         
         //sesty screen
         
-        udajeKlienta.chceteResitDane = clientInfo!["chceteResitDane"] as! Bool
-        udajeKlienta.jeVyplnenoDane = clientInfo!["jeVyplnenoDane"] as! Bool
-        udajeKlienta.danePoznamky = clientInfo!["danePoznamky"] as! String
+        udajeKlienta.chceteResitDane = clientInfo["chceteResitDane"] as! Bool
+        udajeKlienta.jeVyplnenoDane = clientInfo["jeVyplnenoDane"] as! Bool
+        udajeKlienta.danePoznamky = clientInfo["danePoznamky"] as! String
         
         //sedmy screen
         
-        udajeKlienta.ostatniPozadavky = clientInfo!["ostatniPozadavky"] as! String
-        udajeKlienta.chceResitOstatniPozadavky = clientInfo!["chceResitOstatniPozadavky"] as! Bool
-        udajeKlienta.jeVyplnenoOstatniPozadavky = clientInfo!["jeVyplnenoOstatniPozadavky"] as! Bool
+        udajeKlienta.ostatniPozadavky = clientInfo["ostatniPozadavky"] as! String
+        udajeKlienta.chceResitOstatniPozadavky = clientInfo["chceResitOstatniPozadavky"] as! Bool
+        udajeKlienta.jeVyplnenoOstatniPozadavky = clientInfo["jeVyplnenoOstatniPozadavky"] as! Bool
         
         //osmy screen
         
-        udajeKlienta.priority = clientInfo!["priority"] as! [String]
-        udajeKlienta.jeVyplnenoPriority = clientInfo!["jeVyplnenoPriority"] as! Bool
+        udajeKlienta.priority = clientInfo["priority"] as! [String]
+        udajeKlienta.jeVyplnenoPriority = clientInfo["jeVyplnenoPriority"] as! Bool
         
         //devaty screen
         
-        udajeKlienta.realnaCastkaNaProjekt = clientInfo!["realnaCastkaNaProjekt"] as? Int
+        udajeKlienta.realnaCastkaNaProjekt = clientInfo["realnaCastkaNaProjekt"] as? Int
         
     }
     

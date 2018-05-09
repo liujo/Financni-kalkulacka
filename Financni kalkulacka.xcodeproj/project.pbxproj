@@ -34,7 +34,6 @@
 		26475E7E1BF0C46E008BCCD2 /* Zajisteni prijmu cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E7D1BF0C46E008BCCD2 /* Zajisteni prijmu cells.swift */; };
 		26475E801BF0C6D4008BCCD2 /* ZajisteniPrijmuPracovniPomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E7F1BF0C6D4008BCCD2 /* ZajisteniPrijmuPracovniPomer.swift */; };
 		26475E841BF0CCA6008BCCD2 /* ZajisteniPrijmuPracovniPomerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475E831BF0CCA6008BCCD2 /* ZajisteniPrijmuPracovniPomerTableViewController.swift */; };
-		26534E0C1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26534E0B1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift */; };
 		268C5C2C1BE7C046002DE24D /* BytCiDumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C5C2B1BE7C046002DE24D /* BytCiDumTableViewController.swift */; };
 		268C5C301BE7C0A3002DE24D /* VlastniCiNajemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C5C2F1BE7C0A3002DE24D /* VlastniCiNajemTableViewController.swift */; };
 		268C5C321BE7C130002DE24D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 268C5C311BE7C130002DE24D /* Main.storyboard */; };
@@ -140,7 +139,6 @@
 		26475E7D1BF0C46E008BCCD2 /* Zajisteni prijmu cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Zajisteni prijmu cells.swift"; sourceTree = "<group>"; };
 		26475E7F1BF0C6D4008BCCD2 /* ZajisteniPrijmuPracovniPomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZajisteniPrijmuPracovniPomer.swift; sourceTree = "<group>"; };
 		26475E831BF0CCA6008BCCD2 /* ZajisteniPrijmuPracovniPomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZajisteniPrijmuPracovniPomerTableViewController.swift; sourceTree = "<group>"; };
-		26534E0B1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavratnostInvesticeViewController.swift; sourceTree = "<group>"; };
 		268C5C2B1BE7C046002DE24D /* BytCiDumTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytCiDumTableViewController.swift; sourceTree = "<group>"; };
 		268C5C2F1BE7C0A3002DE24D /* VlastniCiNajemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VlastniCiNajemTableViewController.swift; sourceTree = "<group>"; };
 		268C5C311BE7C130002DE24D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -550,7 +548,6 @@
 			isa = PBXGroup;
 			children = (
 				26D91E4E1CE63E6E00734BDD /* NavratnostInvesticeTableViewController.swift */,
-				26534E0B1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift */,
 				26D91E501CE6409100734BDD /* NavratnostInvesticeCell.swift */,
 			);
 			name = "Navratnost investice";
@@ -806,7 +803,6 @@
 				26A55B881C8B406600866F89 /* PDFRendering.swift in Sources */,
 				268C5C361BE81F45002DE24D /* SpokojenostBydleniTableViewController.swift in Sources */,
 				26475E801BF0C6D4008BCCD2 /* ZajisteniPrijmuPracovniPomer.swift in Sources */,
-				26534E0C1BA1B0AA007A0674 /* NavratnostInvesticeViewController.swift in Sources */,
 				26107EB81C0B3A33006470B8 /* BaseTableViewController.swift in Sources */,
 				26ABB34F1B59524300664972 /* CustomHeaderCell.swift in Sources */,
 				2611F90A1BE223DB00377B26 /* PracovniPomerTableViewController.swift in Sources */,

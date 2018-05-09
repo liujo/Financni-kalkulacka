@@ -13,8 +13,8 @@ import MessageUI
 class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDataSource, JBLineChartViewDelegate, MFMailComposeViewControllerDelegate {
     
     let gradientLayer = CAGradientLayer()
-    let jistinaColor = UIColor.greenColor()
-    let urokColor = UIColor.redColor()
+    let jistinaColor = UIColor.green
+    let urokColor = UIColor.red
     
     var toPassPocetRokuGlobal = Int()
     var toPassPujcenyObnosGlobal = Int()
@@ -39,49 +39,47 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         
         self.title = "Graf hypotéky"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(HypotekaGrafTableViewController.sendEmail))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(HypotekaGrafTableViewController.sendEmail))
         
         updateData()
         
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         
-        _ = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("showChart"), userInfo: nil, repeats: false)
+        _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.showChart), userInfo: nil, repeats: false)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         
         let graphView: JBLineChartView = self.tableView.viewWithTag(20) as! JBLineChartView
-        graphView.setState(.Collapsed, animated: true)
+        graphView.setState(.collapsed, animated: true)
     
     }
     
-    func showChart() {
+    @objc func showChart() {
         
         let graphView: JBLineChartView = self.tableView.viewWithTag(20) as! JBLineChartView
         graphView.reloadData()
-        graphView.setState(.Expanded, animated: true)
+        graphView.setState(.expanded, animated: true)
     }
     
     //MARK: - JBLineChartView data source
     
-    func numberOfLinesInLineChartView(lineChartView: JBLineChartView!) -> UInt {
-        
+    func numberOfLines(in lineChartView: JBLineChartView!) -> UInt {
         return 2
-    
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, numberOfVerticalValuesAtLineIndex lineIndex: UInt) -> UInt {
+    func lineChartView(_ lineChartView: JBLineChartView!, numberOfVerticalValuesAtLineIndex lineIndex: UInt) -> UInt {
         
         return UInt(castky.count)
     
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, verticalValueForHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, verticalValueForHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
         
         if lineIndex == 0 {
             
@@ -100,25 +98,25 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, verticalSelectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, verticalSelectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
         
-        return UIColor.whiteColor()
-        
-    }
-    
-    func lineChartView(lineChartView: JBLineChartView!, selectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
-        
-        return UIColor.whiteColor()
+        return UIColor.white
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, dotRadiusForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, selectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+        
+        return UIColor.white
+        
+    }
+    
+    func lineChartView(_ lineChartView: JBLineChartView!, dotRadiusForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
         
         return 4
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, colorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, colorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
         
         if lineIndex == 0 {
             
@@ -130,19 +128,19 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         }
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, selectionColorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, selectionColorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
         
-        return UIColor.whiteColor()
+        return UIColor.white
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, widthForLineAtLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, widthForLineAtLineIndex lineIndex: UInt) -> CGFloat {
         
         return 2
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, colorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, colorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
         
         if lineIndex == 0 {
             
@@ -155,35 +153,35 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         }
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, dimmedSelectionOpacityAtLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, dimmedSelectionOpacityAtLineIndex lineIndex: UInt) -> CGFloat {
         
         return 0.15
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, showsDotsForLineAtLineIndex lineIndex: UInt) -> Bool {
+    func lineChartView(_ lineChartView: JBLineChartView!, showsDotsForLineAtLineIndex lineIndex: UInt) -> Bool {
         
         return true
     }
     
     
-    func lineChartView(lineChartView: JBLineChartView!, didSelectLineAtIndex lineIndex: UInt, horizontalIndex: UInt, touchPoint: CGPoint) {
+    func lineChartView(_ lineChartView: JBLineChartView!, didSelectLineAt lineIndex: UInt, horizontalIndex: UInt, touch touchPoint: CGPoint) {
         
         let infoLabel = self.tableView.viewWithTag(10) as! UILabel
         
         if lineIndex == 0 {
             
             let data = castky[Int(horizontalIndex)]
-            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: zbývá \(numberFormattingInt(data)) Kč z jistiny"
+            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: zbývá \(numberFormattingInt(number: data)) Kč z jistiny"
             
         } else {
             
             let data = uroky[Int(horizontalIndex)]
-            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: zaplaceno \(numberFormattingInt(data)) Kč na úrocích"
+            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: zaplaceno \(numberFormattingInt(number: data)) Kč na úrocích"
         
         }
         
-        tableView.scrollEnabled = false
+        tableView.isScrollEnabled = false
         
         
     }
@@ -193,7 +191,7 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         let infoLabel = self.tableView.viewWithTag(10) as! UILabel
         infoLabel.text = ""
         
-        tableView.scrollEnabled = true
+        tableView.isScrollEnabled = true
         
     }
     
@@ -227,7 +225,7 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         let num4 = maxCastka/4
         
         //formatting do stringu
-        castkyLabels = [numberFormatting(num1), numberFormatting(num2), numberFormatting(num3), numberFormatting(num4)]
+        castkyLabels = [numberFormatting(castka: num1), numberFormatting(castka: num2), numberFormatting(castka: num3), numberFormatting(castka: num4)]
     }
     
     func numberFormatting(castka: Int) -> String {
@@ -253,12 +251,12 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if section == 0 {
@@ -271,7 +269,7 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 1 {
             
@@ -284,7 +282,7 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
     }
 
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
             
@@ -304,16 +302,16 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         }
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("graf") as! GrafCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "graf") as! GrafCell
             
             //setting gradient background
             gradientBackground()
             gradientLayer.frame = cell.contentView.bounds
-            cell.contentView.layer.insertSublayer(gradientLayer, atIndex: 0)
+            cell.contentView.layer.insertSublayer(gradientLayer, at: 0)
             
             //graph setup
             cell.graphView.delegate = self
@@ -327,16 +325,16 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
             
             //vysvetlivky
             cell.jistinaView.layer.cornerRadius = 4
-            cell.jistinaView.layer.backgroundColor = jistinaColor.CGColor
+            cell.jistinaView.layer.backgroundColor = jistinaColor.cgColor
             
             cell.urokView.layer.cornerRadius = 4
-            cell.urokView.layer.backgroundColor = urokColor.CGColor
+            cell.urokView.layer.backgroundColor = urokColor.cgColor
             
             //popisky grafu: roky
             if rokyLabels.count == 2 {
                 
-                cell.roky1.hidden = true
-                cell.roky3.hidden = true
+                cell.roky1.isHidden = true
+                cell.roky3.isHidden = true
                 
                 cell.roky2.text = rokyLabels[0]
                 cell.roky4.text = rokyLabels[1]
@@ -362,23 +360,23 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("headerCell")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell")
                 
                 return cell!
             
             } else {
              
-                let cell = tableView.dequeueReusableCellWithIdentifier("tabulka") as! TabulkaCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "tabulka") as! TabulkaCell
                 
                 let index = indexPath.row - 1
                 
                 cell.rokyLabel.text = "\(roky[index])"
-                cell.jistinaLabel.text = "\(numberFormattingInt(castky[index])) Kč"
-                cell.urokyLabel.text = "\(numberFormattingInt(uroky[index])) Kč"
+                cell.jistinaLabel.text = "\(numberFormattingInt(number: castky[index])) Kč"
+                cell.urokyLabel.text = "\(numberFormattingInt(number: uroky[index])) Kč"
                 
                 if indexPath.row % 2 == 0 {
                     
-                    cell.backgroundColor = UIColor.whiteColor()
+                    cell.backgroundColor = UIColor.white
                     
                 } else {
                 
@@ -397,8 +395,8 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
     
     func gradientBackground() {
         
-        let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).CGColor
-        let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).CGColor
+        let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).cgColor
+        let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).cgColor
         gradientLayer.colors = [color1, color2]
         gradientLayer.locations = [0.0, 1]
     }
@@ -409,7 +407,7 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         
         rovniceVypoctuUroku()
         
-        for var i = 1; i <= toPassPocetRokuGlobal; i++ {
+        for i in 1...toPassPocetRokuGlobal {
             
             if i == toPassPocetRokuGlobal {
                 
@@ -417,18 +415,18 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
                 
             } else {
                 
-                castky.append(rovniceVypoctuJistiny(i))
+                castky.append(rovniceVypoctuJistiny(rok: i))
                 
             }
             roky.append("\(i).")
         }
         
-        castky.insert(toPassPujcenyObnosGlobal, atIndex: 0)
-        roky.insert("0.", atIndex: 0)
-        uroky.insert(0, atIndex: 0)
+        castky.insert(toPassPujcenyObnosGlobal, at: 0)
+        roky.insert("0.", at: 0)
+        uroky.insert(0, at: 0)
         
-        vypocetRokyLabels(roky.count)
-        vypocetCastkyLabels(castky[0])
+        vypocetRokyLabels(pocetRoku: roky.count)
+        vypocetCastkyLabels(maxCastka: castky[0])
 
     }
     
@@ -471,7 +469,7 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
         let mesicniPlatba:Float = Float(toPassMesicniPlatbaVcetneUrokuGlobal)
         let dobaMesice = toPassPocetRokuGlobal*12
         
-        for var i = 1; i <= dobaMesice; i++ {
+        for i in 1...dobaMesice {
             
             arrayOfInterest.append(Float(Float(jistina)*Float(mesicniUrok)))
             soucetUroku = soucetUroku + Float(Float(jistina)*Float(mesicniUrok))
@@ -492,20 +490,20 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
     
     func numberFormattingInt(number: Int) -> String {
         
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
         
-        return formatter.stringFromNumber(number)!.stringByReplacingOccurrencesOfString(",", withString: " ")
+        return formatter.string(from: NSNumber(value: number))!.replacingOccurrences(of: ",", with: " ")
         
     }
     
     //MARK: - share graph via email
     
-    func sendEmail() {
+    @objc func sendEmail() {
         
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
             self.showSendMailErrorAlert()
         }
@@ -533,8 +531,8 @@ class HypotekaGrafTableViewController: UITableViewController, JBLineChartViewDat
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 
 }

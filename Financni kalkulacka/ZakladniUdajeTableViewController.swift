@@ -17,7 +17,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         
         self.title = "Klient"
         
-        let backItem = UIBarButtonItem(title: "Zpět", style: plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "Zpět", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
         let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(ZakladniUdajeTableViewController.forward))
@@ -31,14 +31,14 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         tableView.backgroundView = imageView
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         tableView.reloadData()
         
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         endEditingNow()
@@ -313,7 +313,7 @@ class ZakladniUdajeTableViewController: UITableViewController, UITextFieldDelega
         
     }
     
-    func forward() {
+    @objc func forward() {
                 
         moveOn(isMovingForward: true)
         

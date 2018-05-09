@@ -61,7 +61,7 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
         zhodnoceni = round(zhodnoceni*10)/10
         
         label1Value = "\(zhodnoceni) % ročně"
-        label1Value = label1Value.stringByReplacingOccurrencesOfString(".", withString: ",")
+        label1Value = label1Value.replacingOccurrences(of: ".", with: ",")
         
         print(zhodnoceni)
         
@@ -76,14 +76,14 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
         
         let navratnostInt = Int(navratnost)
         
-        if navratnost % 12 == 0 {
+        if navratnostInt % 12 == 0 {
             
             print(navratnost/12)
             label2Value = "\(navratnostInt/12) let"
             
         } else {
             
-            print("roky: \(round(navratnost/12)), mesice: \(navratnost%12)")
+            print("roky: \(round(navratnost/12)), mesice: \(navratnostInt%12)")
             label2Value = "\(navratnostInt/12) let a \(navratnostInt%12) měsíců"
         }
         
@@ -93,70 +93,70 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 5
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("cena") as! NavratnostCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cena") as! NavratnostCell
             
             cell.cenaTextField.delegate = self
             cell.cenaTextField.tag = 1
             cell.cenaTextField.text = textField1Value
             
-            cell.cenaSlider.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.cenaSliderAction(_:)), forControlEvents: .ValueChanged)
+            cell.cenaSlider.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.cenaSliderAction(sender:)), for: .valueChanged)
             cell.cenaSlider.value = slider1Value
             
-            cell.cenaStepper.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.cenaStepperAction(_:)), forControlEvents: .ValueChanged)
+            cell.cenaStepper.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.cenaStepperAction(sender:)), for: .valueChanged)
             cell.cenaStepper.value = stepper1Value
             
             return cell
             
         } else if indexPath.row == 1 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("mesicniPrijem") as! NavratnostCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mesicniPrijem") as! NavratnostCell
             
             cell.mesicniPrijemTextField.delegate = self
             cell.mesicniPrijemTextField.tag = 2
             cell.mesicniPrijemTextField.text = textField2Value
             
-            cell.mesicniPrijemSlider.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.mesicniPrijemSliderAction(_:)), forControlEvents: .ValueChanged)
+            cell.mesicniPrijemSlider.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.mesicniPrijemSliderAction(sender:)), for: .valueChanged)
             cell.mesicniPrijemSlider.value = slider2Value
             
-            cell.mesicniPrijemStepper.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.mesicniPrijemStepperAction(_:)), forControlEvents: .ValueChanged)
+            cell.mesicniPrijemStepper.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.mesicniPrijemStepperAction(sender:)), for: .valueChanged)
             cell.mesicniPrijemStepper.value = stepper2Value
             
             return cell
             
         } else if indexPath.row == 2 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("naklady") as! NavratnostCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "naklady") as! NavratnostCell
             
             cell.nakladyTextField.delegate = self
             cell.nakladyTextField.tag = 3
             cell.nakladyTextField.text = textField3Value
             
-            cell.nakladySlider.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.nakladySliderAction(_:)), forControlEvents: .ValueChanged)
+            cell.nakladySlider.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.nakladySliderAction(sender:)), for: .valueChanged)
             cell.nakladySlider.value = slider3Value
             
-            cell.nakladyStepper.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.nakladyStepperAction(_:)), forControlEvents: .ValueChanged)
+            cell.nakladyStepper.addTarget(self, action: #selector(NavratnostInvesticeTableViewController.nakladyStepperAction(sender:)), for: .valueChanged)
             cell.nakladyStepper.value = stepper3Value
             
             return cell
             
         } else if indexPath.row == 3 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("zhodnoceni") as! NavratnostCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "zhodnoceni") as! NavratnostCell
             
             cell.zhodnoceniLabel.text = label1Value
             
@@ -164,7 +164,7 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
             
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("navratnost") as! NavratnostCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "navratnost") as! NavratnostCell
             
             cell.navratnostLabel.text = label2Value
             
@@ -174,7 +174,7 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
         
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.row < 3 {
             
@@ -187,33 +187,33 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
     
     //MARK: - slider IBAction
     
-    func cenaSliderAction(sender: UISlider) {
+    @objc func cenaSliderAction(sender: UISlider) {
         
         let a = Int(sender.value) * 100000
         
-        textField1Value = a.currencyFormattingWithSymbol("Kč")
+        textField1Value = a.currencyFormattingWithSymbol(currencySymbol: "Kč")
         stepper1Value = Double(a)
         slider1Value = sender.value
         
         pocitani()
     }
     
-    func mesicniPrijemSliderAction(sender: UISlider) {
+    @objc func mesicniPrijemSliderAction(sender: UISlider) {
         
         let a = Int(sender.value) * 1000
         
-        textField2Value = a.currencyFormattingWithSymbol("Kč")
+        textField2Value = a.currencyFormattingWithSymbol(currencySymbol: "Kč")
         stepper2Value = Double(a)
         slider2Value = sender.value
         
         pocitani()
     }
     
-    func nakladySliderAction(sender: UISlider) {
+    @objc func nakladySliderAction(sender: UISlider) {
         
         let a = Int(sender.value) * 1000
         
-        textField3Value = a.currencyFormattingWithSymbol("Kč")
+        textField3Value = a.currencyFormattingWithSymbol(currencySymbol: "Kč")
         stepper3Value = Double(a)
         slider3Value = sender.value
         
@@ -222,11 +222,11 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
     
     //MARK: - stepper actions
     
-    func cenaStepperAction(sender: UIStepper) {
+    @objc func cenaStepperAction(sender: UIStepper) {
         
         let a = Int(sender.value)
         
-        textField1Value = a.currencyFormattingWithSymbol("Kč")
+        textField1Value = a.currencyFormattingWithSymbol(currencySymbol: "Kč")
         slider1Value = Float(a)/100000
         stepper1Value = sender.value
         
@@ -234,22 +234,22 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
         
     }
     
-    func mesicniPrijemStepperAction(sender: UIStepper) {
+    @objc func mesicniPrijemStepperAction(sender: UIStepper) {
         
         let b = Int(sender.value)
         
-        textField2Value = b.currencyFormattingWithSymbol("Kč")
+        textField2Value = b.currencyFormattingWithSymbol(currencySymbol: "Kč")
         slider2Value = Float(b)/1000
         stepper2Value = sender.value
         
         pocitani()
     }
     
-    func nakladyStepperAction(sender: UIStepper) {
+    @objc func nakladyStepperAction(sender: UIStepper) {
         
         let c = Int(sender.value)
         
-        textField3Value = c.currencyFormattingWithSymbol("Kč")
+        textField3Value = c.currencyFormattingWithSymbol(currencySymbol: "Kč")
         slider3Value = Float(c)/1000
         stepper3Value = sender.value
         
@@ -259,17 +259,17 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
     
     //MARK: - text field actions
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField.text != "" {
             
-            textField.text = textField.text?.chopSuffix(2).condenseWhitespace()
+            textField.text = textField.text?.chopSuffix(count: 2).condenseWhitespace()
             
         }
         
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField.tag == 1 {
             
@@ -287,7 +287,7 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
             
             slider1Value = Float(num)/100000
             stepper1Value = Double(num)
-            textField1Value = num.currencyFormattingWithSymbol("Kč")
+            textField1Value = num.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             pocitani()
             
@@ -308,7 +308,7 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
             
             slider2Value = Float(num)/1000
             stepper2Value = Double(num)
-            textField2Value = num.currencyFormattingWithSymbol("Kč")
+            textField2Value = num.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             pocitani()
             
@@ -328,7 +328,7 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
             
             slider3Value = num/1000
             stepper3Value = Double(num)
-            textField3Value = num.currencyFormattingWithSymbol("Kč")
+            textField3Value = num.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             pocitani()
             
@@ -336,19 +336,19 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
         
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        
-        if string.characters.count > 0 {
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
+        if string.count > 0 {
             
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
+
+            let resultingStringLengthIsLegal = prospectiveText.count <= 10
             
-            let resultingStringLengthIsLegal = prospectiveText.characters.count <= 10
-            
-            let scanner = NSScanner(string: prospectiveText)
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
             
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
         }
@@ -358,7 +358,7 @@ class NavratnostInvesticeTableViewController: UITableViewController, UITextField
     
     //MARK: - schovat klavesnici
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()

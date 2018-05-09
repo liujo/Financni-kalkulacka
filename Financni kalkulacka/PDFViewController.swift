@@ -11,6 +11,8 @@ import Foundation
 import MessageUI
 
 class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, JBLineChartViewDelegate, JBLineChartViewDataSource, UITableViewDelegate, UITableViewDataSource {
+   
+    
 
     @IBOutlet weak var webView: UIWebView!
     
@@ -78,7 +80,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
 
         let bools = [true, true, udajeKlienta.chceResitDeti, udajeKlienta.chceResitDeti, udajeKlienta.chceResitZajisteniPrijmu, udajeKlienta.chceResitBydleni, udajeKlienta.chceResitDuchod, udajeKlienta.chceteResitDane, udajeKlienta.chceResitOstatniPozadavky, true, true]
         
-        var page1 = UIView.loadFromNibNamed("pdf")!
+        var page1 = UIView.loadFromNibNamed(nibNamed: "pdf")!
         var height = 104
         var views = [UIView]()
         
@@ -102,7 +104,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                 print("new page")
                 
                 views.append(page1)
-                page1 = UIView.loadFromNibNamed("pdf")!
+                page1 = UIView.loadFromNibNamed(nibNamed: "pdf")!
                 height = 104
                 
                 sectionView.frame = CGRect(x: 25, y: CGFloat(height), width: sectionView.bounds.width, height: sectionView.bounds.height)
@@ -195,10 +197,10 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             i += 1
         }
         
-        let sectionView = UIView.loadFromNibNamed("ZakladniUdaje")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "ZakladniUdaje")!
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UILabel) {
+            if subview.isKind(of: UILabel.self) {
                 
                 if subview.tag > 0 && subview.tag < 18 {
                     
@@ -239,10 +241,10 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
         }
         
-        let sectionView = UIView.loadFromNibNamed("Priority")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "Priority")!
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UILabel) {
+            if subview.isKind(of: UILabel.self) {
                 
                 if subview.tag > 14 {
                     
@@ -304,10 +306,10 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             i += 1
         }
         
-        let sectionView = UIView.loadFromNibNamed("ZajisteniPrijmu")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "ZajisteniPrijmu")!
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UILabel) {
+            if subview.isKind(of: UILabel.self) {
                 
                 if subview.tag > 0 {
                     
@@ -392,10 +394,10 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         updateDataBydleni()
         
-        let sectionView = UIView.loadFromNibNamed("Bydleni")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "Bydleni")!
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UILabel) {
+            if subview.isKind(of: UILabel.self) {
                 
                 if subview.tag > 0 {
                     
@@ -408,19 +410,19 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
             if udajeKlienta.chceGrafBydleni {
                 
-                if subview.isKindOfClass(UIView) && subview.tag == 1000 {
+                if subview.isKind(of: UIView.self) && subview.tag == 1000 {
                     
                     //tableview setup
                     var tableViewHeight = CGFloat(20 + (grafArray1.count*14))
-                    let tableView = UITableView(frame: CGRectMake(397, 186, 357, tableViewHeight), style: .Plain)
+                    let tableView = UITableView(frame: CGRect(x: 397, y: 186, width: 357, height: tableViewHeight), style: .plain)
                     tableView.tag = 1
-                    tableView.separatorStyle = .None
+                    tableView.separatorStyle = .none
                     tableView.delegate = self
                     tableView.dataSource = self
                     let headerCellNib = UINib(nibName: "GraphHeaderTableCell", bundle: nil)
                     let cellNib = UINib(nibName: "GraphTableCell", bundle: nil)
-                    tableView.registerNib(headerCellNib, forCellReuseIdentifier: "headerCell")
-                    tableView.registerNib(cellNib, forCellReuseIdentifier: "cell")
+                    tableView.register(headerCellNib, forCellReuseIdentifier: "headerCell")
+                    tableView.register(cellNib, forCellReuseIdentifier: "cell")
                     sectionView.addSubview(tableView)
                     
                     if grafArray2.count > 4 {
@@ -429,36 +431,36 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                         
                     }
                     
-                    sectionView.frame = CGRectMake(sectionView.frame.origin.x, sectionView.frame.origin.y, sectionView.frame.width, sectionView.frame.height + tableViewHeight)
+                    sectionView.frame = CGRect(x: sectionView.frame.origin.x, y: sectionView.frame.origin.y, width: sectionView.frame.width, height: sectionView.frame.height + tableViewHeight)
     
-                    let graphView = UIView.loadFromNibNamed("GraphBackground")!
+                    let graphView = UIView.loadFromNibNamed(nibNamed: "GraphBackground")!
                     let gradientLayer = CAGradientLayer()
-                    let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).CGColor
-                    let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).CGColor
+                    let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).cgColor
+                    let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).cgColor
                     gradientLayer.colors = [color1, color2]
                     gradientLayer.locations = [0.0, 1]
                     gradientLayer.frame = graphView.bounds
-                    graphView.layer.insertSublayer(gradientLayer, atIndex: 0)
+                    graphView.layer.insertSublayer(gradientLayer, at: 0)
                     
                     for info in graphView.subviews {
                         
-                        if info.isKindOfClass(UILabel) {
+                        if info.isKind(of: UILabel.self) {
                             
                             var labelText = String()
                             
                             if info.tag == 1 {
                                 
-                                labelText = numberFormatting(bydleniGrafArray1.last!)
+                                labelText = numberFormatting(castka: bydleniGrafArray1.last!)
                                 print(labelText)
                                 
                             } else if info.tag == 2 {
                                 
-                                labelText = numberFormatting(Int(Double(bydleniGrafArray1.last!)*(2/3)))
+                                labelText = numberFormatting(castka: Int(Double(bydleniGrafArray1.last!)*(2/3)))
                                 print(labelText)
                                 
                             } else if info.tag == 3 {
                                 
-                                labelText = numberFormatting(Int(Double(bydleniGrafArray1.last!)*(1/3)))
+                                labelText = numberFormatting(castka: Int(Double(bydleniGrafArray1.last!)*(1/3)))
                                 print(labelText)
                                 
                             } else if info.tag == 4 {
@@ -490,31 +492,31 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                             let label = info as! UILabel
                             label.text = labelText
                             
-                        } else if info.isKindOfClass(JBLineChartView) {
+                        } else if info.isKind(of: JBLineChartView.self) {
                             
                             let chartView = info as! JBLineChartView
                             chartView.delegate = self
                             chartView.dataSource = self
                             chartView.maximumValue = CGFloat(maxValue)
                             chartView.minimumValue = 0
-                            chartView.frame = CGRectMake(34, 5, 315, 113)
+                            chartView.frame = CGRect(x: 34, y: 5, width: 315, height: 113)
                             chartView.reloadData()
-                            chartView.setState(.Expanded, animated: false)
+                            chartView.setState(.expanded, animated: false)
                             
                             
-                        } else if info.isKindOfClass(UIView) {
+                        } else if info.isKind(of: UIView.self) {
                             
                             let view1 = info
                             
                             if view1.tag == 7 {
                                 
                                 view1.layer.cornerRadius = 2.5
-                                view1.layer.backgroundColor = UIColor.greenColor().CGColor
+                                view1.layer.backgroundColor = UIColor.green.cgColor
                                 
                             } else if view1.tag == 8 {
                                 
                                 view1.layer.cornerRadius = 2.5
-                                view1.layer.backgroundColor = UIColor.blueColor().CGColor
+                                view1.layer.backgroundColor = UIColor.blue.cgColor
                             }
                             
                         }
@@ -605,7 +607,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         let relevantNumber = detiRelevantNumber()
         
-        let sectionView = UIView.loadFromNibNamed("Deti")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "Deti")!
         var sectionHeight = CGFloat()
         
         if relevantNumber == 0 {
@@ -626,7 +628,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
         }
         
-        sectionView.frame = CGRectMake(sectionView.frame.origin.x, sectionView.frame.origin.y, sectionView.frame.width, sectionHeight)
+        sectionView.frame = CGRect(x: sectionView.frame.origin.x, y: sectionView.frame.origin.y, width: sectionView.frame.width, height: sectionHeight)
         
         //increase sectionView height
         var appendedHeight1 = CGFloat()
@@ -645,17 +647,17 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         print(appendedHeight1)
         
-        sectionView.frame = CGRectMake(sectionView.frame.origin.x, sectionView.frame.origin.y, sectionView.frame.width, sectionView.frame.height + appendedHeight1 + 10)
+        sectionView.frame = CGRect(x: sectionView.frame.origin.x, y: sectionView.frame.origin.y, width: sectionView.frame.width, height: sectionView.frame.height + appendedHeight1 + 10)
         
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UIView) && subview.tag > 9 && subview.tag < 666 {
+            if subview.isKind(of: UIView.self) && subview.tag > 9 && subview.tag < 666 {
                 
                 let int = subview.tag/10
 
                 if relevantNumber < int {
                     
-                    subview.hidden = true
+                    subview.isHidden = true
                 
                 }
             
@@ -675,11 +677,11 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                                 
                                 if udajeKlienta.detiVynalozenaCastka != nil {
                                     
-                                    str = udajeKlienta.detiVynalozenaCastka!.currencyFormattingWithSymbol("Kč")
+                                    str = udajeKlienta.detiVynalozenaCastka!.currencyFormattingWithSymbol(currencySymbol: "Kč")
                                     
                                 } else {
                                     
-                                    str = Int().currencyFormattingWithSymbol("Kč")
+                                    str = Int().currencyFormattingWithSymbol(currencySymbol: "Kč")
                                     
                                 }
                                 
@@ -704,11 +706,11 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                         footerYPosition = 305
                     }
                     
-                    view1.frame = CGRectMake(view1.frame.origin.x, footerYPosition + appendedHeight1 + 10, view1.frame.width, view1.frame.height)
+                    view1.frame = CGRect(x: view1.frame.origin.x, y: footerYPosition + appendedHeight1 + 10, width: view1.frame.width, height: view1.frame.height)
                     
                 } else {
                     
-                    subview.hidden = true
+                    subview.isHidden = true
                     
                 }
                 
@@ -719,9 +721,9 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         //labels
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UIView) && subview.tag > 9 && subview.tag <= (relevantNumber)*10 && subview.tag <= 20 {
+            if subview.isKind(of: UIView.self) && subview.tag > 9 && subview.tag <= (relevantNumber)*10 && subview.tag <= 20 {
                 
-                subview.hidden = false
+                subview.isHidden = false
                     
                 for subview2 in subview.subviews {
                     
@@ -739,7 +741,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                             
                         } else if tag == 2 {
                             
-                            str = detiCilovaCastka[int].currencyFormattingWithSymbol("Kč")
+                            str = detiCilovaCastka[int].currencyFormattingWithSymbol(currencySymbol: "Kč")
                             
                         } else if tag == 3 {
                         
@@ -747,7 +749,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                             
                         } else if tag == 4 {
                             
-                            str = detiMesicneSporeni[int].currencyFormattingWithSymbol("Kč")
+                            str = detiMesicneSporeni[int].currencyFormattingWithSymbol(currencySymbol: "Kč")
                             
                         }
                         
@@ -765,12 +767,12 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                     
                 }*/
                 
-            } else if subview.isKindOfClass(UIView) && subview.tag > 999 && subview.tag <= 2000 && subview.tag <= relevantNumber*1000 {
+            } else if subview.isKind(of: UIView.self) && subview.tag > 999 && subview.tag <= 2000 && subview.tag <= relevantNumber*1000 {
                 
-                subview.hidden = false
+                subview.isHidden = false
                 
                 let index = subview.tag/1000
-                updateData(index)
+                updateData(int: index)
                 
                 //tady spoticam pozici tableview & vysku view & pozici ostatnich elementu
                 
@@ -792,43 +794,43 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                 //tableview setup
                 let tableView = UITableView()
                 tableView.tag = 2 + index
-                tableView.frame = CGRectMake(xPosition, yPosition, 357, tableViewHeight)
-                tableView.separatorStyle = .None
+                tableView.frame = CGRect(x: xPosition, y: yPosition, width: 357, height: tableViewHeight)
+                tableView.separatorStyle = .none
                 tableView.delegate = self
                 tableView.dataSource = self
                 let headerCellNib = UINib(nibName: "GraphHeaderTableCell", bundle: nil)
                 let cellNib = UINib(nibName: "GraphTableCell", bundle: nil)
-                tableView.registerNib(headerCellNib, forCellReuseIdentifier: "headerCell")
-                tableView.registerNib(cellNib, forCellReuseIdentifier: "cell")
+                tableView.register(headerCellNib, forCellReuseIdentifier: "headerCell")
+                tableView.register(cellNib, forCellReuseIdentifier: "cell")
                 sectionView.addSubview(tableView)
                 
-                let graphView = UIView.loadFromNibNamed("GraphBackground")!
+                let graphView = UIView.loadFromNibNamed(nibNamed: "GraphBackground")!
                 
                 let gradientLayer = CAGradientLayer()
-                let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).CGColor
-                let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).CGColor
+                let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).cgColor
+                let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).cgColor
                 gradientLayer.colors = [color1, color2]
                 gradientLayer.locations = [0.0, 1]
                 gradientLayer.frame = graphView.bounds
-                graphView.layer.insertSublayer(gradientLayer, atIndex: 0)
+                graphView.layer.insertSublayer(gradientLayer, at: 0)
                 
                 for info in graphView.subviews {
                     
-                    if info.isKindOfClass(UILabel) {
+                    if info.isKind(of: UILabel.self) {
                         
                         var labelText = String()
                         
                         if info.tag == 1 {
                             
-                            labelText = numberFormatting(grafArray1.last!)
+                            labelText = numberFormatting(castka: grafArray1.last!)
                             
                         } else if info.tag == 2 {
                             
-                            labelText = numberFormatting(Int(Double(grafArray1.last!)*(2/3)))
+                            labelText = numberFormatting(castka: Int(Double(grafArray1.last!)*(2/3)))
                             
                         } else if info.tag == 3 {
                             
-                            labelText = numberFormatting(Int(Double(grafArray1.last!)*(1/3)))
+                            labelText = numberFormatting(castka: Int(Double(grafArray1.last!)*(1/3)))
                         
                         } else if info.tag == 4 {
                             
@@ -861,7 +863,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                         let label = info as! UILabel
                         label.text = labelText
                     
-                    } else if info.isKindOfClass(JBLineChartView) {
+                    } else if info.isKind(of: JBLineChartView.self) {
                         
                         let chartView = info as! JBLineChartView
                         chartView.delegate = self
@@ -870,21 +872,21 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                         chartView.maximumValue = maxValue*1.19
                         graphView.layoutIfNeeded()
                         chartView.reloadData()
-                        chartView.setState(.Expanded, animated: true)
+                        chartView.setState(.expanded, animated: true)
                         
-                    } else if info.isKindOfClass(UIView) {
+                    } else if info.isKind(of: UIView.self) {
                         
                         let view1 = info
                         
                         if view1.tag == 7 {
                         
                             view1.layer.cornerRadius = 2.5
-                            view1.layer.backgroundColor = UIColor.greenColor().CGColor
+                            view1.layer.backgroundColor = UIColor.green.cgColor
                         
                         } else if view1.tag == 8 {
                             
                             view1.layer.cornerRadius = 2.5
-                            view1.layer.backgroundColor = UIColor.blueColor().CGColor
+                            view1.layer.backgroundColor = UIColor.blue.cgColor
                         }
                     
                     }
@@ -925,10 +927,10 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         let relevantNumber = detiRelevantNumber()
         
-        let sectionView = UIView.loadFromNibNamed("Deti")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "Deti")!
         let sectionHeight = CGFloat(415)
         
-        sectionView.frame = CGRectMake(sectionView.frame.origin.x, sectionView.frame.origin.y, sectionView.frame.width, sectionHeight)
+        sectionView.frame = CGRect(x: sectionView.frame.origin.x, y: sectionView.frame.origin.y, width: sectionView.frame.width, height: sectionHeight)
         
         //increase sectionView height
         var appendedHeight1 = CGFloat()
@@ -941,17 +943,17 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
             
         }
         
-        sectionView.frame = CGRectMake(sectionView.frame.origin.x, sectionView.frame.origin.y, sectionView.frame.width, sectionView.frame.height + appendedHeight1 + 10)
+        sectionView.frame = CGRect(x: sectionView.frame.origin.x, y: sectionView.frame.origin.y, width: sectionView.frame.width, height: sectionView.frame.height + appendedHeight1 + 10)
         
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UIView) && subview.tag > 9 && subview.tag < 666 {
+            if subview.isKind(of: UIView.self) && subview.tag > 9 && subview.tag < 666 {
                 
                 let int = subview.tag/10
                 
                 if relevantNumber < int {
                     
-                    subview.hidden = true
+                    subview.isHidden = true
                     
                 }
                 
@@ -969,11 +971,11 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                             
                             if udajeKlienta.detiVynalozenaCastka != nil {
                                 
-                                str = udajeKlienta.detiVynalozenaCastka!.currencyFormattingWithSymbol("Kč")
+                                str = udajeKlienta.detiVynalozenaCastka!.currencyFormattingWithSymbol(currencySymbol: "Kč")
                                 
                             } else {
                                 
-                                str = Int().currencyFormattingWithSymbol("Kč")
+                                str = Int().currencyFormattingWithSymbol(currencySymbol: "Kč")
                                 
                             }
                             
@@ -998,7 +1000,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                     footerYPosition = 305
                 }
                 
-                view1.frame = CGRectMake(view1.frame.origin.x, footerYPosition + appendedHeight1 + 10, view1.frame.width, view1.frame.height)
+                view1.frame = CGRect(x: view1.frame.origin.x, y: footerYPosition + appendedHeight1 + 10, width: view1.frame.width, height: view1.frame.height)
                 
             }
             
@@ -1007,9 +1009,9 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         //labels
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UIView) && subview.tag > 9 && subview.tag <= 20 && subview.tag <= (relevantNumber - 2)*10 {
+            if subview.isKind(of: UIView.self) && subview.tag > 9 && subview.tag <= 20 && subview.tag <= (relevantNumber - 2)*10 {
                 
-                subview.hidden = false
+                subview.isHidden = false
                 
                 for subview2 in subview.subviews {
                     
@@ -1027,7 +1029,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                             
                         } else if tag == 2 {
                             
-                            str = detiCilovaCastka[int].currencyFormattingWithSymbol("Kč")
+                            str = detiCilovaCastka[int].currencyFormattingWithSymbol(currencySymbol: "Kč")
                             
                         } else if tag == 3 {
                             
@@ -1035,7 +1037,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                             
                         } else if tag == 4 {
                             
-                            str = detiMesicneSporeni[int].currencyFormattingWithSymbol("Kč")
+                            str = detiMesicneSporeni[int].currencyFormattingWithSymbol(currencySymbol: "Kč")
                             
                         }
                         
@@ -1053,12 +1055,12 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                  
                  }*/
                 
-            } else if subview.isKindOfClass(UIView) && subview.tag > 999 && subview.tag <= 2000 && subview.tag <= (relevantNumber - 2)*1000  {
+            } else if subview.isKind(of: UIView.self) && subview.tag > 999 && subview.tag <= 2000 && subview.tag <= (relevantNumber - 2)*1000  {
                 
-                subview.hidden = false
+                subview.isHidden = false
                 
                 let index = subview.tag/1000 + 2
-                updateData(index)
+                updateData(int: index)
                 
                 //tady spoticam pozici tableview & vysku view & pozici ostatnich elementu
                 
@@ -1080,43 +1082,43 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                 //tableview setup
                 let tableView = UITableView()
                 tableView.tag = 2 + index
-                tableView.frame = CGRectMake(xPosition, yPosition, 357, tableViewHeight)
-                tableView.separatorStyle = .None
+                tableView.frame = CGRect(x: xPosition, y: yPosition, width: 357, height: tableViewHeight)
+                tableView.separatorStyle = .none
                 tableView.delegate = self
                 tableView.dataSource = self
                 let headerCellNib = UINib(nibName: "GraphHeaderTableCell", bundle: nil)
                 let cellNib = UINib(nibName: "GraphTableCell", bundle: nil)
-                tableView.registerNib(headerCellNib, forCellReuseIdentifier: "headerCell")
-                tableView.registerNib(cellNib, forCellReuseIdentifier: "cell")
+                tableView.register(headerCellNib, forCellReuseIdentifier: "headerCell")
+                tableView.register(cellNib, forCellReuseIdentifier: "cell")
                 sectionView.addSubview(tableView)
                 
-                let graphView = UIView.loadFromNibNamed("GraphBackground")!
+                let graphView = UIView.loadFromNibNamed(nibNamed: "GraphBackground")!
                 
                 let gradientLayer = CAGradientLayer()
-                let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).CGColor
-                let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).CGColor
+                let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).cgColor
+                let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).cgColor
                 gradientLayer.colors = [color1, color2]
                 gradientLayer.locations = [0.0, 1]
                 gradientLayer.frame = graphView.bounds
-                graphView.layer.insertSublayer(gradientLayer, atIndex: 0)
+                graphView.layer.insertSublayer(gradientLayer, at: 0)
                 
                 for info in graphView.subviews {
                     
-                    if info.isKindOfClass(UILabel) {
+                    if info.isKind(of: UILabel.self) {
                         
                         var labelText = String()
                         
                         if info.tag == 1 {
                             
-                            labelText = numberFormatting(grafArray1.last!)
+                            labelText = numberFormatting(castka: grafArray1.last!)
                             
                         } else if info.tag == 2 {
                             
-                            labelText = numberFormatting(Int(Double(grafArray1.last!)*(2/3)))
+                            labelText = numberFormatting(castka: Int(Double(grafArray1.last!)*(2/3)))
                             
                         } else if info.tag == 3 {
                             
-                            labelText = numberFormatting(Int(Double(grafArray1.last!)*(1/3)))
+                            labelText = numberFormatting(castka: Int(Double(grafArray1.last!)*(1/3)))
                             
                         } else if info.tag == 4 {
                             
@@ -1149,7 +1151,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                         let label = info as! UILabel
                         label.text = labelText
                         
-                    } else if info.isKindOfClass(JBLineChartView) {
+                    } else if info.isKind(of: JBLineChartView.self) {
                         
                         let chartView = info as! JBLineChartView
                         chartView.delegate = self
@@ -1158,21 +1160,21 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                         chartView.maximumValue = maxValue*1.19
                         graphView.layoutIfNeeded()
                         chartView.reloadData()
-                        chartView.setState(.Expanded, animated: true)
+                        chartView.setState(.expanded, animated: true)
                         
-                    } else if info.isKindOfClass(UIView) {
+                    } else if info.isKind(of: UIView.self) {
                         
                         let view1 = info
                         
                         if view1.tag == 7 {
                             
                             view1.layer.cornerRadius = 2.5
-                            view1.layer.backgroundColor = UIColor.greenColor().CGColor
+                            view1.layer.backgroundColor = UIColor.green.cgColor
                             
                         } else if view1.tag == 8 {
                             
                             view1.layer.cornerRadius = 2.5
-                            view1.layer.backgroundColor = UIColor.blueColor().CGColor
+                            view1.layer.backgroundColor = UIColor.blue.cgColor
                         }
                         
                     }
@@ -1200,10 +1202,8 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
     
     //MARK: - jb chart view
     
-    func numberOfLinesInLineChartView(lineChartView: JBLineChartView!) -> UInt {
-        
+    func numberOfLines(in lineChartView: JBLineChartView!) -> UInt {
         return 2
-        
     }
     
     func lineChartView(_ lineChartView: JBLineChartView!, numberOfVerticalValuesAtLineIndex lineIndex: UInt) -> UInt {
@@ -1225,7 +1225,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, colorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, colorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
         
         if lineIndex == 0 {
             
@@ -1238,7 +1238,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, widthForLineAtLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, widthForLineAtLineIndex lineIndex: UInt) -> CGFloat {
         
         return 1
         
@@ -1387,10 +1387,10 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         updateDataDuchod()
         
-        let sectionView = UIView.loadFromNibNamed("Duchod")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "Duchod")!
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UILabel) {
+            if subview.isKind(of: UILabel.self) {
                 
                 if subview.tag > 0 {
                     
@@ -1402,19 +1402,19 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                 
             } else if udajeKlienta.chceGrafDuchodu {
                 
-                if subview.isKindOfClass(UIView) && subview.tag == 1000 {
+                if subview.isKind(of: UIView.self) && subview.tag == 1000 {
                     
                     //tableview setup
                     var tableViewHeight = CGFloat(20 + (grafArray1.count*14))
-                    let tableView = UITableView(frame: CGRectMake(400, 180, 357, tableViewHeight), style: .Plain)
+                    let tableView = UITableView(frame: CGRect(x: 400, y: 180, width: 357, height: tableViewHeight), style: .plain)
                     tableView.tag = 2
-                    tableView.separatorStyle = .None
+                    tableView.separatorStyle = .none
                     tableView.delegate = self
                     tableView.dataSource = self
                     let headerCellNib = UINib(nibName: "GraphHeaderTableCell", bundle: nil)
                     let cellNib = UINib(nibName: "GraphTableCell", bundle: nil)
-                    tableView.registerNib(headerCellNib, forCellReuseIdentifier: "headerCell")
-                    tableView.registerNib(cellNib, forCellReuseIdentifier: "cell")
+                    tableView.register(headerCellNib, forCellReuseIdentifier: "headerCell")
+                    tableView.register(cellNib, forCellReuseIdentifier: "cell")
                     sectionView.addSubview(tableView)
                     
                     if grafArray2.count > 4 {
@@ -1423,35 +1423,35 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                         
                     }
                     
-                    sectionView.frame = CGRectMake(sectionView.frame.origin.x, sectionView.frame.origin.y, sectionView.frame.width, sectionView.frame.height + tableViewHeight)
+                    sectionView.frame = CGRect(x: sectionView.frame.origin.x, y: sectionView.frame.origin.y, width: sectionView.frame.width, height: sectionView.frame.height + tableViewHeight)
                     
                     //graph view setup
-                    let graphView = UIView.loadFromNibNamed("GraphBackground")!
+                    let graphView = UIView.loadFromNibNamed(nibNamed: "GraphBackground")!
                     let gradientLayer = CAGradientLayer()
-                    let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).CGColor
-                    let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).CGColor
+                    let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).cgColor
+                    let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).cgColor
                     gradientLayer.colors = [color1, color2]
                     gradientLayer.locations = [0.0, 1]
                     gradientLayer.frame = graphView.bounds
-                    graphView.layer.insertSublayer(gradientLayer, atIndex: 0)
+                    graphView.layer.insertSublayer(gradientLayer, at: 0)
                     
                     for info in graphView.subviews {
                         
-                        if info.isKindOfClass(UILabel) {
+                        if info.isKind(of: UILabel.self) {
                             
                             var labelText = String()
                             
                             if info.tag == 1 {
                                 
-                                labelText = numberFormatting(grafArray1.last!)
+                                labelText = numberFormatting(castka: grafArray1.last!)
                                 
                             } else if info.tag == 2 {
                                 
-                                labelText = numberFormatting(Int(Double(grafArray1.last!)*(2/3)))
+                                labelText = numberFormatting(castka: Int(Double(grafArray1.last!)*(2/3)))
                                 
                             } else if info.tag == 3 {
                                 
-                                labelText = numberFormatting(Int(Double(grafArray1.last!)*(1/3)))
+                                labelText = numberFormatting(castka: Int(Double(grafArray1.last!)*(1/3)))
                                 
                             } else if info.tag == 4 {
                                 
@@ -1482,30 +1482,30 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
                             let label = info as! UILabel
                             label.text = labelText
                             
-                        } else if info.isKindOfClass(JBLineChartView) {
+                        } else if info.isKind(of: JBLineChartView.self) {
                             
                             let chartView = info as! JBLineChartView
                             chartView.delegate = self
                             chartView.dataSource = self
                             chartView.maximumValue = CGFloat(maxValue)
                             chartView.minimumValue = 0
-                            chartView.frame = CGRectMake(34, 5, 315, 113)
+                            chartView.frame = CGRect(x: 34, y: 5, width: 315, height: 113)
                             chartView.reloadData()
-                            chartView.setState(.Expanded, animated: false)
+                            chartView.setState(.expanded, animated: false)
                             
-                        } else if info.isKindOfClass(UIView) {
+                        } else if info.isKind(of: UIView.self) {
                             
                             let view1 = info
                             
                             if view1.tag == 7 {
                                 
                                 view1.layer.cornerRadius = 2.5
-                                view1.layer.backgroundColor = UIColor.greenColor().CGColor
+                                view1.layer.backgroundColor = UIColor.green.cgColor
                                 
                             } else if view1.tag == 8 {
                                 
                                 view1.layer.cornerRadius = 2.5
-                                view1.layer.backgroundColor = UIColor.blueColor().CGColor
+                                view1.layer.backgroundColor = UIColor.blue.cgColor
                             }
                             
                         }
@@ -1659,7 +1659,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
             
@@ -1741,10 +1741,10 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         values.insert(str, at: 0)
         
-        let sectionView = UIView.loadFromNibNamed("Dane")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "Dane")!
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UILabel) && subview.tag > 0 {
+            if subview.isKind(of: UILabel.self) && subview.tag > 0 {
                 
                 let label = subview as! UILabel
                 let str = values[subview.tag - 1]
@@ -1763,10 +1763,10 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         
         let value = udajeKlienta.ostatniPozadavky
         
-        let sectionView = UIView.loadFromNibNamed("OstatniPozadavky")!
+        let sectionView = UIView.loadFromNibNamed(nibNamed: "OstatniPozadavky")!
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UILabel) && subview.tag == 1 {
+            if subview.isKind(of: UILabel.self) && subview.tag == 1 {
                 
                 let label = subview as! UILabel
                 label.text = value
@@ -1839,7 +1839,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         let sectionView = UIView.loadFromNibNamed(nibNamed: "KlientNechceResit")!
         for subview in sectionView.subviews {
             
-            if subview.isKindOfClass(UILabel) && subview.tag > 0 {
+            if subview.isKind(of: UILabel.self) && subview.tag > 0 {
                 
                 let label = subview as! UILabel
                 label.text = result[subview.tag - 1]
@@ -1959,7 +1959,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         filePath = pdfFileName
         
         let url = NSURL.fileURL(withPath: pdfFileName)
-        let request = NSURLRequest(URL: url)
+        let request = URLRequest(url: url)
         webView.scalesPageToFit = true
         webView.loadRequest(request)
         
@@ -2027,7 +2027,7 @@ class PDFViewController: UIViewController, MFMailComposeViewControllerDelegate, 
     
     // MARK: MFMailComposeViewControllerDelegate Method
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
     

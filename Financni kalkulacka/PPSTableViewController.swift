@@ -152,7 +152,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         let castkaBezMezerCelkem = textField1Value.condenseWhitespace()
         //formatovani urokove sazby
         //MARK: - to be resolved
-        let urokCarka = textField3Value.stringByReplacingOccurrencesOfString(",", withString: ".", options: [], range: nil)
+        let urokCarka = textField3Value.replacingOccurrences(of: ",", with: ".")
         
         let castkaCelkem = Float((castkaBezMezerCelkem as NSString).floatValue) //jistina
         let doba = Float((textField2Value as NSString).floatValue)*12 //celkem doba prevedena na mesice
@@ -196,8 +196,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
         var snizeniJistiny = Float() //variable ktery urcuje o kolik se realne mesicne splati dluh
         
-        var i = 1
-        while i <= dobaMesice {
+        for _ in 1...dobaMesice {
             
             snizeniJistiny = Float(mesicniPlatba) - Float(Float(jistina)*Float(mesicniUrok))
             jistina = Float(jistina) - snizeniJistiny
@@ -208,7 +207,6 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
             }
             
             poleJistin.append(Int(round(jistina)))
-            i += 1
         }
         
         //tady vypocitam pole se sporenim po kazdem mesici (ulozka + urok)
@@ -224,13 +222,11 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         udajeKlienta.grafBydleniSporeniDoba = dobaSporeni/12
         udajeKlienta.grafBydleniSporeniUrok = mesicniUrokSporeni*12/0.01
         
-        var ii = 1
-        while ii <= dobaSporeni {
+        for _ in 1...dobaSporeni {
             
             sporeniCelkemNasporenaCastka = sporeniCelkemNasporenaCastka + mesicniUlozkaSporeni + sporeniCelkemNasporenaCastka*mesicniUrokSporeni
             
             sporeniPoleSporeni.append(Int(round(sporeniCelkemNasporenaCastka)))
-            ii += 1
         }
         
         sporeniCelkemNasporenaCastka = 0
@@ -240,42 +236,36 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         if poleJistin.count > sporeniPoleSporeni.count {
             
             let rozdil = poleJistin.count - sporeniPoleSporeni.count
-            var iii = 1
-            while iii <= rozdil {
+            for _ in 1...rozdil {
                 sporeniPoleSporeni.append(sporeniPoleSporeni[sporeniPoleSporeni.count - 1])
-                iii += 1
             }
             
         } else if poleJistin.count < sporeniPoleSporeni.count {
             
             let rozdil = sporeniPoleSporeni.count - poleJistin.count
             
-            var iii = 1
-            while iii <= rozdil {
+            for _ in 1...rozdil {
                 sporeniPoleSporeni.removeLast()
-                iii += 1
             }
         }
         
         
         //tady zjistim v kolikatym mesici se splati uver
-        var iii = 0
-        while iii < poleJistin.count {
+        for i in 0..<poleJistin.count {
             
-            if sporeniPoleSporeni[a] >= poleJistin[a] {
-                mesicSplaceniSegue = a
+            if sporeniPoleSporeni[i] >= poleJistin[i] {
+                mesicSplaceniSegue = i
                 break
             }
-            iii += 1
         }
         
         if mesicSplaceniSegue % 12 == 0 {
             
-            var iiii = 11
-            while iiii < mesicSplaceniSegue {
-                sporeniPoleSegue.append(sporeniPoleSporeni[i])
-                jistinaPoleSegue.append(poleJistin[i])
-                iiii += 12
+            var m = 11
+            while m < mesicSplaceniSegue {
+                sporeniPoleSegue.append(sporeniPoleSporeni[m])
+                jistinaPoleSegue.append(poleJistin[m])
+                m += 12
             }
             
             resultLabel = "Úvěr bude splacen po uplynutí \(mesicSplaceniSegue/12) let. Více informací naleznet v grafu."
@@ -284,19 +274,19 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
             
         } else {
             
-            var iiii = 11
-            while iiii < mesicSplaceniSegue {
+            var m = 11
+            while m < mesicSplaceniSegue {
                 
-                jistinaPoleSegue.append(poleJistin[i])
-                sporeniPoleSegue.append(sporeniPoleSporeni[i])
+                jistinaPoleSegue.append(poleJistin[m])
+                sporeniPoleSegue.append(sporeniPoleSporeni[m])
                 
-                if (i + 12) > mesicSplaceniSegue {
+                if (m + 12) > mesicSplaceniSegue {
                     
                     jistinaPoleSegue.append(poleJistin[mesicSplaceniSegue])
                     sporeniPoleSegue.append(sporeniPoleSporeni[mesicSplaceniSegue])
                     break
                 }
-                iiii += 12
+                m += 12
             }
             
             resultLabel = "Úvěr bude splacen po uplynutí \(mesicSplaceniSegue/12) let a \(mesicSplaceniSegue % 12) měsíců. Více informací naleznete v grafu."
@@ -350,10 +340,10 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
                 cell.uverCastkaTextField.tag = 1
                 cell.uverCastkaTextField.text = textField1Value
                 
-                cell.uverCastkaSlider.addTarget(self, action: #selector(PPSTableViewController.uverCastkaSliderAction(_:)), for: .ValueChanged)
+                cell.uverCastkaSlider.addTarget(self, action: #selector(PPSTableViewController.uverCastkaSliderAction(sender:)), for: .valueChanged)
                 cell.uverCastkaSlider.value = slider1Value
                 
-                cell.uverCastkaStepper.addTarget(self, action: #selector(PPSTableViewController.uverCastkaStepperAction(_:)), forControlEvents: .ValueChanged)
+                cell.uverCastkaStepper.addTarget(self, action: #selector(PPSTableViewController.uverCastkaStepperAction(sender:)), for: .valueChanged)
                 cell.uverCastkaStepper.value = stepper1Value
                 
                 return cell
@@ -366,10 +356,10 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
                 cell.uverDobaTextField.tag = 2
                 cell.uverDobaTextField.text = textField2Value
                 
-                cell.uverDobaSlider.addTarget(self, action: #selector(PPSTableViewController.uverDobaSliderAction(_:)), for: .ValueChanged)
+                cell.uverDobaSlider.addTarget(self, action: #selector(PPSTableViewController.uverDobaSliderAction(sender:)), for: .valueChanged)
                 cell.uverDobaSlider.value = slider2Value
                 
-                cell.uverDobaStepper.addTarget(self, action: #selector(PPSTableViewController.uverDobaStepperAction(_:)), for: .ValueChanged)
+                cell.uverDobaStepper.addTarget(self, action: #selector(PPSTableViewController.uverDobaStepperAction(sender:)), for: .valueChanged)
                 cell.uverDobaStepper.value = stepper2Value
                 
                 return cell
@@ -382,10 +372,10 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
                 cell.uverUrokTextField.tag = 3
                 cell.uverUrokTextField.text = textField3Value
                 
-                cell.uverUrokSlider.addTarget(self, action: #selector(PPSTableViewController.uverUrokSliderAction(_:)), forControlEvents: .ValueChanged)
+                cell.uverUrokSlider.addTarget(self, action: #selector(PPSTableViewController.uverUrokSliderAction(sender:)), for: .valueChanged)
                 cell.uverUrokSlider.value = slider3Value
                 
-                cell.uverUrokStepper.addTarget(self, action: #selector(PPSTableViewController.uverUrokStepperAction(_:)), forControlEvents: .ValueChanged)
+                cell.uverUrokStepper.addTarget(self, action: #selector(PPSTableViewController.uverUrokStepperAction(sender:)), for: .valueChanged)
                 cell.uverUrokStepper.value = stepper3Value
                 
                 return cell
@@ -402,10 +392,10 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
                 cell.sporeniMesicniPlatbaTextField.tag = 4
                 cell.sporeniMesicniPlatbaTextField.text = textField4Value
                 
-                cell.sporeniMesicniPlatbaSlider.addTarget(self, action: #selector(PPSTableViewController.sporeniMesicniPlatbaSliderAction(_:)), forControlEvents: .ValueChanged)
+                cell.sporeniMesicniPlatbaSlider.addTarget(self, action: #selector(PPSTableViewController.sporeniMesicniPlatbaSliderAction(sender:)), for: .valueChanged)
                 cell.sporeniMesicniPlatbaSlider.value = slider4Value
                 
-                cell.sporeniMesicniPlatbaStepper.addTarget(self, action: #selector(PPSTableViewController.sporeniMesicniPlatbaStepperAction(_:)), forControlEvents: .ValueChanged)
+                cell.sporeniMesicniPlatbaStepper.addTarget(self, action: #selector(PPSTableViewController.sporeniMesicniPlatbaStepperAction(sender:)), for: .valueChanged)
                 cell.sporeniMesicniPlatbaStepper.value = stepper4Value
                 
                 return cell
@@ -418,10 +408,10 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
                 cell.sporeniDobaTextField.tag = 5
                 cell.sporeniDobaTextField.text = textField5Value
                 
-                cell.sporeniDobaSlider.addTarget(self, action: #selector(PPSTableViewController.sporeniDobaSliderAction(_:)), for: .ValueChanged)
+                cell.sporeniDobaSlider.addTarget(self, action: #selector(PPSTableViewController.sporeniDobaSliderAction(sender:)), for: .valueChanged)
                 cell.sporeniDobaSlider.value = slider5Value
                 
-                cell.sporeniDobaStepper.addTarget(self, action: #selector(PPSTableViewController.sporeniDobaStepperAction(_:)), for: .ValueChanged)
+                cell.sporeniDobaStepper.addTarget(self, action: #selector(PPSTableViewController.sporeniDobaStepperAction(sender:)), for: .valueChanged)
                 cell.sporeniDobaStepper.value = stepper5Value
                 
                 return cell
@@ -434,10 +424,10 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
                 cell.sporeniUrokTextField.tag = 6
                 cell.sporeniUrokTextField.text = textField6Value
                 
-                cell.sporeniUrokSlider.addTarget(self, action: #selector(PPSTableViewController.sporeniUrokSliderAction(_:) as (PPSTableViewController) -> (UISlider) -> ()), for: .ValueChanged)
+                cell.sporeniUrokSlider.addTarget(self, action: #selector(self.sporeniUrokSliderAction(sender:)), for: .valueChanged)
                 cell.sporeniUrokSlider.value = slider6Value
                 
-                cell.sporeniUrokStepper.addTarget(self, action: #selector(PPSTableViewController.sporeniUrokStepperAction(_:)), for: .ValueChanged)
+                cell.sporeniUrokStepper.addTarget(self, action: #selector(self.sporeniUrokStepperAction(sender:)), for: .valueChanged)
                 cell.sporeniUrokStepper.value = stepper6Value
                 
                 return cell
@@ -455,7 +445,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "pridatGraf") as! PPSTableCell
             
-            cell.grafSwitch.addTarget(self, action: #selector(PPSTableViewController.grafSwitchAction(_:)), for: .ValueChanged)
+            cell.grafSwitch.addTarget(self, action: #selector(PPSTableViewController.grafSwitchAction(sender:)), for: .valueChanged)
             
             if udajeKlienta.chceGrafBydleni {
                 
@@ -513,7 +503,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: - uiswitch
     
-    func grafSwitchAction(sender: UISwitch) {
+    @objc func grafSwitchAction(sender: UISwitch) {
         
         if sender.isOn == true {
             
@@ -530,7 +520,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: slider ibactions
     
-    func uverCastkaSliderAction(sender: UISlider) {
+    @objc func uverCastkaSliderAction(sender: UISlider) {
         
         let a = Int(sender.value)*100000
         
@@ -542,7 +532,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func uverDobaSliderAction(sender: UISlider) {
+    @objc func uverDobaSliderAction(sender: UISlider) {
         
         let b = Int(sender.value)
         
@@ -554,7 +544,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func uverUrokSliderAction(sender: UISlider) {
+    @objc func uverUrokSliderAction(sender: UISlider) {
         
         var c = Float(sender.value)
         c = round(c)
@@ -568,7 +558,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
 
-    func sporeniMesicniPlatbaSliderAction(sender: UISlider) {
+    @objc func sporeniMesicniPlatbaSliderAction(sender: UISlider) {
         
         let a = Int(sender.value)*100
         
@@ -580,7 +570,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func sporeniDobaSliderAction(sender: UISlider) {
+    @objc func sporeniDobaSliderAction(sender: UISlider) {
         
         let b = Int(sender.value)
         
@@ -592,7 +582,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func sporeniUrokSliderAction(sender: UISlider) {
+    @objc func sporeniUrokSliderAction(sender: UISlider) {
         
         var c = Float(sender.value)
         c = round(c)
@@ -608,7 +598,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: - stepper ibactions
     
-    func uverCastkaStepperAction(sender: UIStepper) {
+    @objc func uverCastkaStepperAction(sender: UIStepper) {
         
         let a = Int(sender.value)
         
@@ -620,7 +610,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func uverDobaStepperAction(sender: UIStepper) {
+    @objc func uverDobaStepperAction(sender: UIStepper) {
         
         let b = Int(sender.value)
         
@@ -632,7 +622,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func uverUrokStepperAction(sender: UIStepper) {
+    @objc func uverUrokStepperAction(sender: UIStepper) {
         
         var c = Float(sender.value)
         
@@ -648,7 +638,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func sporeniMesicniPlatbaStepperAction(sender: UIStepper) {
+    @objc func sporeniMesicniPlatbaStepperAction(sender: UIStepper) {
         
         let a = Int(sender.value)
         
@@ -660,7 +650,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func sporeniDobaStepperAction(sender: UIStepper) {
+    @objc func sporeniDobaStepperAction(sender: UIStepper) {
         
         let b = Int(sender.value)
         
@@ -672,7 +662,7 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func sporeniUrokStepperAction(sender: UIStepper) {
+    @objc func sporeniUrokStepperAction(sender: UIStepper) {
         
         var c = Float(sender.value)
         c = round(c)
@@ -898,11 +888,11 @@ class PPSTableViewController: UITableViewController, UITextFieldDelegate {
         self.performSegue(withIdentifier: "grafPPS", sender: self)
     }
     
-    func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
+    func prepareForSegue(segue: (UIStoryboardSegue?), sender: AnyObject!) {
         
-        if segue.identifier == "grafPPS" {
+        if segue?.identifier == "grafPPS" {
             
-            let svc = segue.destination as! PPSGrafTableViewController
+            let svc = segue?.destination as! PPSGrafTableViewController
             
             svc.poleSporeni = sporeniSegue
             svc.poleJistin = jistinaSegue

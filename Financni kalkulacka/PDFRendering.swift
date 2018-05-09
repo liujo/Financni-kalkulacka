@@ -22,22 +22,21 @@ class PDFRendering: NSObject {
         let framesetter : CTFramesetter = CTFramesetterCreateWithAttributedString(currentText)
         
         let framePath = CGMutablePath()
-        CGPathAddRect(framePath, nil, frameRect)
+        framePath.addRect(frameRect)
         
         let currentRange = CFRangeMake(0, 0)
         let frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, nil)
         
         guard let currentContext = UIGraphicsGetCurrentContext() else { return }
         
-        CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
+        currentContext.textMatrix = CGAffineTransform.identity
+        currentContext.translateBy(x: 0, y: frameRect.origin.y*2)
+        currentContext.scaleBy(x: 1.0, y: -1.0)
         
-        CGContextTranslateCTM(currentContext, 0, frameRect.origin.y*2)
-        CGContextScaleCTM(currentContext, 1.0, -1.0)
+        CTFrameDraw(frameRef, currentContext)
         
-        CTFrameDraw(frameRef, currentContext!)
-        
-        CGContextScaleCTM(currentContext, 1.0, -1.0)
-        CGContext.translateBy(currentContext, 0, (-1)*frameRect.origin.y*2)
+        currentContext.scaleBy(x: 1.0, y: -1.0)
+        currentContext.translateBy(x: 0, y: (-1)*frameRect.origin.y*2)
     }
     
     func drawImage(imageToDraw: UIImage, inRect rect: CGRect) {

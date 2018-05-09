@@ -66,14 +66,14 @@ class ZdravotniStavTableViewController: UITableViewController {
         
         if indexPath.row != checkedCell {
             
-            let tappedCell = tableView.cellForRow(at: indexPath)
-            tappedCell?.accessoryType = checkmark
+            let tappedCell = tableView.cellForRow(at: indexPath as IndexPath)
+            tappedCell?.accessoryType = .checkmark
             tableView.cellForRow(at: IndexPath(row: checkedCell, section: 0))?.accessoryType = .none
             checkedCell = indexPath.row
         }
         
         udajeKlienta.zdravotniStav = cellLabels[checkedCell]
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
 
 }

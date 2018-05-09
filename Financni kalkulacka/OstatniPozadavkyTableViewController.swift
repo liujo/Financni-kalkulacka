@@ -111,13 +111,13 @@ class OstatniPozadavkyTableViewController: UITableViewController, UITextViewDele
         
     }
     
-    func backward() {
+    @objc func backward() {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "6")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     
-    func forward() {
+    @objc func forward() {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "8")
         self.navigationController?.pushViewController(vc!, animated: false)

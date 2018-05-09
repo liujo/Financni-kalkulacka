@@ -189,7 +189,7 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
-        if searchController.active {
+        if searchController.isActive {
             
             return UITableViewCellEditingStyle.none
         
@@ -268,12 +268,12 @@ class KartaKlientaTableViewController: UITableViewController, UISearchController
         var i = 0
         while i < clientsArray.count {
             
-            let ID = clientsArray[i] as! Int
-            let client = defaults.objectForKey("\(ID)")
+            let ID = clientsArray[i]
+            let client = defaults.object(forKey: "\(ID)") as! Dictionary<String, AnyObject>
             
-            let krestniJmeno = client!["krestniJmeno"] as? String
-            let prijmeni = client!["prijmeni"] as? String
-            let povolani = client!["povolani"] as? String
+            let krestniJmeno = client["krestniJmeno"] as? String
+            let prijmeni = client["prijmeni"] as? String
+            let povolani = client["povolani"] as? String
             
             var str = String()
             

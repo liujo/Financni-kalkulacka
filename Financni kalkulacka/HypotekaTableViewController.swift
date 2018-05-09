@@ -41,10 +41,10 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         self.title = "Hypoteční úvěr"
-        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Graf", style: .Plain, target: self, action: #selector(HypotekaTableViewController.showGraph))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Graf", style: .plain, target: self, action: #selector(HypotekaTableViewController.showGraph))
         
         pocitani()
         
@@ -55,7 +55,7 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
         //preformatovat pujcenou castku
         let castkaBezMezerCelkem = textField1Value.condenseWhitespace()
         //formatovani urokove sazby
-        let urokCarka = textField3Value.stringByReplacingOccurrencesOfString(",", withString: ".", options: [], range: nil)
+        let urokCarka = textField3Value.replacingOccurrences(of: ",", with: ".")
         
         let castkaCelkem = Float((castkaBezMezerCelkem as NSString).floatValue) //jistina
         let doba = Float((textField2Value as NSString).floatValue)*12 //celkem doba prevedena na mesice
@@ -85,9 +85,9 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
         
         //Formatovani vysledku
         
-        let formattedPrumernaMesicniPlatba = prumernaMesicniPlatbaInt.currencyFormattingWithSymbol("Kč")
-        let formattedCelkemUrok = celkemUrokInt.currencyFormattingWithSymbol("Kč")
-        let formattedZaplatit = zaplatitInt.currencyFormattingWithSymbol("Kč")
+        let formattedPrumernaMesicniPlatba = prumernaMesicniPlatbaInt.currencyFormattingWithSymbol(currencySymbol: "Kč")
+        let formattedCelkemUrok = celkemUrokInt.currencyFormattingWithSymbol(currencySymbol: "Kč")
+        let formattedZaplatit = zaplatitInt.currencyFormattingWithSymbol(currencySymbol: "Kč")
         
         //vysledne labely
         
@@ -107,70 +107,70 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 6
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("castka") as! HypoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "castka") as! HypoCell
             
             cell.castkaTextField.delegate = self
             cell.castkaTextField.tag = 1
             cell.castkaTextField.text = textField1Value
             
-            cell.castkaSlider.addTarget(self, action: #selector(HypotekaTableViewController.castkaSliderAction(_:)), forControlEvents: .ValueChanged)
+            cell.castkaSlider.addTarget(self, action: #selector(HypotekaTableViewController.castkaSliderAction(sender:)), for: .valueChanged)
             cell.castkaSlider.value = slider1Value
             
-            cell.castkaStepper.addTarget(self, action: #selector(HypotekaTableViewController.castkaStepperAction(_:)), forControlEvents: .ValueChanged)
+            cell.castkaStepper.addTarget(self, action: #selector(HypotekaTableViewController.castkaStepperAction(sender:)), for: .valueChanged)
             cell.castkaStepper.value = stepper1Value
             
             return cell
         
         } else if indexPath.row == 1 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("doba") as! HypoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "doba") as! HypoCell
             
             cell.dobaTextField.delegate = self
             cell.dobaTextField.tag = 2
             cell.dobaTextField.text = textField2Value
             
-            cell.dobaSlider.addTarget(self, action: #selector(HypotekaTableViewController.dobaSliderAction(_:)), forControlEvents: .ValueChanged)
+            cell.dobaSlider.addTarget(self, action: #selector(HypotekaTableViewController.dobaSliderAction(sender:)), for: .valueChanged)
             cell.dobaSlider.value = slider2Value
             
-            cell.dobaStepper.addTarget(self, action: #selector(HypotekaTableViewController.dobaStepperAction(_:)), forControlEvents: .ValueChanged)
+            cell.dobaStepper.addTarget(self, action: #selector(HypotekaTableViewController.dobaStepperAction(sender:)), for: .valueChanged)
             cell.dobaStepper.value = stepper2Value
             
             return cell
             
         } else if indexPath.row == 2 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("rocniUrok") as! HypoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "rocniUrok") as! HypoCell
             
             cell.urokTextField.delegate = self
             cell.urokTextField.tag = 3
             cell.urokTextField.text = textField3Value
             
-            cell.urokSlider.addTarget(self, action: #selector(HypotekaTableViewController.urokSliderAction(_:)), forControlEvents: .ValueChanged)
+            cell.urokSlider.addTarget(self, action: #selector(HypotekaTableViewController.urokSliderAction(sender:)), for: .valueChanged)
             cell.urokSlider.value = slider3Value
             
-            cell.urokStepper.addTarget(self, action: #selector(HypotekaTableViewController.urokStepperAction(_:)), forControlEvents: .ValueChanged)
+            cell.urokStepper.addTarget(self, action: #selector(HypotekaTableViewController.urokStepperAction(sender:)), for: .valueChanged)
             cell.urokStepper.value = stepper3Value
             
             return cell
             
         } else if indexPath.row == 3 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("mesicniPlatba") as! HypoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mesicniPlatba") as! HypoCell
             
             cell.mesicniPlatbaLabel.text = label1Value
             
@@ -178,7 +178,7 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
             
         } else if indexPath.row == 4 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("celkemUrok") as! HypoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "celkemUrok") as! HypoCell
             
             cell.celkemUrokLabel.text = label2Value
             
@@ -186,7 +186,7 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
             
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("klientCelkemZaplati") as! HypoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "klientCelkemZaplati") as! HypoCell
             
             cell.klientCelkemZaplatiLabel.text = label3Value
             
@@ -195,7 +195,7 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.row < 3 {
             
@@ -208,11 +208,11 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: slider ibactions
     
-    func castkaSliderAction(sender: UISlider) {
+    @objc func castkaSliderAction(sender: UISlider) {
         
         let a = Int(sender.value)*100000
         
-        textField1Value = a.currencyFormattingWithSymbol("Kč")
+        textField1Value = a.currencyFormattingWithSymbol(currencySymbol: "Kč")
         stepper1Value = Double(a)
         slider1Value = sender.value
         
@@ -220,11 +220,11 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func dobaSliderAction(sender: UISlider) {
+    @objc func dobaSliderAction(sender: UISlider) {
         
         let b = Int(sender.value)
         
-        textField2Value = b.currencyFormattingWithSymbol("let")
+        textField2Value = b.currencyFormattingWithSymbol(currencySymbol: "let")
         stepper2Value = Double(b)
         slider2Value = sender.value
         
@@ -232,13 +232,13 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func urokSliderAction(sender: UISlider) {
+    @objc func urokSliderAction(sender: UISlider) {
         
         var c = Float(sender.value)
         c = round(c)
         c = c * 0.1
         
-        textField3Value = c.currencyFormattingWithSymbol("%")
+        textField3Value = c.currencyFormattingWithSymbol(currencySymbol: "%")
         stepper3Value = Double(sender.value)
         slider3Value = sender.value
         
@@ -249,11 +249,11 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: - stepper ibactions
     
-    func castkaStepperAction(sender: UIStepper) {
+    @objc func castkaStepperAction(sender: UIStepper) {
         
         let a = Int(sender.value)
         
-        textField1Value = a.currencyFormattingWithSymbol("Kč")
+        textField1Value = a.currencyFormattingWithSymbol(currencySymbol: "Kč")
         slider1Value = Float(sender.value)/100000
         stepper1Value = sender.value
         
@@ -261,11 +261,11 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func dobaStepperAction(sender: UIStepper) {
+    @objc func dobaStepperAction(sender: UIStepper) {
         
         let b = Int(sender.value)
         
-        textField2Value = b.currencyFormattingWithSymbol("let")
+        textField2Value = b.currencyFormattingWithSymbol(currencySymbol: "let")
         slider2Value = Float(sender.value)
         stepper2Value = sender.value
         
@@ -273,7 +273,7 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func urokStepperAction(sender: UIStepper) {
+    @objc func urokStepperAction(sender: UIStepper) {
         
         var c = Float(sender.value)
         
@@ -281,7 +281,7 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
         
         c = c * 0.1
         
-        textField3Value = c.currencyFormattingWithSymbol("%")
+        textField3Value = c.currencyFormattingWithSymbol(currencySymbol: "%")
         slider3Value = Float(sender.value)
         stepper3Value = sender.value
         
@@ -291,7 +291,7 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: - text field actions
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField.text != "" {
             
@@ -306,12 +306,12 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
                 int = 3
             }
             
-            textField.text = textField.text?.chopSuffix(int).condenseWhitespace()
+            textField.text = textField.text?.chopSuffix(count: int).condenseWhitespace()
             
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField.tag == 1 {
             
@@ -329,7 +329,7 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
             
             slider1Value = Float(num)/100000
             stepper1Value = Double(num)
-            textField1Value = num.currencyFormattingWithSymbol("Kč")
+            textField1Value = num.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             pocitani()
         
@@ -350,13 +350,13 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
             
             slider2Value = Float(num)
             stepper2Value = Double(num)
-            textField2Value = num.currencyFormattingWithSymbol("let")
+            textField2Value = num.currencyFormattingWithSymbol(currencySymbol: "let")
             
             pocitani()
         
         } else if textField.tag == 3 {
             
-            let str = textField.text?.stringByReplacingOccurrencesOfString(",", withString: ".")
+            let str = textField.text?.replacingOccurrences(of: ",", with: ".")//stringByReplacingOccurrencesOfString(",", withString: ".")
             var num = Float((str! as NSString).floatValue)
             
             if num > 20 {
@@ -371,19 +371,19 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
             
             slider3Value = num*10
             stepper3Value = Double(num)*10
-            textField3Value = num.currencyFormattingWithSymbol("%")
+            textField3Value = num.currencyFormattingWithSymbol(currencySymbol: "%")
             
             pocitani()
         }
         
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             
-        if string.characters.count > 0 {
+        if string.count > 0 {
             
             var int = Int()
             
@@ -400,13 +400,13 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
                 int = 4
             }
             
-            let resultingStringLengthIsLegal = prospectiveText.characters.count <= int
+            let resultingStringLengthIsLegal = prospectiveText.count <= int
                 
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789.,").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
-            
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789.,").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
+
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
                 
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
         
@@ -418,7 +418,7 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: - schovat klavesnici
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()
@@ -428,17 +428,17 @@ class HypotekaTableViewController: UITableViewController, UITextFieldDelegate {
     
     // MARK: - segue
     
-    func showGraph() {
+    @objc func showGraph() {
         
-        self.performSegueWithIdentifier("grafSegue", sender: self)
+        self.performSegue(withIdentifier: "grafSegue", sender: self)
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         if segue.identifier == "grafSegue" {
             
-            let svc = segue.destinationViewController as! HypotekaGrafTableViewController
+            let svc = segue.destination as! HypotekaGrafTableViewController
             
             svc.toPassPocetRokuGlobal = pocetRoku
             svc.toPassPujcenyObnosGlobal = pujcenyObnos

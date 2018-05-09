@@ -15,7 +15,7 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
 
         self.title = "Důchod"
         
-        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "Zpět", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
         let forwardButton = UIBarButtonItem(image: UIImage(named: "forward.png"), style: .plain, target: self, action: #selector(DuchodTableViewController.forward))
@@ -472,12 +472,12 @@ class DuchodTableViewController: UITableViewController, UITextFieldDelegate, UIT
         }
     }
     
-    func backward() {
+    @objc func backward() {
         
         moveOn(moveID: 4)
     }
     
-    func forward() {
+    @objc func forward() {
         
         moveOn(moveID: 6)
     }

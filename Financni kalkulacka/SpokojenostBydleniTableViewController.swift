@@ -130,10 +130,8 @@ class SpokojenostBydleniTableViewController: UITableViewController, UITextViewDe
         if indexPath.row != checkedCell {
             
             let tappedCell = tableView.cellForRow(at: indexPath as IndexPath)
-            
             tappedCell?.accessoryType = .checkmark
-            
-            tableView.cellForRow(at: NSIndexPath(forRow: checkedCell, inSection: 0) as IndexPath)?.accessoryType = .none
+            tableView.cellForRow(at: IndexPath(row: checkedCell, section: 0))?.accessoryType = .none
             
             checkedCell = indexPath.row
         }

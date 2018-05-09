@@ -33,7 +33,7 @@ class VlastniCiNajemTableViewController: UITableViewController, UITextFieldDeleg
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
         if udajeKlienta.vlastniCiNajemnni == "Vlastní" {
@@ -47,7 +47,7 @@ class VlastniCiNajemTableViewController: UITableViewController, UITextFieldDeleg
         }
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if section == 0 {
@@ -127,39 +127,38 @@ class VlastniCiNajemTableViewController: UITableViewController, UITextFieldDeleg
     
     //MARK: - textField formatting
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField.text != "" {
         
-            textField.text = textField.text?.chopSuffix(2).condenseWhitespace()
+            textField.text = textField.text?.chopSuffix(count: 2).condenseWhitespace()
             
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         udajeKlienta.najemne = Int((textField.text! as NSString).intValue)
         
         if udajeKlienta.najemne > 0 {
             
-            textField.text = udajeKlienta.najemne.currencyFormattingWithSymbol("Kč")
+            textField.text = udajeKlienta.najemne.currencyFormattingWithSymbol(currencySymbol: "Kč")
         }
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        
-        
-        if string.characters.count > 0 {
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
+        if string.count > 0 {
             
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
             
-            let resultingStringLengthIsLegal = prospectiveText.characters.count <= 6
+            let resultingStringLengthIsLegal = prospectiveText.count <= 6
             
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
             
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
             
@@ -171,7 +170,7 @@ class VlastniCiNajemTableViewController: UITableViewController, UITextFieldDeleg
     
     //MARK: - schovat klavesnici
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         let toolbar = UIToolbar()
         textField.inputAccessoryView = toolbar.hideKeyboardToolbar()

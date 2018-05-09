@@ -157,13 +157,13 @@ class DaneTableViewController: UITableViewController, UITextViewDelegate {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    func backward() {
+    @objc func backward() {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "5")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     
-    func forward() {
+    @objc func forward() {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "7")
         self.navigationController?.pushViewController(vc!, animated: false)

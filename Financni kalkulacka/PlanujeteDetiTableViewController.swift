@@ -120,7 +120,7 @@ class PlanujeteDetiTableViewController: UITableViewController {
             
         }
         
-        tableView.deselectRowAtIndexPath(indexPath as IndexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
 
     

@@ -15,12 +15,12 @@ class BaseTableViewController: UITableViewController {
 
         self.title = "Podpora"
         
-        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
     }
 
@@ -31,20 +31,20 @@ class BaseTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 6
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! BaseCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! BaseCell
         
         let imgs = ["mortgage", "saving", "insurance", "salary", "schedule", "investment"]
         let labels = ["Hypoteční kalkulačka", "Výpočet spoření", "Zajištění příjmů", "Čistá mzda", "Program předčasného splacení", "Návratnost investice"]
@@ -55,18 +55,18 @@ class BaseTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         return 50
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let ids = ["hypotekaSegue", "sporeniSegue", "zajisteniPrijmuSegue", "cistaMzdaSegue", "PPSSegue", "investiceSegue"]
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
-        self.performSegueWithIdentifier(ids[indexPath.row], sender: self)
+        self.performSegue(withIdentifier: ids[indexPath.row], sender: self)
         
     }
     

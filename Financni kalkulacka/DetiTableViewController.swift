@@ -107,6 +107,17 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        var dostatecneDeti = false
+        var dostatecnePlanovanychDeti = false
+        
+        if let a = udajeKlienta.pocetDeti, a > 0 {
+            dostatecneDeti = true
+        }
+        
+        if let b = udajeKlienta.pocetPlanovanychDeti, b > 0 {
+            dostatecnePlanovanychDeti = true
+        }
+        
         if indexPath.section == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "chceResitDeti") as! ChceResitDeti
@@ -210,7 +221,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
                 return cell
             }
             
-        } else if indexPath.section == 3 + topNum && (udajeKlienta.pocetDeti > 0 || udajeKlienta.pocetPlanovanychDeti > 0) {
+        } else if indexPath.section == 3 + topNum && (dostatecneDeti || dostatecnePlanovanychDeti) {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "seznamDeti") as! diteSporeni
             
@@ -302,7 +313,18 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        if section == 3 + topNum && (udajeKlienta.pocetDeti > 0 || udajeKlienta.pocetPlanovanychDeti > 0) {
+        var dostatecneDeti = false
+        var dostatecnePlanovanychDeti = false
+        
+        if let a = udajeKlienta.pocetDeti, a > 0 {
+            dostatecneDeti = true
+        }
+        
+        if let b = udajeKlienta.pocetPlanovanychDeti, b > 0 {
+            dostatecnePlanovanychDeti = true
+        }
+        //if section == 3 + topNum && (udajeKlienta.pocetDeti > 0 || udajeKlienta.pocetPlanovanychDeti > 0) {
+        if section == 3 + topNum && (dostatecneDeti || dostatecnePlanovanychDeti) {
             
             return "Děti spoření"
         
@@ -370,7 +392,7 @@ class DetiTableViewController: UITableViewController, UITextFieldDelegate, UITex
     
     //MARK: - textfield formatting
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var result = true
         let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
 

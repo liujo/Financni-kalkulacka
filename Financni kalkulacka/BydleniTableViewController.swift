@@ -228,7 +228,7 @@ class BydleniTableViewController: UITableViewController, UITextFieldDelegate, UI
             
         }
         
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath as IndexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
     
         return cell
     }

@@ -61,7 +61,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
         scrollView.alwaysBounceVertical = true
         
         
-        let b = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: "sendEmail")
+        let b = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(self.sendEmail))
         self.navigationItem.rightBarButtonItem = b
     }
     
@@ -249,7 +249,7 @@ class SalaryViewController: UIViewController, UITextFieldDelegate, MFMailCompose
     
     //MARK: - share graph via email
     
-    func sendEmail() {
+    @objc func sendEmail() {
         
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {

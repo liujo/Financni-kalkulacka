@@ -13,8 +13,8 @@ import MessageUI
 class SavingsGrafTableViewController: UITableViewController, JBLineChartViewDataSource, JBLineChartViewDelegate, MFMailComposeViewControllerDelegate {
     
     let gradientLayer = CAGradientLayer()
-    let sporeniColor = UIColor.greenColor()
-    let urokColor = UIColor.blueColor()
+    let sporeniColor = UIColor.green
+    let urokColor = UIColor.blue
     
     var toPassDobaGlobal = Int()
     var toPassCelkovaUlozka = Int()
@@ -34,7 +34,7 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         
         self.title = "Graf spoření"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "sendEmail")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: Selector(("sendEmail")))
         
         urokSporeni = toPassArrayInterest
         
@@ -44,18 +44,18 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("showChart"), userInfo: nil, repeats: false)
+        _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: Selector(("showChart")), userInfo: nil, repeats: false)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         
         let graphView: JBLineChartView = self.tableView.viewWithTag(20) as! JBLineChartView
-        graphView.setState(.Collapsed, animated: true)
+        graphView.setState(.collapsed, animated: true)
         
     }
     
@@ -63,24 +63,22 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         
         let graphView: JBLineChartView = self.tableView.viewWithTag(20) as! JBLineChartView
         graphView.reloadData()
-        graphView.setState(.Expanded, animated: true)
+        graphView.setState(.expanded, animated: true)
     }
     
     //MARK: - JBLineChartView data source
     
-    func numberOfLinesInLineChartView(lineChartView: JBLineChartView!) -> UInt {
-        
+    func numberOfLines(in lineChartView: JBLineChartView!) -> UInt {
         return 2
-        
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, numberOfVerticalValuesAtLineIndex lineIndex: UInt) -> UInt {
+    func lineChartView(_ lineChartView: JBLineChartView!, numberOfVerticalValuesAtLineIndex lineIndex: UInt) -> UInt {
         
         return UInt(roky.count)
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, verticalValueForHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, verticalValueForHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
         
         if lineIndex == 0 {
             
@@ -99,25 +97,25 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, verticalSelectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, verticalSelectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
         
-        return UIColor.whiteColor()
-        
-    }
-    
-    func lineChartView(lineChartView: JBLineChartView!, selectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
-        
-        return UIColor.whiteColor()
+        return UIColor.white
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, dotRadiusForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, selectionColorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+        
+        return UIColor.white
+        
+    }
+    
+    func lineChartView(_ lineChartView: JBLineChartView!, dotRadiusForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> CGFloat {
         
         return 4
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, colorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, colorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
         
         if lineIndex == 0 {
             
@@ -129,19 +127,19 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         }
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, selectionColorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, selectionColorForDotAtHorizontalIndex horizontalIndex: UInt, atLineIndex lineIndex: UInt) -> UIColor! {
         
-        return UIColor.whiteColor()
+        return UIColor.white
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, widthForLineAtLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, widthForLineAtLineIndex lineIndex: UInt) -> CGFloat {
         
         return 2
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, colorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
+    func lineChartView(_ lineChartView: JBLineChartView!, colorForLineAtLineIndex lineIndex: UInt) -> UIColor! {
         
         if lineIndex == 0 {
             
@@ -154,35 +152,35 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         }
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, dimmedSelectionOpacityAtLineIndex lineIndex: UInt) -> CGFloat {
+    func lineChartView(_ lineChartView: JBLineChartView!, dimmedSelectionOpacityAtLineIndex lineIndex: UInt) -> CGFloat {
         
         return 0.15
         
     }
     
-    func lineChartView(lineChartView: JBLineChartView!, showsDotsForLineAtLineIndex lineIndex: UInt) -> Bool {
+    func lineChartView(_ lineChartView: JBLineChartView!, showsDotsForLineAtLineIndex lineIndex: UInt) -> Bool {
         
         return true
     }
     
     
-    func lineChartView(lineChartView: JBLineChartView!, didSelectLineAtIndex lineIndex: UInt, horizontalIndex: UInt, touchPoint: CGPoint) {
+    func lineChartView(_ lineChartView: JBLineChartView!, didSelectLineAt lineIndex: UInt, horizontalIndex: UInt, touch touchPoint: CGPoint) {
         
         let infoLabel = self.tableView.viewWithTag(10) as! UILabel
         
         if lineIndex == 0 {
             
             let data = sporeniVcetneUroku[Int(horizontalIndex)]
-            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: celkem naspořeno \(numberFormattingInt(data)) Kč"
+            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: celkem naspořeno \(numberFormattingInt(number: data)) Kč"
             
         } else {
             
             let data = urokSporeni[Int(horizontalIndex)]
-            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: zúročeno \(numberFormattingInt(data)) Kč"
+            infoLabel.text = "\(roky[Int(horizontalIndex)]) rok: zúročeno \(numberFormattingInt(number: data)) Kč"
             
         }
         
-        tableView.scrollEnabled = false
+        tableView.isScrollEnabled = false
         
         
     }
@@ -192,7 +190,7 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         let infoLabel = self.tableView.viewWithTag(10) as! UILabel
         infoLabel.text = ""
         
-        tableView.scrollEnabled = true
+        tableView.isScrollEnabled = true
         
     }
     
@@ -226,7 +224,7 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         let num4 = maxCastka/4
         
         //formatting do stringu
-        castkyLabels = [numberFormatting(num1), numberFormatting(num2), numberFormatting(num3), numberFormatting(num4)]
+        castkyLabels = [numberFormatting(castka: num1), numberFormatting(castka: num2), numberFormatting(castka: num3), numberFormatting(castka: num4)]
     }
     
     func numberFormatting(castka: Int) -> String {
@@ -252,12 +250,12 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if section == 0 {
@@ -270,7 +268,7 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 1 {
             
@@ -283,7 +281,7 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
     }
     
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
             
@@ -303,16 +301,16 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("graf") as! SavingsGrafCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "graf") as! SavingsGrafCell
             
             //setting gradient background
             gradientBackground()
             gradientLayer.frame = cell.contentView.bounds
-            cell.contentView.layer.insertSublayer(gradientLayer, atIndex: 0)
+            cell.contentView.layer.insertSublayer(gradientLayer, at: 0)
             
             //graph setup
             cell.graphView.delegate = self
@@ -326,16 +324,16 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
             
             //vysvetlivky
             cell.celkemNasporenoKolecko.layer.cornerRadius = 4
-            cell.celkemNasporenoKolecko.layer.backgroundColor = sporeniColor.CGColor
+            cell.celkemNasporenoKolecko.layer.backgroundColor = sporeniColor.cgColor
             
             cell.urokKolecko.layer.cornerRadius = 4
-            cell.urokKolecko.layer.backgroundColor = urokColor.CGColor
+            cell.urokKolecko.layer.backgroundColor = urokColor.cgColor
             
             //popisky grafu: roky
             if rokyLabels.count == 2 {
                 
-                cell.roky1.hidden = true
-                cell.roky3.hidden = true
+                cell.roky1.isHidden = true
+                cell.roky3.isHidden = true
                 
                 cell.roky2.text = rokyLabels[0]
                 cell.roky4.text = rokyLabels[1]
@@ -361,23 +359,23 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("headerCell")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell")
                 
                 return cell!
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("tabulka") as! SavingsTabulkaCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "tabulka") as! SavingsTabulkaCell
                 
                 let index = indexPath.row - 1
                 
                 cell.rokyLabel.text = "\(roky[index])"
-                cell.celkemNasporenoLabel.text = "\(numberFormattingInt(sporeniVcetneUroku[index])) Kč"
-                cell.urokyLabel.text = "\(numberFormattingInt(urokSporeni[index])) Kč"
+                cell.celkemNasporenoLabel.text = "\(numberFormattingInt(number: sporeniVcetneUroku[index])) Kč"
+                cell.urokyLabel.text = "\(numberFormattingInt(number: urokSporeni[index])) Kč"
                 
                 if indexPath.row % 2 == 0 {
                     
-                    cell.backgroundColor = UIColor.whiteColor()
+                    cell.backgroundColor = UIColor.white
                     
                 } else {
                     
@@ -396,8 +394,8 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
     
     func gradientBackground() {
         
-        let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).CGColor
-        let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).CGColor
+        let color1 = UIColor(red: 15/255, green: 63/255, blue: 10/255, alpha: 1).cgColor
+        let color2 = UIColor(red: 8/255, green: 161/255, blue: 2/255, alpha: 1).cgColor
         gradientLayer.colors = [color1, color2]
         gradientLayer.locations = [0.0, 1]
     }
@@ -406,20 +404,20 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
     
     func updateData() {
         
-        for var i = 1; i <= toPassDobaGlobal; i++ {
+        for i in 1...toPassDobaGlobal {
             
-            let value = vypocetKrivkysporeniVcetneUroku(i) + urokSporeni[i - 1]
+            let value = vypocetKrivkysporeniVcetneUroku(rok: i) + urokSporeni[i - 1]
             
             sporeniVcetneUroku.append(value)
             roky.append("\(i).")
         }
         
-        sporeniVcetneUroku.insert(0, atIndex: 0)
-        urokSporeni.insert(0, atIndex: 0)
-        roky.insert("0.", atIndex: 0)
+        sporeniVcetneUroku.insert(0, at: 0)
+        urokSporeni.insert(0, at: 0)
+        roky.insert("0.", at: 0)
         
-        vypocetRokyLabels(roky.count)
-        vypocetCastkyLabels(sporeniVcetneUroku.last!)
+        vypocetRokyLabels(pocetRoku: roky.count)
+        vypocetCastkyLabels(maxCastka: sporeniVcetneUroku.last!)
     }
     
     func vypocetKrivkysporeniVcetneUroku(rok: Int) -> Int {
@@ -436,25 +434,25 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
     //MARK: - number formatting
     
     func numberFormattingInt(number: Int) -> String {
-        
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        
-        return formatter.stringFromNumber(number)!.stringByReplacingOccurrencesOfString(",", withString: " ")
-        
+    
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+    
+        return formatter.string(from: NSNumber(value: number))!.replacingOccurrences(of: ",", with: " ")
+    
     }
     
     //MARK: - share graph via email
     
     func sendEmail() {
-        
+    
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
             self.showSendMailErrorAlert()
         }
-        
+    
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
@@ -478,8 +476,8 @@ class SavingsGrafTableViewController: UITableViewController, JBLineChartViewData
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
 }

@@ -37,7 +37,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         
         self.title = "Graf PPS"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: "sendEmail")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(self.sendEmail))
         
         vypocet()
                
@@ -46,7 +46,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        var timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: Selector("showChart"), userInfo: nil, repeats: false)
+        _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.showChart), userInfo: nil, repeats: false)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -57,7 +57,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         
     }
     
-    func showChart() {
+    @objc func showChart() {
         
         let graphView: JBLineChartView = self.tableView.viewWithTag(20) as! JBLineChartView
         graphView.reloadData()
@@ -430,12 +430,12 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         //MARK: - to be resolved
-        return formatter.stringFromNumber(NSNumber(number))!.stringByReplacingOccurrencesOfString(",", withString: " ")
+        return formatter.string(from: NSNumber(value: number))!.replacingOccurrences(of: ",", with: " ")
     }
     
     //MARK: - share graph via email
     
-    func sendEmail() {
+    @objc func sendEmail() {
         
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
@@ -467,7 +467,7 @@ class PPSGrafTableViewController: UITableViewController, JBLineChartViewDataSour
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
     

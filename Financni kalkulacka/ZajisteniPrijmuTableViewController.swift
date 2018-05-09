@@ -22,19 +22,19 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
 
         self.title = "Zajištění příjmů"
         
-        let b = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "sendEmail")
+        let b = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(self.sendEmail))
         self.navigationItem.rightBarButtonItem = b
         
-        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         
         let imageView = UIImageView(frame: self.view.frame)
         let image = UIImage()
-        imageView.image = image.background(UIScreen.mainScreen().bounds.height)
+        imageView.image = image.background(height: UIScreen.main.bounds.height)
         tableView.backgroundView = imageView
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         tableView.reloadData()
@@ -44,12 +44,12 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 3
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         if section == 0 {
@@ -68,11 +68,11 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
         
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("pracovniPomer") as! ZajisteniPrijmuCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "pracovniPomer") as! ZajisteniPrijmuCell
             
             cell.pracovniPomer.text = ZajisteniPrijmuStruct.pracovniPomer
             
@@ -82,7 +82,7 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("mesicniPrijem") as! ZajisteniPrijmuCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "mesicniPrijem") as! ZajisteniPrijmuCell
                 
                 cell.mesicniPrijemTextField.delegate = self
                 cell.mesicniPrijemTextField.tag = 0
@@ -91,7 +91,7 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("mesicniNaklady") as! ZajisteniPrijmuCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "mesicniNaklady") as! ZajisteniPrijmuCell
                 
                 cell.mesicniNakladyTextField.delegate = self
                 cell.mesicniNakladyTextField.tag = 1
@@ -116,12 +116,12 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
             
             if indexPath.row == 0 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("zajisteniPrijmuNaMesic") as! ZajisteniPrijmuCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "zajisteniPrijmuNaMesic") as! ZajisteniPrijmuCell
                 
                 if mesicniPrijem > 0 {
                     
-                    cell.zajisteniPrijmuNaMesic.text = vysledek.currencyFormattingWithSymbol("Kč")
-                    cell.zajisteniPrijmuNaMesic.textColor = UIColor.blackColor()
+                    cell.zajisteniPrijmuNaMesic.text = vysledek.currencyFormattingWithSymbol(currencySymbol: "Kč")
+                    cell.zajisteniPrijmuNaMesic.textColor = UIColor.black
                 
                 } else {
                     
@@ -133,13 +133,13 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
                 
             } else if indexPath.row == 1 {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("denniZajisteniPrijmu") as! ZajisteniPrijmuCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "denniZajisteniPrijmu") as! ZajisteniPrijmuCell
                 
                 if mesicniPrijem > 0 {
                     
                     vysledek = vysledek/30
-                    cell.denniZajisteniPrijmu.text = vysledek.currencyFormattingWithSymbol("Kč")
-                    cell.denniZajisteniPrijmu.textColor = UIColor.blackColor()
+                    cell.denniZajisteniPrijmu.text = vysledek.currencyFormattingWithSymbol(currencySymbol: "Kč")
+                    cell.denniZajisteniPrijmu.textColor = UIColor.black
                 
                 } else {
                     
@@ -151,13 +151,13 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
                 
             } else {
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier("denniZajisteniNakladu") as! ZajisteniPrijmuCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "denniZajisteniNakladu") as! ZajisteniPrijmuCell
                 
                 if mesicniNaklady > 0 {
                     
                     let vysledek1 = mesicniNaklady/30
-                    cell.denniZajisteniNakladu.text = vysledek1.currencyFormattingWithSymbol("Kč")
-                    cell.denniZajisteniNakladu.textColor = UIColor.blackColor()
+                    cell.denniZajisteniNakladu.text = vysledek1.currencyFormattingWithSymbol(currencySymbol: "Kč")
+                    cell.denniZajisteniNakladu.textColor = UIColor.black
                 
                 } else {
                     
@@ -170,7 +170,7 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 2 {
             
@@ -183,20 +183,20 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
         
     //MARK: - textfield formatting
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var result = true
-        let prospectiveText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        let prospectiveText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
-        if string.characters.count > 0 {
+        if string.count > 0 {
             
-            let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
-            let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+            let disallowedCharacterSet = CharacterSet(charactersIn: "0123456789").inverted
+            let replacementStringIsLegal = string.rangeOfCharacter(from: disallowedCharacterSet) == nil
             var resultingStringLengthIsLegal = Bool()
             
-            resultingStringLengthIsLegal = prospectiveText.characters.count <= 7
+            resultingStringLengthIsLegal = prospectiveText.count <= 7
             
-            let scanner:NSScanner = NSScanner.localizedScannerWithString(prospectiveText) as! NSScanner
-            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.atEnd
+            let scanner = Scanner.localizedScanner(with: prospectiveText) as! Scanner
+            let resultingTextIsNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
             
             result = replacementStringIsLegal && resultingStringLengthIsLegal && resultingTextIsNumeric
             
@@ -207,14 +207,14 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
         
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        textField.text = textField.text?.stringByReplacingOccurrencesOfString("Kč", withString: "")
+        textField.text = textField.text?.replacingOccurrences(of: "Kč", with: "")//stringByReplacingOccurrencesOfString("Kč", withString: "")
         textField.text = textField.text?.condenseWhitespace()
         
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField.tag == 0 {
             
@@ -222,7 +222,7 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
             
             if mesicniPrijem > 0 {
                 
-                textField.text = mesicniPrijem.currencyFormattingWithSymbol("Kč")
+                textField.text = mesicniPrijem.currencyFormattingWithSymbol(currencySymbol: "Kč")
             
             }
         
@@ -232,7 +232,7 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
             
             if mesicniNaklady > 0 {
                 
-                textField.text = mesicniNaklady.currencyFormattingWithSymbol("Kč")
+                textField.text = mesicniNaklady.currencyFormattingWithSymbol(currencySymbol: "Kč")
             }
         }
     
@@ -241,11 +241,11 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
     
     //MARK: - press return key to go to other textfield
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         let nextTage=textField.tag+1;
         // Try to find next responder
-        let nextResponder=textField.superview?.superview?.superview?.viewWithTag(nextTage) as UIResponder!
+        let nextResponder=textField.superview?.superview?.superview?.viewWithTag(nextTage) as UIResponder?
         
         if (nextResponder != nil){
             // Found next responder, so set it.
@@ -262,7 +262,7 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
     
     //MARK: - toolbar & button to hide keyboard
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         
         // Create a button bar for the number pad
@@ -270,8 +270,8 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
         keyboardDoneButtonView.sizeToFit()
         
         // Setup the buttons to be put in the system.
-        let item1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
-        let item2 = UIBarButtonItem(image: UIImage(named: "down.png")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("endEditingNow"))
+        let item1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let item2 = UIBarButtonItem(image: UIImage(named: "down.png")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.endEditingNow))
         let toolbarButtons = [item1, item2]
         
         //Put the buttons into the ToolBar and display the tool bar
@@ -284,7 +284,7 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
     
     //MARK: - share graph via email
     
-    func sendEmail() {
+    @objc func sendEmail() {
         
         if mesicniNaklady != 0 && mesicniPrijem != 0 {
             
@@ -292,7 +292,7 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
             
             if MFMailComposeViewController.canSendMail() {
             
-                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+                self.present(mailComposeViewController, animated: true, completion: nil)
             
             } else {
             
@@ -302,11 +302,11 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
         
         } else {
             
-            let warning = UIAlertController(title: "Chybějící údaje", message: "Prosím vyplňte chybějící údaje.", preferredStyle: UIAlertControllerStyle.Alert)
+            let warning = UIAlertController(title: "Chybějící údaje", message: "Prosím vyplňte chybějící údaje.", preferredStyle: UIAlertControllerStyle.alert)
             
-            warning.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            warning.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             
-            self.presentViewController(warning, animated: true, completion: nil)
+            self.present(warning, animated: true, completion: nil)
             
         }
         
@@ -318,12 +318,12 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
         
         mailComposerVC.setSubject("Zajištění příjmů")
         
-        let a = mesicniPrijem.currencyFormattingWithSymbol("Kč")
-        let b = mesicniNaklady.currencyFormattingWithSymbol("Kč")
+        let a = mesicniPrijem.currencyFormattingWithSymbol(currencySymbol: "Kč")
+        let b = mesicniNaklady.currencyFormattingWithSymbol(currencySymbol: "Kč")
         
-        let c = (mesicniPrijem/2).currencyFormattingWithSymbol("Kč")
-        let d = (mesicniPrijem/30/2).currencyFormattingWithSymbol("Kč")
-        let e = (mesicniNaklady/30).currencyFormattingWithSymbol("Kč")
+        let c = (mesicniPrijem/2).currencyFormattingWithSymbol(currencySymbol: "Kč")
+        let d = (mesicniPrijem/30/2).currencyFormattingWithSymbol(currencySymbol: "Kč")
+        let e = (mesicniNaklady/30).currencyFormattingWithSymbol(currencySymbol: "Kč")
         
         mailComposerVC.setMessageBody("<h2>Zajištění příjmů</h2><p><b>Měsíční příjmy:</b> \(a) </p><p><b>Měsíční náklady:</b> \(b) </p><p><b>Zajištění příjmů na měsíc:</b>\(c)</p><p><b>Denní zajištění příjmů:</b> \(d) </p><p><b>Děnní zajištěnní nákladů:</b> \(e) </p>", isHTML: true)
         
@@ -337,7 +337,7 @@ class ZajisteniPrijmuTableViewController: UITableViewController, UITextFieldDele
     
     // MARK: MFMailComposeViewControllerDelegate Method
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
 
     
